@@ -1,0 +1,684 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="严格来说，本来应该先看数据库的，但是这学期学的是Web后端，就略过了，导致后端那边JDBC无法操作，还是得回来看数据库。
+但是数据库这边个人觉得有点麻烦，环境有可视化图形界面，但是在Linux部署还是得在命令行敲。有点难办。">
+  <meta name="author" content="Oxygen">
+  <meta name="keywords" content="">
+  
+  <title>MySQL的基本数据库操作 - Oxygen</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"grz21.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Oxygen</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="MySQL的基本数据库操作">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-05-23 23:26" pubdate>
+        2020年5月23日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      14
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MySQL的基本数据库操作</h1>
+            
+            <div class="markdown-body">
+              <p>严格来说，本来应该先看数据库的，但是这学期学的是Web后端，就略过了，导致后端那边JDBC无法操作，还是得回来看数据库。</p>
+<p>但是数据库这边个人觉得有点麻烦，环境有可视化图形界面，但是在Linux部署还是得在命令行敲。有点难办。</p>
+<span id="more"></span>
+
+<p>全程使用数据库MYSQL5.7版本，可视化使用SQLyog。</p>
+<h1 id="基本操作："><a href="#基本操作：" class="headerlink" title="基本操作："></a>基本操作：</h1><h2 id="创建一个数据库："><a href="#创建一个数据库：" class="headerlink" title="创建一个数据库："></a>创建一个数据库：</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> databases [if <span class="hljs-keyword">not</span> <span class="hljs-keyword">exists</span>] 数据库名;   <span class="hljs-comment">-- if not exists为判断语句</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="删除一个数据库："><a href="#删除一个数据库：" class="headerlink" title="删除一个数据库："></a>删除一个数据库：</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">drop</span> databases [if <span class="hljs-keyword">exists</span>] 数据库名; <span class="hljs-comment">--if exists为判断语句</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="查看系统中数据库"><a href="#查看系统中数据库" class="headerlink" title="查看系统中数据库:"></a>查看系统中数据库:</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">show</span> databases;<br></code></pre></td></tr></table></figure>
+
+<h2 id="使用某个数据库："><a href="#使用某个数据库：" class="headerlink" title="使用某个数据库："></a>使用某个数据库：</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">use 数据库名<br></code></pre></td></tr></table></figure>
+
+<h2 id="刷新数据库："><a href="#刷新数据库：" class="headerlink" title="刷新数据库："></a>刷新数据库：</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">flush privileges; <br></code></pre></td></tr></table></figure>
+
+<hr>
+<p>在创建表之前，搞懂下面这些概念：</p>
+<h1 id="数据值和列的数据类型："><a href="#数据值和列的数据类型：" class="headerlink" title="数据值和列的数据类型："></a>数据值和列的数据类型：</h1><ul>
+<li><h2 id="数值类型"><a href="#数值类型" class="headerlink" title="数值类型"></a>数值类型</h2></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">说明</th>
+<th align="center">储存需求</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">tinyint</td>
+<td align="center">非常小的数据</td>
+<td align="center">1字节</td>
+</tr>
+<tr>
+<td align="center">smallint</td>
+<td align="center">较小的数据</td>
+<td align="center">2字节</td>
+</tr>
+<tr>
+<td align="center">mediumint</td>
+<td align="center">中等大小的数据</td>
+<td align="center">3字节</td>
+</tr>
+<tr>
+<td align="center">int</td>
+<td align="center">标准数据</td>
+<td align="center">4字节</td>
+</tr>
+<tr>
+<td align="center">bigint</td>
+<td align="center">较大的整数</td>
+<td align="center">8字节</td>
+</tr>
+<tr>
+<td align="center">float</td>
+<td align="center">单精度浮点数</td>
+<td align="center">4字节</td>
+</tr>
+<tr>
+<td align="center">double</td>
+<td align="center">双精度浮点数</td>
+<td align="center">8字节</td>
+</tr>
+<tr>
+<td align="center">decimal</td>
+<td align="center">字符串形式的浮点数</td>
+<td align="center">9个字节</td>
+</tr>
+</tbody></table>
+<ul>
+<li><h2 id="字符串类型："><a href="#字符串类型：" class="headerlink" title="字符串类型："></a>字符串类型：</h2></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">说明</th>
+<th align="center">最大长度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">char[(M)]</td>
+<td align="center">固定长字符串，快但是浪费空间。0&lt;M&lt;255</td>
+<td align="center">M字符</td>
+</tr>
+<tr>
+<td align="center">varchar[(M)]</td>
+<td align="center">可变字符串。0&lt;=M&lt;=65535</td>
+<td align="center">可变长度</td>
+</tr>
+<tr>
+<td align="center">tinytext</td>
+<td align="center">微型文本串</td>
+<td align="center">2^8-1</td>
+</tr>
+<tr>
+<td align="center">text</td>
+<td align="center">文本串</td>
+<td align="center">2^16-1</td>
+</tr>
+</tbody></table>
+<ul>
+<li><h2 id="日期和时间数值类型："><a href="#日期和时间数值类型：" class="headerlink" title="日期和时间数值类型："></a>日期和时间数值类型：</h2></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">说明</th>
+<th align="center">取值范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">DATE</td>
+<td align="center">YYYY-MM-DD，日期格式</td>
+<td align="center">1000-01-01~9999-12-31</td>
+</tr>
+<tr>
+<td align="center">TIME</td>
+<td align="center">Hh:mm:ss，时间格式</td>
+<td align="center">-838：59：59~838：59：59</td>
+</tr>
+<tr>
+<td align="center">DATATIME</td>
+<td align="center">YY-MM-DD hh:mm:ss</td>
+<td align="center">1000-01-01 00:00:00至9999-12-31 23：59：59</td>
+</tr>
+<tr>
+<td align="center">TIMESTAMP</td>
+<td align="center">YYYYMMDDhhmmss表示的时间戳</td>
+<td align="center">1970010101000000~2037年某个时刻</td>
+</tr>
+<tr>
+<td align="center">YEAR</td>
+<td align="center">YYYY格式的年份值</td>
+<td align="center">1901~2155</td>
+</tr>
+</tbody></table>
+<ul>
+<li><h2 id="NULL值："><a href="#NULL值：" class="headerlink" title="NULL值："></a>NULL值：</h2></li>
+<li><p>理解为 “没有值” 或 “未知值”</p>
+</li>
+<li><p>不要用NULL进行算术运算 , 结果仍为NULL</p>
+</li>
+</ul>
+<h1 id="数据字段属性："><a href="#数据字段属性：" class="headerlink" title="数据字段属性："></a>数据字段属性：</h1><p><strong>UnSigned</strong></p>
+<ul>
+<li>无符号的</li>
+<li>声明该数据列不允许负数 .</li>
+</ul>
+<p><strong>ZEROFILL</strong></p>
+<ul>
+<li>0填充的</li>
+<li>不足位数的用0来填充 , 如int(3),5则为005</li>
+</ul>
+<p><strong>Auto_InCrement</strong></p>
+<ul>
+<li><p>自动增长的 , 每添加一条数据 , 自动在上一个记录数上加 1(默认)</p>
+</li>
+<li><p>通常用于设置<strong>主键</strong> , 且为整数类型</p>
+</li>
+<li><p>可定义起始值和步长</p>
+</li>
+<li><ul>
+<li>当前表设置步长(AUTO_INCREMENT=100) : 只影响当前表</li>
+<li>SET @@auto_increment_increment=5 ; 影响所有使用自增的表(全局)</li>
+</ul>
+</li>
+</ul>
+<p><strong>NULL 和 NOT NULL</strong></p>
+<ul>
+<li>默认为NULL , 即没有插入该列的数值</li>
+<li>如果设置为NOT NULL , 则该列必须有值</li>
+</ul>
+<p><strong>DEFAULT</strong></p>
+<ul>
+<li>默认的</li>
+<li>用于设置默认值</li>
+<li>例如,性别字段,默认为”男” , 否则为 “女” ; 若无指定该列的值 , 则默认值为”男”的值</li>
+</ul>
+<h1 id="数据库引擎："><a href="#数据库引擎：" class="headerlink" title="数据库引擎："></a>数据库引擎：</h1><p>MySQL的数据表的类型 : <strong>MyISAM</strong> , <strong>InnoDB</strong> , HEAP , BOB , CSV等…</p>
+<p>大部分时候使用MyISAM和InnoDB。</p>
+<table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">MyISAM</th>
+<th align="center">InnoDB</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">事务处理</td>
+<td align="center">不支持</td>
+<td align="center">支持</td>
+</tr>
+<tr>
+<td align="center">数据行锁定</td>
+<td align="center">不支持</td>
+<td align="center">支持</td>
+</tr>
+<tr>
+<td align="center">外键约束</td>
+<td align="center">不支持</td>
+<td align="center">支持</td>
+</tr>
+<tr>
+<td align="center">全文索引</td>
+<td align="center">支持</td>
+<td align="center">不支持</td>
+</tr>
+<tr>
+<td align="center">表空间大小</td>
+<td align="center">较小</td>
+<td align="center">较大，约2倍</td>
+</tr>
+</tbody></table>
+<p>接下来就是对数据库中的表的操作：</p>
+<h1 id="在数据库中对表的创建："><a href="#在数据库中对表的创建：" class="headerlink" title="在数据库中对表的创建："></a>在数据库中对表的创建：</h1><p>使用create关键字：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> [if <span class="hljs-keyword">not</span> <span class="hljs-keyword">exists</span>] `表名`(<br>`参数名` 列的数据类型(长度)   <span class="hljs-keyword">null</span>或<span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>   auto_increment  comment `备注`,<br>`参数名` 列的数据类型(长度)   <span class="hljs-keyword">null</span>或<span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>  <span class="hljs-keyword">default</span><span class="hljs-string">&#x27;默认值&#x27;</span>  comment `备注`,<br><br><span class="hljs-keyword">primary</span> key (`参数名`)<br>) engine <span class="hljs-operator">=</span> 数据库引擎 <span class="hljs-keyword">default</span> charset <span class="hljs-operator">=</span> 字符编码<br></code></pre></td></tr></table></figure>
+
+<p><strong>注意：自增auto_increment和default’默认值’不可以同时选中。``反引号用于区别MySQL保留字与普通字符而引入的 (键盘esc下面的键)。</strong></p>
+<p>举例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> IF <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> `teacher`(<br>`name` <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">10</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-string">&#x27;佚名&#x27;</span> COMMENT <span class="hljs-string">&#x27;老师姓名&#x27;</span>,<br>`id` <span class="hljs-type">INT</span>(<span class="hljs-number">10</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> AUTO_INCREMENT COMMENT <span class="hljs-string">&#x27;工号&#x27;</span>,<br>`password` <span class="hljs-type">INT</span>(<span class="hljs-number">16</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-string">&#x27;123456&#x27;</span> COMMENT <span class="hljs-string">&#x27;密码&#x27;</span>,<br><span class="hljs-keyword">PRIMARY</span> KEY (`id`)<br>)ENGINE INNODB <span class="hljs-keyword">DEFAULT</span> CHARSET<span class="hljs-operator">=</span>utf8 <span class="hljs-comment">-- 设置引擎和字符集</span><br></code></pre></td></tr></table></figure>
+
+<p>但是一般我们使用可视化界面创建，再通过以下语句读出创建时自动生成的语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 查看数据库的定义</span><br><span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">CREATE</span> DATABASE school;<br><span class="hljs-comment">-- 查看数据表的定义</span><br><span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> student;<br><span class="hljs-comment">-- 显示表结构</span><br><span class="hljs-keyword">DESC</span> student;  <span class="hljs-comment">-- 设置严格检查模式(不能容错了)SET sql_mode=&#x27;STRICT_TRANS_TABLES&#x27;;</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="数据库中对表的修改："><a href="#数据库中对表的修改：" class="headerlink" title="数据库中对表的修改："></a>数据库中对表的修改：</h1><p>使用Alter关键字：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sql">修改表名 :<span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> 旧表名 RENAME <span class="hljs-keyword">AS</span> 新表名<br><br>添加字段 : <span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> 表名 <span class="hljs-keyword">ADD</span>字段名 列属性[属性]<br><br>修改字段 :<br><br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> 表名 MODIFY 字段名 列类型[属性]<br><br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> 表名 CHANGE 旧字段名 新字段名 列属性[属性]<br><br>删除字段 :  <span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> 表名 <span class="hljs-keyword">DROP</span> 字段名<br></code></pre></td></tr></table></figure>
+
+<h1 id="数据库中的对表的删除："><a href="#数据库中的对表的删除：" class="headerlink" title="数据库中的对表的删除："></a>数据库中的对表的删除：</h1><p>使用drop关键字：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">TABLE</span> [IF <span class="hljs-keyword">EXISTS</span>] 表名<br><br>IF <span class="hljs-keyword">EXISTS</span>为可选 , 判断是否存在该数据表<br><br>如删除不存在的数据表会抛出错误<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Java/">-Java</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/MySQL/">-MySQL</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/05/26/MySQL%E4%B8%AD%E7%9A%84%E7%89%A9%E7%90%86%E5%A4%96%E9%94%AE%E5%92%8CDML/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MySQL中的物理外键和DML</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/21/JavaWeb%E6%80%BB%E7%BB%93/">
+                        <span class="hidden-mobile">JavaWeb总结</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

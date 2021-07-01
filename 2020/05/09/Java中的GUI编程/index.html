@@ -14,13 +14,30 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
+  <meta name="description" content="没有办法，一般来说，学完Java SE一般有两个玩意肯定要写一下，一个是贪吃蛇，该有一个是多人聊天室。但是操蛋的是，贪吃蛇是要用GUI编程来写，只能再开一篇帖子了。
+其实GUI这玩意用的感觉真的不多了，界面感觉也不好看……">
   <meta name="author" content="Oxygen">
   <meta name="keywords" content="">
   
-  <title>归档 - Oxygen</title>
+  <title>Java中的GUI编程 - Oxygen</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
@@ -48,7 +65,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -147,9 +164,46 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="归档">
+            <span class="h2" id="subtitle" title="Java中的GUI编程">
               
             </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-05-09 01:14" pubdate>
+        2020年5月9日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      242 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      2
+       分钟
+    </span>
+  
+
+  
+  
+</div>
 
             
           </div>
@@ -162,52 +216,122 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 32 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2021</p>
-    
-    <a href="/2021/06/16/C-%E4%B8%AD%E7%9A%84%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">C++中的复合类型</span>
-      <time style="float: right;">06-16</time>
-    </a>
-  
-    
-    <a href="/2021/06/10/C-%E4%B8%AD%E7%9A%84%E7%AE%80%E5%8D%95%E5%8F%98%E9%87%8F/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">C++的简单变量</span>
-      <time style="float: right;">06-10</time>
-    </a>
-  
-    
-    <a href="/2021/06/07/C-%E7%9A%84%E5%8E%86%E5%8F%B2%E5%92%8C%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">C++的历史和基础语法</span>
-      <time style="float: right;">06-07</time>
-    </a>
-  
-</div>
 
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java中的GUI编程</h1>
+            
+            <div class="markdown-body">
+              <p>没有办法，一般来说，学完Java SE一般有两个玩意肯定要写一下，一个是贪吃蛇，该有一个是多人聊天室。但是操蛋的是，贪吃蛇是要用GUI编程来写，只能再开一篇帖子了。</p>
+<p>其实GUI这玩意用的感觉真的不多了，界面感觉也不好看……</p>
+<span id="more"></span>
 
+<ul>
+<li><p>AWT</p>
+<p>在GUI算第一个板块了。</p>
+<ol>
+<li>Frame: 就是看见的窗口，后期的组件都要在这个上面跑。</li>
+<li>Panel：板块，划分用</li>
+<li>Button：按钮</li>
+<li>Label：标签</li>
+</ol>
+</li>
+<li><p>布局：</p>
+<ol>
+<li>流式布局：FlowLayout()</li>
+<li>东南西北中布局：BorderLayout()</li>
+<li>表格布局：GridLayout()</li>
+</ol>
+<p>这玩意倒是让我想起了写Android时候的constraintlayout，但是差点意思。毕竟GUI不常用了……</p>
+</li>
+<li><p>监听：</p>
+<p>最难的就是在这块了，鼠标监听，窗口监听，键盘监听……鼠标监听最难搞。</p>
+<p>至于sWing，今天没看到，明天估计差不多就能做贪吃蛇这个Demo了。</p>
+<p>自学，路漫漫啊……</p>
+</li>
+</ul>
 
-
-
-              </div>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Java/">-Java</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%95%AA%E5%A4%96/">-番外</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/05/13/JavaWeb%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8CHTTP%EF%BC%8CMaven/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JavaWeb的服务器，HTTP，Maven</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/07/Java%E4%B8%ADJunit%EF%BC%8C%E5%8F%8D%E5%B0%84%EF%BC%8C%E6%B3%A8%E8%A7%A3/">
+                        <span class="hidden-mobile">Java中Junit，反射，注解</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -287,9 +411,15 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
 
 
 

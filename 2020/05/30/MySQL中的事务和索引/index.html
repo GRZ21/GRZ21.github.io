@@ -1,0 +1,535 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="事务是为后期和Java中的try……catch语句结合起来写。使用索引是提高MySQL查询速度。">
+  <meta name="author" content="Oxygen">
+  <meta name="keywords" content="">
+  
+  <title>MySQL中的事务和索引 - Oxygen</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"grz21.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Oxygen</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="MySQL中的事务和索引">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-05-30 23:18" pubdate>
+        2020年5月30日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      26
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MySQL中的事务和索引</h1>
+            
+            <div class="markdown-body">
+              <p>事务是为后期和Java中的try……catch语句结合起来写。使用索引是提高MySQL查询速度。</p>
+<span id="more"></span>
+
+<h1 id="事务："><a href="#事务：" class="headerlink" title="事务："></a>事务：</h1><h2 id="事务具有四种属性：ACID"><a href="#事务具有四种属性：ACID" class="headerlink" title="事务具有四种属性：ACID"></a><strong>事务具有四种属性：ACID</strong></h2><p>A：<strong>原子性(Atomic)</strong></p>
+<ul>
+<li>整个事务中的所有操作，要么全部完成，要么全部不完成，不可能停滞在中间某个环节。事务在执行过程中发生错误，会被回滚（ROLLBACK）到事务开始前的状态，就像这个事务从来没有执行过一样。</li>
+</ul>
+<p>C：<strong>一致性(Consist)</strong></p>
+<ul>
+<li>一个事务可以封装状态改变（除非它是一个只读的）。事务必须始终保持系统处于一致的状态，不管在任何给定的时间并发事务有多少。也就是说：如果事务是并发多个，系统也必须如同串行事务一样操作。其主要特征是保护性和不变性(Preserving an Invariant)，以转账案例为例，假设有五个账户，每个账户余额是100元，那么五个账户总额是500元，如果在这个5个账户之间同时发生多个转账，无论并发多少个，比如在A与B账户之间转账5元，在C与D账户之间转账10元，在B与E之间转账15元，五个账户总额也应该还是500元，这就是保护性和不变性。</li>
+</ul>
+<p>I：<strong>隔离性(Isolated)</strong></p>
+<ul>
+<li>隔离状态执行事务，使它们好像是系统在给定时间内执行的唯一操作。如果有两个事务，运行在相同的时间内，执行相同的功能，事务的隔离性将确保每一事务在系统中认为只有该事务在使用系统。这种属性有时称为串行化，为了防止事务操作间的混淆，必须串行化或序列化请求，使得在同一时间仅有一个请求用于同一数据。</li>
+</ul>
+<p>D：<strong>持久性(Durable)</strong></p>
+<ul>
+<li>在事务完成以后，该事务对数据库所作的更改便持久的保存在数据库之中，并不会被回滚。</li>
+</ul>
+<h2 id="基本语法："><a href="#基本语法：" class="headerlink" title="基本语法："></a>基本语法：</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 使用set语句来改变自动提交模式</span><br><span class="hljs-keyword">SET</span> autocommit <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;   <span class="hljs-comment">/*关闭*/</span><br><span class="hljs-keyword">SET</span> autocommit <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;   <span class="hljs-comment">/*开启*/</span><br><br><span class="hljs-comment">-- 注意:</span><br><span class="hljs-comment">--- 1.MySQL中默认是自动提交</span><br><span class="hljs-comment">--- 2.使用事务时应先关闭自动提交</span><br><br><span class="hljs-comment">-- 开始一个事务,标记事务的起始点</span><br><span class="hljs-keyword">START</span> TRANSACTION  <br><br><span class="hljs-comment">-- 提交一个事务给数据库</span><br><span class="hljs-keyword">COMMIT</span><br><br><span class="hljs-comment">-- 将事务回滚,数据回到本次事务的初始状态</span><br><span class="hljs-keyword">ROLLBACK</span><br><br><span class="hljs-comment">-- 还原MySQL数据库的自动提交</span><br><span class="hljs-keyword">SET</span> autocommit <span class="hljs-operator">=</span><span class="hljs-number">1</span>;<br><br><span class="hljs-comment">-- 保存点</span><br><span class="hljs-keyword">SAVEPOINT</span> 保存点名称 <span class="hljs-comment">-- 设置一个事务保存点</span><br><span class="hljs-keyword">ROLLBACK</span> <span class="hljs-keyword">TO</span> <span class="hljs-keyword">SAVEPOINT</span> 保存点名称 <span class="hljs-comment">-- 回滚到保存点</span><br><span class="hljs-keyword">RELEASE</span> <span class="hljs-keyword">SAVEPOINT</span> 保存点名称 <span class="hljs-comment">-- 删除保存点</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>我们使用转账来举例：</p>
+<p>创建一个表并插入例子：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> `account` (<br>`id` <span class="hljs-type">INT</span>(<span class="hljs-number">10</span>) AUTO_INCREMENT,<br>`name` <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">10</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>`moeny` <span class="hljs-type">DECIMAL</span>(<span class="hljs-number">9</span>,<span class="hljs-number">2</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br><span class="hljs-keyword">PRIMARY</span> KEY(`id`)<br>)ENGINE <span class="hljs-operator">=</span> INNODB <span class="hljs-keyword">DEFAULT</span> CHARSET <span class="hljs-operator">=</span> utf8<br><br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> `account`(`name`,`moeny`)<span class="hljs-keyword">values</span>(<span class="hljs-string">&#x27;GRZ&#x27;</span>,<span class="hljs-string">&#x27;10000.00&#x27;</span>),(<span class="hljs-string">&#x27;XYZ&#x27;</span>,<span class="hljs-number">2000.00</span>)<br></code></pre></td></tr></table></figure>
+
+<p>在MySQL中，自动提交是保持打卡的状态的，我们写一个事务，第一步需要将自动提交关闭。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 自动提交的状态分为打开：1，和关闭：0，两个状态。</span><br><span class="hljs-keyword">SET</span> autocommit <span class="hljs-operator">=</span> <span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+
+<p>之后开启一个事务：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">START</span> TRANSACTION<br></code></pre></td></tr></table></figure>
+
+<p>写入转账的语句，即update语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- GRZ的账户-500，XYZ+500</span><br>UPDATE `account` <span class="hljs-keyword">set</span> `moeny` <span class="hljs-operator">=</span> `moeny`<span class="hljs-number">-500</span> <span class="hljs-keyword">where</span> `name`<span class="hljs-operator">=</span><span class="hljs-string">&#x27;GRZ&#x27;</span><br>UPDATE `account` <span class="hljs-keyword">set</span> `moeny` <span class="hljs-operator">=</span> `moeny`<span class="hljs-operator">+</span><span class="hljs-number">500</span> <span class="hljs-keyword">where</span> `name`<span class="hljs-operator">=</span><span class="hljs-string">&#x27;XYZ&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>两种选择，commit和rollback</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">commit</span> <span class="hljs-comment">--提交</span><br><span class="hljs-keyword">rollback</span> <span class="hljs-comment">-- 回滚</span><br></code></pre></td></tr></table></figure>
+
+<p>将自动提交打开：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SET</span> autocommit <span class="hljs-operator">=</span> <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="索引："><a href="#索引：" class="headerlink" title="索引："></a>索引：</h1><h2 id="索引作用："><a href="#索引作用：" class="headerlink" title="索引作用："></a>索引作用：</h2><ul>
+<li>提高查询速度</li>
+<li>确保数据的唯一性</li>
+<li>可以加速表和表之间的连接 , 实现表与表之间的参照完整性</li>
+<li>使用分组和排序子句进行数据检索时 , 可以显著减少分组和排序的时间</li>
+<li>全文检索字段进行搜索优化.</li>
+</ul>
+<h2 id="索引分类："><a href="#索引分类：" class="headerlink" title="索引分类："></a>索引分类：</h2><h3 id="主键索引-Primary-Key-："><a href="#主键索引-Primary-Key-：" class="headerlink" title="主键索引(Primary Key)："></a>主键索引(Primary Key)：</h3><p>主键 : 某一个属性组能唯一标识一条记录</p>
+<p>特点 :</p>
+<ul>
+<li>最常见的索引类型</li>
+<li>确保数据记录的唯一性</li>
+<li>确定特定数据记录在数据库中的位置</li>
+</ul>
+<h3 id="唯一索引-Unique-："><a href="#唯一索引-Unique-：" class="headerlink" title="唯一索引(Unique)："></a>唯一索引(Unique)：</h3><p>作用 : 避免同一个表中某数据列中的值重复</p>
+<p>与主键索引的区别</p>
+<ul>
+<li>主键索引只能有一个</li>
+<li>唯一索引可能有多个</li>
+</ul>
+<h3 id="普通索引-Index-："><a href="#普通索引-Index-：" class="headerlink" title="普通索引 (Index)："></a>普通索引 (Index)：</h3><p>作用 : 快速定位特定数据</p>
+<p>注意 :</p>
+<ul>
+<li>index 和 key 关键字都可以设置常规索引</li>
+<li>应加在查询找条件的字段</li>
+<li>不宜添加太多常规索引,影响数据的插入,删除和修改操作</li>
+</ul>
+<h3 id="全文索引-FullText-："><a href="#全文索引-FullText-：" class="headerlink" title="全文索引(FullText)："></a>全文索引(FullText)：</h3><p>作用 : 快速定位特定数据</p>
+<p>注意 :</p>
+<ul>
+<li>只能用于MyISAM类型的数据表</li>
+<li>只能用于CHAR , VARCHAR , TEXT数据列类型</li>
+<li>适合大型数据集</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">/*</span><br><span class="hljs-comment">#方法一：创建表时</span><br><span class="hljs-comment">  　　CREATE TABLE 表名 (</span><br><span class="hljs-comment">               字段名1 数据类型 [完整性约束条件…],</span><br><span class="hljs-comment">               字段名2 数据类型 [完整性约束条件…],</span><br><span class="hljs-comment">               [UNIQUE | FULLTEXT | SPATIAL ]   INDEX | KEY</span><br><span class="hljs-comment">               [索引名] (字段名[(长度)] [ASC |DESC])</span><br><span class="hljs-comment">               );</span><br><span class="hljs-comment"></span><br><span class="hljs-comment"></span><br><span class="hljs-comment">#方法二：CREATE在已存在的表上创建索引</span><br><span class="hljs-comment">       CREATE [UNIQUE | FULLTEXT | SPATIAL ] INDEX 索引名</span><br><span class="hljs-comment">                    ON 表名 (字段名[(长度)] [ASC |DESC]) ;</span><br><span class="hljs-comment"></span><br><span class="hljs-comment"></span><br><span class="hljs-comment">#方法三：ALTER TABLE在已存在的表上创建索引</span><br><span class="hljs-comment">       ALTER TABLE 表名 ADD [UNIQUE | FULLTEXT | SPATIAL ] INDEX</span><br><span class="hljs-comment">                            索引名 (字段名[(长度)] [ASC |DESC]) ;</span><br><span class="hljs-comment">                           </span><br><span class="hljs-comment">                           </span><br><span class="hljs-comment">#删除索引：DROP INDEX 索引名 ON 表名字;</span><br><span class="hljs-comment">#删除主键索引: ALTER TABLE 表名 DROP PRIMARY KEY;</span><br><span class="hljs-comment"></span><br><span class="hljs-comment"></span><br><span class="hljs-comment">#显示索引信息: SHOW INDEX FROM student;</span><br><span class="hljs-comment">*/</span><br><br><span class="hljs-comment">/*增加全文索引*/</span><br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> `school`.`student` <span class="hljs-keyword">ADD</span> FULLTEXT INDEX `studentname` (`StudentName`);<br><br><span class="hljs-comment">/*EXPLAIN : 分析SQL语句执行性能*/</span><br>EXPLAIN <span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> student <span class="hljs-keyword">WHERE</span> studentno<span class="hljs-operator">=</span><span class="hljs-string">&#x27;1000&#x27;</span>;<br><br><span class="hljs-comment">/*使用全文索引*/</span><br><span class="hljs-comment">-- 全文搜索通过 MATCH() 函数完成。</span><br><span class="hljs-comment">-- 搜索字符串作为 against() 的参数被给定。搜索以忽略字母大小写的方式执行。对于表中的每个记录行，MATCH() 返回一个相关性值。即，在搜索字符串与记录行在 MATCH() 列表中指定的列的文本之间的相似性尺度。</span><br>EXPLAIN <span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span><span class="hljs-keyword">FROM</span> student <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">MATCH</span>(studentname) AGAINST(<span class="hljs-string">&#x27;love&#x27;</span>);<br><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">开始之前，先说一下全文索引的版本、存储引擎、数据类型的支持情况</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">MySQL 5.6 以前的版本，只有 MyISAM 存储引擎支持全文索引；</span><br><span class="hljs-comment">MySQL 5.6 及以后的版本，MyISAM 和 InnoDB 存储引擎均支持全文索引;</span><br><span class="hljs-comment">只有字段的数据类型为 char、varchar、text 及其系列才可以建全文索引。</span><br><span class="hljs-comment">测试或使用全文索引时，要先看一下自己的 MySQL 版本、存储引擎和数据类型是否支持全文索引。</span><br><span class="hljs-comment">*/</span><br></code></pre></td></tr></table></figure>
+
+<p>测试全文索引，我们在数据库中插入100万条数据来测试举例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 创建表</span><br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> `app_user` (<br>`id` <span class="hljs-type">BIGINT</span>(<span class="hljs-number">20</span>) UNSIGNED <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> AUTO_INCREMENT,<br>`name` <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">50</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-string">&#x27;&#x27;</span> COMMENT <span class="hljs-string">&#x27;用户昵称&#x27;</span>,<br>`email` <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">50</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;用户邮箱&#x27;</span>,<br>`phone` <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">20</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-string">&#x27;&#x27;</span> COMMENT <span class="hljs-string">&#x27;手机号&#x27;</span>,<br>`gender` TINYINT(<span class="hljs-number">4</span>) UNSIGNED <span class="hljs-keyword">DEFAULT</span> <span class="hljs-string">&#x27;0&#x27;</span> COMMENT <span class="hljs-string">&#x27;性别（0:男；1：女）&#x27;</span>,<br>`password` <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;密码&#x27;</span>,<br>`age` TINYINT(<span class="hljs-number">4</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-string">&#x27;0&#x27;</span> COMMENT <span class="hljs-string">&#x27;年龄&#x27;</span>,<br>`create_time` DATETIME <span class="hljs-keyword">DEFAULT</span> <span class="hljs-built_in">CURRENT_TIMESTAMP</span>,<br>`update_time` <span class="hljs-type">TIMESTAMP</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-built_in">CURRENT_TIMESTAMP</span> <span class="hljs-keyword">ON</span> UPDATE <span class="hljs-built_in">CURRENT_TIMESTAMP</span>,<br><span class="hljs-keyword">PRIMARY</span> KEY (`id`)<br>) ENGINE<span class="hljs-operator">=</span>INNODB <span class="hljs-keyword">DEFAULT</span> CHARSET<span class="hljs-operator">=</span>utf8mb4 COMMENT<span class="hljs-operator">=</span><span class="hljs-string">&#x27;app用户表&#x27;</span><br><br><span class="hljs-comment">-- 插入100万条数据</span><br><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">FUNCTION</span> IF <span class="hljs-keyword">EXISTS</span> mock_data;<br>DELIMITER $$<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">FUNCTION</span> mock_data()<br><span class="hljs-keyword">RETURNS</span> <span class="hljs-type">INT</span><br><span class="hljs-keyword">BEGIN</span><br><span class="hljs-keyword">DECLARE</span> num <span class="hljs-type">INT</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-number">1000000</span>;<br><span class="hljs-keyword">DECLARE</span> i <span class="hljs-type">INT</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-number">0</span>;<br>WHILE i <span class="hljs-operator">&lt;</span> num DO<br>  <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> app_user(`name`, `email`, `phone`, `gender`, `password`, `age`)<br>   <span class="hljs-keyword">VALUES</span>(CONCAT(<span class="hljs-string">&#x27;用户&#x27;</span>, i), <span class="hljs-string">&#x27;24736743@qq.com&#x27;</span>, CONCAT(<span class="hljs-string">&#x27;18&#x27;</span>, <span class="hljs-built_in">FLOOR</span>(RAND()<span class="hljs-operator">*</span>(<span class="hljs-number">999999999</span><span class="hljs-number">-100000000</span>)<span class="hljs-operator">+</span><span class="hljs-number">100000000</span>)),<span class="hljs-built_in">FLOOR</span>(RAND()<span class="hljs-operator">*</span><span class="hljs-number">2</span>),UUID(), <span class="hljs-built_in">FLOOR</span>(RAND()<span class="hljs-operator">*</span><span class="hljs-number">100</span>));<br>  <span class="hljs-keyword">SET</span> i <span class="hljs-operator">=</span> i <span class="hljs-operator">+</span> <span class="hljs-number">1</span>;<br><span class="hljs-keyword">END</span> WHILE;<br><span class="hljs-keyword">RETURN</span> i;<br><span class="hljs-keyword">END</span>;<br><span class="hljs-keyword">SELECT</span> mock_data();<br><br><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> app_user <span class="hljs-keyword">WHERE</span> `name` <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;用户9999&#x27;</span>; <span class="hljs-comment">-- 无索引使用1s</span><br><br><span class="hljs-keyword">CREATE</span> INDEX idx_app_user_name <span class="hljs-keyword">ON</span> app_user(`name`);  <span class="hljs-comment">-- 插入索引</span><br><br><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> app_user <span class="hljs-keyword">WHERE</span> `name` <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;用户9999&#x27;</span>; <span class="hljs-comment">-- 插入索引后效率提高使用使用0.01s</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="索引准则："><a href="#索引准则：" class="headerlink" title="索引准则："></a>索引准则：</h2><ul>
+<li>索引不是越多越好</li>
+<li>不要对经常变动的数据加索引</li>
+<li>小数据量的表建议不要加索引</li>
+<li>索引一般应加在查找条件的字段</li>
+</ul>
+<h2 id="索引的数据结构："><a href="#索引的数据结构：" class="headerlink" title="索引的数据结构："></a>索引的数据结构：</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 我们可以在创建上述索引的时候，为其指定索引类型，分两类</span><br>hash类型的索引：查询单条快，范围查询慢<br>btree类型的索引：b<span class="hljs-operator">+</span>树，层数越多，数据量指数级增长（我们就用它，因为innodb默认支持它）<br><br><span class="hljs-comment">-- 不同的存储引擎支持的索引类型也不一样</span><br>InnoDB 支持事务，支持行级别锁定，支持 B<span class="hljs-operator">-</span>tree、<span class="hljs-keyword">Full</span><span class="hljs-operator">-</span>text 等索引，不支持 Hash 索引；<br>MyISAM 不支持事务，支持表级别锁定，支持 B<span class="hljs-operator">-</span>tree、<span class="hljs-keyword">Full</span><span class="hljs-operator">-</span>text 等索引，不支持 Hash 索引；<br>Memory 不支持事务，支持表级别锁定，支持 B<span class="hljs-operator">-</span>tree、Hash 等索引，不支持 <span class="hljs-keyword">Full</span><span class="hljs-operator">-</span>text 索引；<br>NDB 支持事务，支持行级别锁定，支持 Hash 索引，不支持 B<span class="hljs-operator">-</span>tree、<span class="hljs-keyword">Full</span><span class="hljs-operator">-</span>text 等索引；<br>Archive 不支持事务，支持表级别锁定，不支持 B<span class="hljs-operator">-</span>tree、Hash、<span class="hljs-keyword">Full</span><span class="hljs-operator">-</span>text 等索引；<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Java/">-Java</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/MySQL/">-MySQL</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/06/01/MySQL%E4%B8%AD%E7%9A%84%E6%9D%83%E9%99%90%E5%92%8C%E5%AF%BC%E5%87%BA/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MySQL中的权限和导出</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/30/MySQL%E4%B8%AD%E7%9A%84SQL%E5%87%BD%E6%95%B0/">
+                        <span class="hidden-mobile">MySQL中的SQL函数</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

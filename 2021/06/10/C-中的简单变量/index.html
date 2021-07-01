@@ -18,9 +18,25 @@
   <meta name="author" content="Oxygen">
   <meta name="keywords" content="">
   
-  <title>归档 - Oxygen</title>
+  <title>C++的简单变量 - Oxygen</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
@@ -48,7 +64,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -147,9 +163,46 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="归档">
+            <span class="h2" id="subtitle" title="C++的简单变量">
               
             </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-10 11:27" pubdate>
+        2021年6月10日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      322 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      3
+       分钟
+    </span>
+  
+
+  
+  
+</div>
 
             
           </div>
@@ -162,52 +215,108 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 32 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2021</p>
-    
-    <a href="/2021/06/16/C-%E4%B8%AD%E7%9A%84%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">C++中的复合类型</span>
-      <time style="float: right;">06-16</time>
-    </a>
-  
-    
-    <a href="/2021/06/10/C-%E4%B8%AD%E7%9A%84%E7%AE%80%E5%8D%95%E5%8F%98%E9%87%8F/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">C++的简单变量</span>
-      <time style="float: right;">06-10</time>
-    </a>
-  
-    
-    <a href="/2021/06/07/C-%E7%9A%84%E5%8E%86%E5%8F%B2%E5%92%8C%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">C++的历史和基础语法</span>
-      <time style="float: right;">06-07</time>
-    </a>
-  
-</div>
 
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">C++的简单变量</h1>
+            
+            <div class="markdown-body">
+              <p>第三章讲的是C++中的简单变量处理。</p>
+<p>相比Java，C++提供的简单变量类型很多，包括在C++11中新增加的几种类型。</p>
+<p>其中的基本整形变量：bool，char、short、int、long以及在C++11中所提供的新类型long long。它们都有符号版本和无符号版本（即正数）。我们可以在climit文件中找到这些符号常量。其中，无符号类型一般在有符号类型前加上unsigned即可。无符号类型，在某些特殊的情况下比有符号类型更加适用（比如人口数量）。</p>
+<p>C++的const限定符：这是一种来修改变量的声明和初始化的关键字。</p>
+<p>const创建常量格式如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">const</span> type name = value; <br><br><span class="hljs-comment">//举个例子</span><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> a = <span class="hljs-number">10</span>;<br></code></pre></td></tr></table></figure>
 
+<p>C++浮点数：浮点数即为可以带小数的数，可以提供比整形大的多的值。C++有三种浮点数类型：float、double和long double。</p>
+<p>C++算术运算符：常见的+、-、*、/和%。即加减乘除和取模运算（取余数）。</p>
+<p>C++强制类型转换：高精度转低精度会有损失，低精度转高精度则不会。</p>
+<p>强制转换格式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-built_in"><span class="hljs-keyword">typename</span></span>(value)<br><br> <span class="hljs-comment">//举个例子</span><br> <span class="hljs-built_in"><span class="hljs-keyword">int</span></span>(<span class="hljs-string">&#x27;A&#x27;</span>)<br></code></pre></td></tr></table></figure>
 
+<p>总的来说，第三章没啥难的。</p>
 
-
-              </div>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/C/">-C++</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%9F%BA%E7%A1%80/">-基础</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/06/16/C-%E4%B8%AD%E7%9A%84%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">C++中的复合类型</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/07/C-%E7%9A%84%E5%8E%86%E5%8F%B2%E5%92%8C%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">
+                        <span class="hidden-mobile">C++的历史和基础语法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -287,9 +396,15 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
 
 
 

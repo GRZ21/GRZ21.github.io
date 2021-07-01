@@ -1,0 +1,601 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="这块属于基础扩充内容，也不算难吧。">
+  <meta name="author" content="Oxygen">
+  <meta name="keywords" content="">
+  
+  <title>Java中Junit，反射，注解 - Oxygen</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"grz21.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Oxygen</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java中Junit，反射，注解">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-05-07 18:37" pubdate>
+        2020年5月7日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      11
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java中Junit，反射，注解</h1>
+            
+            <div class="markdown-body">
+              <p>这块属于基础扩充内容，也不算难吧。</p>
+<span id="more"></span>
+
+<ul>
+<li><p>Junit测试</p>
+<p>在测试中，一般分为两种，白盒和黑盒测试，Junit属于白盒测试。</p>
+<p>Junit使用：</p>
+<ol>
+<li><p>定义一个测试类  </p>
+<p>建议：</p>
+<p>测试类名：被测试得类名+Test</p>
+<p>包名：xxx.xx.test</p>
+</li>
+<li><p>定义测试方法：</p>
+<p>建议：</p>
+<p>方法名：test+测试的方法名</p>
+<p>返回值：void</p>
+<p>参数列表：空参</p>
+</li>
+<li><p>给方法加@Test</p>
+</li>
+<li><p>给Junit导入环境</p>
+</li>
+<li><p>判定结果：</p>
+<p>红色：失败</p>
+<p>绿色：成功</p>
+<p>一般我们使用断言来操作处理结果：Assert。assertEquals（期望的结果，运算的结果）;</p>
+</li>
+</ol>
+<p>补充：</p>
+<p>@Before：修饰的方法会在测试方法执行之前自动执行。</p>
+<p>@After：修饰的方法会在测试方法执行之后自动执行。</p>
+<hr>
+<ul>
+<li><p>反射：框架设计的灵魂。</p>
+</li>
+<li><p>获取Class对象的方式：</p>
+<ol>
+<li><p>Class.forName(全类名）：将字节码文件加载进内存，返回Class对象。</p>
+<p>多用于配置文件，将类名定义在配置文件中，读取文件，加载类。</p>
+</li>
+<li><p>类名。class：通过类名的属性class获取：</p>
+<p>多用于参数的传递。</p>
+</li>
+<li><p>对象。getClass()：getClass()方法在OBject类中定义：</p>
+<p>多用于对象获取字节码的方式。</p>
+</li>
+</ol>
+</li>
+</ul>
+<p>结论：同一个字节码文件(*.class)在一次程序运行过程中，只会被加载一次，无论哪种方式获得的都是同一个。</p>
+<p>class对象功能：</p>
+<p>获取功能：</p>
+<ol>
+<li>   获取成员方法们：</li>
+</ol>
+<p>   Filed   getField(String name)</p>
+<p>   Filed[  ]  getFields() ：获取所有public修饰的成员变量</p>
+<p>   Filed  getDeclaredField(String name)</p>
+<p>   Filed[  ]  getDeclaredFields() ：获取所有成员变量，不考虑修饰符</p>
+<p>   Filed：成员变量操作：</p>
+<ol>
+<li><p>设置值：</p>
+<p>void set(Object obj,Object value)</p>
+</li>
+<li><p>获取值：</p>
+<p>get(Object obj)</p>
+</li>
+<li><p>忽略访问权限修饰符:</p>
+<p>对象.setAccessible(true); 暴力反射。</p>
+<hr>
+</li>
+<li><p>获取构造方法：</p>
+<p>Constructor<T>  getConstructor(类… parameterTypes)</p>
+<p>Constructor[  ]   geConstructors() ：获取所有public修饰的构造方法</p>
+<p>Constructor<T>  getDeclaredConstructor(类… parameterTypes)</p>
+<p>Constructor[  ]   getDeclaredConstructors()  ：获取所有构造方法，不考虑修饰符</p>
+<p>Constructor：构造方法操作：</p>
+<p>创建对象：</p>
+<p>T newInstance(Object……initargs)</p>
+<p>如果是空参数，可以直接使用Class对象的newInstance方法。</p>
+</li>
+</ol>
+<hr>
+<ol start="3">
+<li><p>获取成员方法们：</p>
+<p>Method getMethod(String name,  类… parameterTypes)</p>
+<p>Mathod[  ]  getMethods()</p>
+<p>Method getDeclaredMethod(String name,  类… parameterTypes)</p>
+<p>Mathod[  ]  getDeclaredMethods()</p>
+<p>Method：成员方法操作：</p>
+<p>执行方法：Object invoke(Object obj，Object……args)</p>
+<p>获取方法名称：String getName：获取方法名。</p>
+<hr>
+</li>
+<li><p>获取类名：</p>
+<p>String  getName()</p>
+</li>
+</ol>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>注解：</p>
+<p>说明程序：给计算机看的。</p>
+<p>概念描述：</p>
+<ol>
+<li>JDK1.5之后的新特性</li>
+<li>说明程序的</li>
+<li>使用注解：@注解名称</li>
+</ol>
+<p>作用分类：</p>
+<ol>
+<li>编写文档：通过代码中标识的元数据生成文档（生成doc文档）。</li>
+<li>代码分析：通过代码中标识的元数据生成分析（使用文档）。</li>
+<li>编译检查：通过代码中标识的元数据让编译器实现基本的编译检查（Override)。</li>
+</ol>
+</li>
+<li><p>JDK预定义注解：</p>
+<ol>
+<li>@Override：检测该注解的方法是否来自继承自父类（接口）的。</li>
+<li>@Deprecated：标注的类容代表已经过时。</li>
+<li>@SuppressWarnings：压制警告，一般写在类前，value给all，压制所有警告。</li>
+</ol>
+</li>
+<li><p>自定义注解：</p>
+<p>格式：</p>
+<p>元注解</p>
+<p>public @interface 注解名称{  }</p>
+<p>本质是一个接口，该接口默认继承Annotation接口。</p>
+<p>属性：接口可以定义的成员方法要求：</p>
+<ol>
+<li><p>基本数据类型</p>
+</li>
+<li><p>String</p>
+</li>
+<li><p>枚举</p>
+</li>
+<li><p>注解</p>
+</li>
+<li><p>以上类型的数组</p>
+<p>定义了属性，需要给属性赋值：</p>
+<ol>
+<li>如果定义属性时，使用default关键字默认初始值，则在使用注解时，无需进行属性的赋值。</li>
+<li>如果志有一个属性需要赋值，且名称是value，则value可以省略，直接定义值即可。</li>
+<li>数组赋值时，值使用｛｝包裹，如果数组只有一个值，则可以省略｛｝。</li>
+</ol>
+</li>
+</ol>
+<p>元注解：</p>
+<ol>
+<li><p>@Target：描述注解能够作用的位置（其中包含TYPE，作用于类；METHOD，作用于方法；FIELD,作用于成员变量）。</p>
+</li>
+<li><p>@Retention：描述注解能够保留的阶段（RetentionPolicy+ 包含SOURCE，CLASS，RUNTIME三个阶段，一般使用RUNTIME阶段）。</p>
+</li>
+<li><p>@Documented：描述注解是否被抽取到API文档中。</p>
+</li>
+<li><p>@Inherited：描述注解是否被子类继承。</p>
+</li>
+</ol>
+</li>
+</ul>
+<p>其实，在以后大多数时候，我们都是自己去使用注解，而不是自定义……</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Java/">-Java</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%9F%BA%E7%A1%80/">-基础</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/05/09/Java%E4%B8%AD%E7%9A%84GUI%E7%BC%96%E7%A8%8B/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java中的GUI编程</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/06/Java%E4%B8%AD%E7%88%B6%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/">
+                        <span class="hidden-mobile">Java中父类和接口</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

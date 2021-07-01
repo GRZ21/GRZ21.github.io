@@ -1,0 +1,511 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="这块……第二部分的聚合函数需要掌握，第一部分常用函数……类似于Java中的常用类，需要了解常用部分（不过也挺多的）。">
+  <meta name="author" content="Oxygen">
+  <meta name="keywords" content="">
+  
+  <title>MySQL中的SQL函数 - Oxygen</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"grz21.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Oxygen</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="MySQL中的SQL函数">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-05-30 00:40" pubdate>
+        2020年5月30日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      20
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MySQL中的SQL函数</h1>
+            
+            <div class="markdown-body">
+              <p>这块……第二部分的聚合函数需要掌握，第一部分常用函数……类似于Java中的常用类，需要了解常用部分（不过也挺多的）。</p>
+<span id="more"></span>
+
+<h1 id="常用函数："><a href="#常用函数：" class="headerlink" title="常用函数："></a>常用函数：</h1><h2 id="数据函数："><a href="#数据函数：" class="headerlink" title="数据函数："></a>数据函数：</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">ABS</span>(<span class="hljs-number">-8</span>);  <span class="hljs-comment">/*绝对值*/</span><br><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">CEILING</span>(<span class="hljs-number">9.4</span>); <span class="hljs-comment">/*向上取整*/</span><br><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">FLOOR</span>(<span class="hljs-number">9.4</span>);   <span class="hljs-comment">/*向下取整*/</span><br><span class="hljs-keyword">SELECT</span> RAND();  <span class="hljs-comment">/*随机数,返回一个0-1之间的随机数*/</span><br><span class="hljs-keyword">SELECT</span> SIGN(<span class="hljs-number">0</span>); <span class="hljs-comment">/*符号函数: 负数返回-1,正数返回1,0返回0*/</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="字符串函数："><a href="#字符串函数：" class="headerlink" title="字符串函数："></a>字符串函数：</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">CHAR_LENGTH</span>(<span class="hljs-string">&#x27;狂神说坚持就能成功&#x27;</span>); <span class="hljs-comment">/*返回字符串包含的字符数*/</span><br><span class="hljs-keyword">SELECT</span> CONCAT(<span class="hljs-string">&#x27;我&#x27;</span>,<span class="hljs-string">&#x27;爱&#x27;</span>,<span class="hljs-string">&#x27;程序&#x27;</span>);  <span class="hljs-comment">/*合并字符串,参数可以有多个*/</span><br><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">INSERT</span>(<span class="hljs-string">&#x27;我爱编程helloworld&#x27;</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-string">&#x27;超级热爱&#x27;</span>);  <span class="hljs-comment">/*替换字符串,从某个位置开始替换某个长度*/</span><br><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">LOWER</span>(<span class="hljs-string">&#x27;KuangShen&#x27;</span>); <span class="hljs-comment">/*小写*/</span><br><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">UPPER</span>(<span class="hljs-string">&#x27;KuangShen&#x27;</span>); <span class="hljs-comment">/*大写*/</span><br><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">LEFT</span>(<span class="hljs-string">&#x27;hello,world&#x27;</span>,<span class="hljs-number">5</span>);   <span class="hljs-comment">/*从左边截取*/</span><br><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">RIGHT</span>(<span class="hljs-string">&#x27;hello,world&#x27;</span>,<span class="hljs-number">5</span>);  <span class="hljs-comment">/*从右边截取*/</span><br><span class="hljs-keyword">SELECT</span> REPLACE(<span class="hljs-string">&#x27;狂神说坚持就能成功&#x27;</span>,<span class="hljs-string">&#x27;坚持&#x27;</span>,<span class="hljs-string">&#x27;努力&#x27;</span>);  <span class="hljs-comment">/*替换字符串*/</span><br><span class="hljs-keyword">SELECT</span> SUBSTR(<span class="hljs-string">&#x27;狂神说坚持就能成功&#x27;</span>,<span class="hljs-number">4</span>,<span class="hljs-number">6</span>); <span class="hljs-comment">/*截取字符串,开始和长度*/</span><br><span class="hljs-keyword">SELECT</span> REVERSE(<span class="hljs-string">&#x27;狂神说坚持就能成功&#x27;</span>); <span class="hljs-comment">/*反转</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">-- 查询姓周的同学,改成邹</span><br><span class="hljs-comment">SELECT REPLACE(studentname,&#x27;周&#x27;,&#x27;邹&#x27;) AS 新名字</span><br><span class="hljs-comment">FROM student WHERE studentname LIKE &#x27;周%&#x27;;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="日期和时间函数："><a href="#日期和时间函数：" class="headerlink" title="日期和时间函数："></a>日期和时间函数：</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">CURRENT_DATE</span>();   <span class="hljs-comment">/*获取当前日期*/</span><br><span class="hljs-keyword">SELECT</span> CURDATE();   <span class="hljs-comment">/*获取当前日期*/</span><br><span class="hljs-keyword">SELECT</span> NOW();   <span class="hljs-comment">/*获取当前日期和时间*/</span><br><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">LOCALTIME</span>();   <span class="hljs-comment">/*获取当前日期和时间*/</span><br><span class="hljs-keyword">SELECT</span> SYSDATE();   <span class="hljs-comment">/*获取当前日期和时间*/</span><br><br><span class="hljs-comment">-- 获取年月日,时分秒</span><br><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">YEAR</span>(NOW());<br><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">MONTH</span>(NOW());<br><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">DAY</span>(NOW());<br><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">HOUR</span>(NOW());<br><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">MINUTE</span>(NOW());<br><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">SECOND</span>(NOW());<br></code></pre></td></tr></table></figure>
+
+<h2 id="系统函数："><a href="#系统函数：" class="headerlink" title="系统函数："></a>系统函数：</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> VERSION();  <span class="hljs-comment">/*版本*/</span><br><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">USER</span>();     <span class="hljs-comment">/*用户*/</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="聚合函数："><a href="#聚合函数：" class="headerlink" title="聚合函数："></a>聚合函数：</h1><table>
+<thead>
+<tr>
+<th align="center">函数名称</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">count()</td>
+<td align="center">返回满足select条件的记录总数，如select count（*）【不建议使用】</td>
+</tr>
+<tr>
+<td align="center">sum()</td>
+<td align="center">返回数字字段或表达式列作统计，返回一列的总和</td>
+</tr>
+<tr>
+<td align="center">avg()</td>
+<td align="center">返回数字字段或表达式列作统计，返回一列的平均值</td>
+</tr>
+<tr>
+<td align="center">max()</td>
+<td align="center">返回数字字段或表达式列作统计，返回一列的最大值</td>
+</tr>
+<tr>
+<td align="center">min()</td>
+<td align="center">返回数字字段或表达式列作统计，返回一列的最小值</td>
+</tr>
+</tbody></table>
+<p>对count几种不同情况的说明和其他函数：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 聚合函数</span><br><span class="hljs-comment">/*COUNT:非空的*/</span><br><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(studentname) <span class="hljs-keyword">FROM</span> student;<br><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">FROM</span> student;<br><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-number">1</span>) <span class="hljs-keyword">FROM</span> student;  <span class="hljs-comment">/*推荐*/</span><br><br><span class="hljs-comment">-- 从含义上讲，count(1) 与 count(*) 都表示对全部数据行的查询。</span><br><span class="hljs-comment">-- count(字段) 会统计该字段在表中出现的次数，忽略字段为null 的情况。即不统计字段为null 的记录。</span><br><span class="hljs-comment">-- count(*) 包括了所有的列，相当于行数，在统计结果的时候，包含字段为null 的记录；</span><br><span class="hljs-comment">-- count(1) 用1代表代码行，在统计结果的时候，包含字段为null 的记录 。</span><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">很多人认为count(1)执行的效率会比count(*)高，原因是count(*)会存在全表扫描，而count(1)可以针对一个字段进行查询。其实不然，count(1)和count(*)都会对全表进行扫描，统计所有记录的条数，包括那些为null的记录，因此，它们的效率可以说是相差无几。而count(字段)则与前两者不同，它会统计该字段不为null的记录条数。</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">下面它们之间的一些对比：</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">1）在表没有主键时，count(1)比count(*)快</span><br><span class="hljs-comment">2）有主键时，主键作为计算条件，count(主键)效率最高；</span><br><span class="hljs-comment">3）若表格只有一个字段，则count(*)效率较高。</span><br><span class="hljs-comment">*/</span><br><br><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">SUM</span>(StudentResult) <span class="hljs-keyword">AS</span> 总和 <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">result</span>;<br><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">AVG</span>(StudentResult) <span class="hljs-keyword">AS</span> 平均分 <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">result</span>;<br><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">MAX</span>(StudentResult) <span class="hljs-keyword">AS</span> 最高分 <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">result</span>;<br><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">MIN</span>(StudentResult) <span class="hljs-keyword">AS</span> 最低分 <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">result</span>;<br></code></pre></td></tr></table></figure>
+
+<p>题目：</p>
+<p>建议和DQL最后的having和group by配合起来看：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 查询不同课程的平均分,最高分,最低分</span><br><span class="hljs-comment">-- 前提:根据不同的课程进行分组</span><br><br><span class="hljs-keyword">SELECT</span> subjectname,<span class="hljs-built_in">AVG</span>(studentresult) <span class="hljs-keyword">AS</span> 平均分,<span class="hljs-built_in">MAX</span>(StudentResult) <span class="hljs-keyword">AS</span> 最高分,<span class="hljs-built_in">MIN</span>(StudentResult) <span class="hljs-keyword">AS</span> 最低分<br><span class="hljs-keyword">FROM</span> <span class="hljs-keyword">result</span> <span class="hljs-keyword">AS</span> r<br><span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> `subject` <span class="hljs-keyword">AS</span> s<br><span class="hljs-keyword">ON</span> r.subjectno <span class="hljs-operator">=</span> s.subjectno<br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> r.subjectno<br><span class="hljs-keyword">HAVING</span> 平均分<span class="hljs-operator">&gt;</span><span class="hljs-number">80</span>;<br><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">where写在group by前面.</span><br><span class="hljs-comment">要是放在分组后面的筛选</span><br><span class="hljs-comment">要使用HAVING..</span><br><span class="hljs-comment">因为having是从前面筛选的字段再筛选，而where是从数据表中的&gt;字段直接进行的筛选的</span><br><span class="hljs-comment">*/</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="拓展："><a href="#拓展：" class="headerlink" title="拓展："></a>拓展：</h1><h2 id="MD5函数："><a href="#MD5函数：" class="headerlink" title="MD5函数："></a>MD5函数：</h2><p>这个函数用于加密，在数据库存储密码使用。</p>
+<p>举例：</p>
+<p>新建一个表：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> `TESTMD5`(<br>  `id` <span class="hljs-type">INT</span>(<span class="hljs-number">4</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>  `name` <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">20</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>  `pwd` <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">50</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>  <span class="hljs-keyword">PRIMARY</span> KEY (`id`)<br>)<br></code></pre></td></tr></table></figure>
+
+<p>在表中插入数据：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> `TESTMD5`(`id`,`name`,`pwd`) <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;1&#x27;</span>,<span class="hljs-string">&#x27;GRZ&#x27;</span>,<span class="hljs-string">&#x27;123456&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>这个时候，我们的插入的密码是明文。</p>
+<p>我们对密码只用MD5函数进行加密：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">UPDATE `TESTMD5` <span class="hljs-keyword">SET</span> `pwd`<span class="hljs-operator">=</span> MD5(`pwd`)<br></code></pre></td></tr></table></figure>
+
+<p>同样的，我们也可以使用where子句对指定行进行加密：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 对id是1的用户进行MD5加密</span><br>UPDATE `TESTMD5` <span class="hljs-keyword">SET</span> `pwd`<span class="hljs-operator">=</span> MD5(`pwd`)<br><span class="hljs-keyword">where</span> `id` <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;1&#x27;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- ================ 内置函数 ================</span><br><span class="hljs-comment">-- 数值函数</span><br><span class="hljs-built_in">abs</span>(x)            <span class="hljs-comment">-- 绝对值 abs(-10.9) = 10</span><br>format(x, d)    <span class="hljs-comment">-- 格式化千分位数值 format(1234567.456, 2) = 1,234,567.46</span><br><span class="hljs-built_in">ceil</span>(x)            <span class="hljs-comment">-- 向上取整 ceil(10.1) = 11</span><br><span class="hljs-built_in">floor</span>(x)        <span class="hljs-comment">-- 向下取整 floor (10.1) = 10</span><br>round(x)        <span class="hljs-comment">-- 四舍五入去整</span><br><span class="hljs-built_in">mod</span>(m, n)        <span class="hljs-comment">-- m%n m mod n 求余 10%3=1</span><br>pi()            <span class="hljs-comment">-- 获得圆周率</span><br>pow(m, n)        <span class="hljs-comment">-- m^n</span><br><span class="hljs-built_in">sqrt</span>(x)            <span class="hljs-comment">-- 算术平方根</span><br>rand()            <span class="hljs-comment">-- 随机数</span><br><span class="hljs-keyword">truncate</span>(x, d)    <span class="hljs-comment">-- 截取d位小数</span><br><br><span class="hljs-comment">-- 时间日期函数</span><br>now(), <span class="hljs-built_in">current_timestamp</span>();     <span class="hljs-comment">-- 当前日期时间</span><br><span class="hljs-built_in">current_date</span>();                    <span class="hljs-comment">-- 当前日期</span><br><span class="hljs-built_in">current_time</span>();                    <span class="hljs-comment">-- 当前时间</span><br><span class="hljs-type">date</span>(<span class="hljs-string">&#x27;yyyy-mm-dd hh:ii:ss&#x27;</span>);    <span class="hljs-comment">-- 获取日期部分</span><br><span class="hljs-type">time</span>(<span class="hljs-string">&#x27;yyyy-mm-dd hh:ii:ss&#x27;</span>);    <span class="hljs-comment">-- 获取时间部分</span><br>date_format(<span class="hljs-string">&#x27;yyyy-mm-dd hh:ii:ss&#x27;</span>, <span class="hljs-string">&#x27;%d %y %a %d %m %b %j&#x27;</span>);    <span class="hljs-comment">-- 格式化时间</span><br>unix_timestamp();                <span class="hljs-comment">-- 获得unix时间戳</span><br>from_unixtime();                <span class="hljs-comment">-- 从时间戳获得时间</span><br><br><span class="hljs-comment">-- 字符串函数</span><br>length(string)            <span class="hljs-comment">-- string长度，字节</span><br><span class="hljs-keyword">char_length</span>(string)        <span class="hljs-comment">-- string的字符个数</span><br><span class="hljs-built_in">substring</span>(str, position [,length])        <span class="hljs-comment">-- 从str的position开始,取length个字符</span><br>replace(str ,search_str ,replace_str)    <span class="hljs-comment">-- 在str中用replace_str替换search_str</span><br>instr(string ,substring)    <span class="hljs-comment">-- 返回substring首次在string中出现的位置</span><br>concat(string [,...])    <span class="hljs-comment">-- 连接字串</span><br>charset(str)            <span class="hljs-comment">-- 返回字串字符集</span><br>lcase(string)            <span class="hljs-comment">-- 转换成小写</span><br><span class="hljs-keyword">left</span>(string, length)    <span class="hljs-comment">-- 从string2中的左边起取length个字符</span><br>load_file(file_name)    <span class="hljs-comment">-- 从文件读取内容</span><br>locate(substring, string [,start_position])    <span class="hljs-comment">-- 同instr,但可指定开始位置</span><br>lpad(string, length, pad)    <span class="hljs-comment">-- 重复用pad加在string开头,直到字串长度为length</span><br>ltrim(string)            <span class="hljs-comment">-- 去除前端空格</span><br>repeat(string, count)    <span class="hljs-comment">-- 重复count次</span><br>rpad(string, length, pad)    <span class="hljs-comment">--在str后用pad补充,直到长度为length</span><br>rtrim(string)            <span class="hljs-comment">-- 去除后端空格</span><br>strcmp(string1 ,string2)    <span class="hljs-comment">-- 逐字符比较两字串大小</span><br><br><span class="hljs-comment">-- 聚合函数</span><br><span class="hljs-built_in">count</span>()<br><span class="hljs-built_in">sum</span>();<br><span class="hljs-built_in">max</span>();<br><span class="hljs-built_in">min</span>();<br><span class="hljs-built_in">avg</span>();<br>group_concat()<br><br><span class="hljs-comment">-- 其他常用函数</span><br>md5();<br><span class="hljs-keyword">default</span>();<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Java/">-Java</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/MySQL/">-MySQL</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/05/30/MySQL%E4%B8%AD%E7%9A%84%E4%BA%8B%E5%8A%A1%E5%92%8C%E7%B4%A2%E5%BC%95/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MySQL中的事务和索引</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/26/MySQL%E4%B8%AD%E7%9A%84DQL/">
+                        <span class="hidden-mobile">MySQL中的DQL</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
