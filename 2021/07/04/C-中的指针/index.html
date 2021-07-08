@@ -14,7 +14,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
+  <meta name="description" content="在很多时候，大家听说到C/C++时候，都会说到一个名词：指针。指针是C/C++的特色所在，但是也让人头疼不已。 我只能讲讲我现在理解的指针。">
   <meta name="author" content="Oxygen">
   <meta name="keywords" content="">
   
@@ -241,12 +241,14 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：5 天前
+                  本文最后更新于：几秒前
                 
               </p>
             
             <div class="markdown-body">
               <p>在很多时候，大家听说到C/C++时候，都会说到一个名词：指针。指针是C/C++的特色所在，但是也让人头疼不已。 我只能讲讲我现在理解的指针。</p>
+<span id="more"></span>　　
+
 <p>指针应该是在复合类型那一章初次接触。首先明确一个概念，指针就是一个地址。比如<code>int* x</code>,指的就是<code>&amp;*x</code>。其中这个解除引用运算符<code>*</code>会让人很疑惑。举个例子：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">int</span>* x;<br>*x = <span class="hljs-number">100</span>;<br>x = &amp;*x;  <br></code></pre></td></tr></table></figure>
 

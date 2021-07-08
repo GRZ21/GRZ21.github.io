@@ -14,7 +14,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
+  <meta name="description" content="在我们点击运行时候，其实编译器做了两件事：编译和链接。编译是检查你的文件可行性并且编译成一种为.obj格式的中间文件，而链接是把你在这个文件中使用到的头文件或者是在其他文件中使用的全局变量导入进来，最后形成一个可执行文件exe。">
   <meta name="author" content="Oxygen">
   <meta name="keywords" content="">
   
@@ -241,12 +241,14 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：5 天前
+                  本文最后更新于：1 分钟前
                 
               </p>
             
             <div class="markdown-body">
               <p>在我们点击运行时候，其实编译器做了两件事：编译和链接。编译是检查你的文件可行性并且编译成一种为<code>.obj</code>格式的中间文件，而链接是把你在这个文件中使用到的头文件或者是在其他文件中使用的全局变量导入进来，最后形成一个可执行文件<code>exe</code>。</p>
+<span id="more"></span>　　
+
 <h1 id="头文件："><a href="#头文件：" class="headerlink" title="头文件："></a>头文件：</h1><p>一般我们在写一个<code>.cpp</code>文件第一步是写<code>#include&lt;&gt;</code>，这个就是将一个库导入。其实<code>#include</code>做的事很简单，如果将VS编译过程中的输出中间文件打开，我们会发现输出了一个<code>.i</code>文件，在文件中会看到，其实就是简单的将导入的库复制过来到你所引用文件中。</p>
 <p>在我们自己创建一个<code>.h</code>头文件时候，我们一般将这些内容放在其中：</p>
 <ul>
