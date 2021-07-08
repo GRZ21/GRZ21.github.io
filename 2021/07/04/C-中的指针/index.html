@@ -14,11 +14,11 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="其实，在这边怎么说，前端和数据库都没学……因为进度原因，所以直接看的Web后端，这就会搞得一知半解的，但是也不影响入门。至于入门其实也就不得不提到配置环境这块……">
+  <meta name="description" content="">
   <meta name="author" content="Oxygen">
   <meta name="keywords" content="">
   
-  <title>JavaWeb的服务器，HTTP，Maven - Oxygen</title>
+  <title>C++中的指针 - Oxygen</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -175,7 +175,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="JavaWeb的服务器，HTTP，Maven">
+            <span class="h2" id="subtitle" title="C++中的指针">
               
             </span>
 
@@ -185,8 +185,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-05-13 22:22" pubdate>
-        2020年5月13日 晚上
+      <time datetime="2021-07-04 09:32" pubdate>
+        2021年7月4日 上午
       </time>
     </span>
   
@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      716 字
+      832 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      9
        分钟
     </span>
   
@@ -237,62 +237,39 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">JavaWeb的服务器，HTTP，Maven</h1>
+            <h1 style="display: none">C++中的指针</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：7 天前
+                  本文最后更新于：5 天前
                 
               </p>
             
             <div class="markdown-body">
-              <p>其实，在这边怎么说，前端和数据库都没学……因为进度原因，所以直接看的Web后端，这就会搞得一知半解的，但是也不影响入门。至于入门其实也就不得不提到配置环境这块……</p>
-<span id="more"></span>
+              <p>在很多时候，大家听说到C/C++时候，都会说到一个名词：指针。指针是C/C++的特色所在，但是也让人头疼不已。 我只能讲讲我现在理解的指针。</p>
+<p>指针应该是在复合类型那一章初次接触。首先明确一个概念，指针就是一个地址。比如<code>int* x</code>,指的就是<code>&amp;*x</code>。其中这个解除引用运算符<code>*</code>会让人很疑惑。举个例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">int</span>* x;<br>*x = <span class="hljs-number">100</span>;<br>x = &amp;*x;  <br></code></pre></td></tr></table></figure>
 
-<h1 id="1、JavaWeb"><a href="#1、JavaWeb" class="headerlink" title="1、JavaWeb"></a>1、JavaWeb</h1><p>个人觉得吧，JavaWeb在学校教育里的概念等同于JSP，但是并不是。</p>
-<p>Java Web，是用Java技术来解决相关web互联网领域的技术栈。web包括：web服务端和web客户端两部分。Java在服务器端的应用非常的丰富，比如Servlet，JSP和第三方框架等等。Java技术对Web领域的发展注入了强大的动力。——百度百科</p>
-<h1 id="2、配置"><a href="#2、配置" class="headerlink" title="2、配置"></a>2、配置</h1><p>在IDEA中写JavaWeb的代码，是要配置Web服务器和Maven来管理需要依赖的jar包。一般Web服务器都是用Tomcat。</p>
-<h1 id="3、Tomcat"><a href="#3、Tomcat" class="headerlink" title="3、Tomcat"></a>3、Tomcat</h1><p>Tomcat是Apache提供的服务器。在IDEA中配置相对与Ecplise要简单的很。但是一般需要导入war包作为依赖。</p>
-<h1 id="4、Maven"><a href="#4、Maven" class="headerlink" title="4、Maven"></a>4、Maven</h1><p>Maven项目对象模型(POM)，可以通过一小段描述信息来管理项目的构建，报告和文档的项目管理工具)软件。——百度百科</p>
-<p>通俗的讲，在Javaweb开发中，需要导入大量的jar包，Maven就是方便导入jar包和管理。</p>
-<p>Maven的使用和Java差不多，使用需要配置环境变量。</p>
-<p>且建议配置Maven的阿里云镜像和配置本地仓库，保证在导入依赖的jar包时的速度。</p>
-<p>在IDEA里，Maven更类似于一个集成管理工具。在pom.XML中从Maven市场的找到自己需要的依赖。在<dependencies></dependencies>标签中使用<dependency></dependency>关键字导入且刷新。</p>
-<p>举个例子：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>junit<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>junit<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>4.11<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>test<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br> <span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>在<code>int</code>类型后面跟了一个<code>*</code>，但是这个是用来定义<code>x</code>是一个指针。但是接下来<code>*x</code>又是什么？其实就是这个<code>int</code>类型指针<code>x</code>其中的值。最后一句是为了说明指针其实就是一个地址。</p>
+<p>每定义一个指针，一般就会出现这几个问题：这个指针是什么类型？指针指向什么类型？指针又指向哪里？</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//还是用int* x做例子</span><br><span class="hljs-keyword">int</span>* x;<br>*x = <span class="hljs-number">100</span>;<br><span class="hljs-comment">//这个指针是int*类型，指向int类型，值是100。</span><br><br><span class="hljs-comment">//接下来看点复杂的</span><br><span class="hljs-keyword">int</span> **ptr; <span class="hljs-comment">//指针类型是int**,指针所指向的的类型是 int*</span><br><span class="hljs-built_in"><span class="hljs-keyword">int</span></span> (*ptr)[<span class="hljs-number">3</span>]; <span class="hljs-comment">//指针类型是int(*)[3]，指针所指向的的类型是 int()[3]</span><br><span class="hljs-keyword">int</span> *(*ptr)[<span class="hljs-number">4</span>]; <span class="hljs-comment">//指针类型是int*(*)[4]，指针所指向的的类型是 int* ()[4]</span><br></code></pre></td></tr></table></figure>
 
-
-
-<h1 id="5、HTTP"><a href="#5、HTTP" class="headerlink" title="5、HTTP"></a>5、HTTP</h1><p>HTTP是一种超文本传输协议，分为1.0时代和1.1时代。</p>
-<p>HTTPS是在HTTP协议上使用SSH加密技术，一般来说安全性更高。</p>
+<p>从语法的角度来说：</p>
 <ul>
-<li><p>HTTP请求（respose)：</p>
-</li>
-<li><p>客户端—发请求（Request）—服务器</p>
-<p>我的博客举例：</p>
-</li>
+<li>指针是什么类型：一般只要把指针声明语句里的指针名字去掉，剩下的部分就是这个指针的类型。</li>
+<li>指针指向什么类型：把指针声明语句中的指针名字和名字左边的指针声明符<code>*</code>去掉，剩下的就是指针所指向的类型。</li>
 </ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml">Request URL: https://grz21.xyz/             请求地址<br>Request Method: GET                         请求方法<br>Status Code: 304                            状态码<br>Remote Address: 185.199.108.153:443      主机地址和端口<br></code></pre></td></tr></table></figure>
+<p>接下来，在C++中，更让人觉得迷惑的地方是指针和数组的关系。举个例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">int</span> arr[<span class="hljs-number">4</span>] = &#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>&#125;;<br>*arr = arr[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;  <span class="hljs-comment">//数组索引从0开始</span><br>arr = &amp;arr[<span class="hljs-number">0</span>];<br>*(arr+<span class="hljs-number">1</span>) = arr[<span class="hljs-number">1</span>] = <span class="hljs-number">2</span>;  <span class="hljs-comment">//没错，数组名其实也是一个指针，我们可以对数组名进行解除引用，来获得其中的值。</span><br><span class="hljs-comment">//其实在C++中，数组中括号中的索引本质就是在内存中移动指针的位置（我怀疑Java也是，因为Java因为数组越界会报空指针异常错误）。</span><br></code></pre></td></tr></table></figure>
 
-<ul>
-<li>请求行：Get或者Post方法。</li>
-</ul>
-<p>get方法：不安全但是高效，能请求携带的数据较少。</p>
-<p>post方法：安全但是低效，能请求携带的数据多。</p>
-<ul>
-<li>消息头：</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml">accept: text/html                                                      支持的数据类型<br>accept-encoding: gzip, deflate, br                                     编码类型<br>accept-language: zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7                   语言类型<br></code></pre></td></tr></table></figure>
+<p>在上面这个例子中，当<code>arr</code>是数组时，它的类型是<code>int</code>，但是当它成为了一个指针时，它的类型是<code>int*</code>。arr作为指针时，它指向数组的第一个元素的地址（索引为0）。当对指针<code>arr</code>操作时，比如：<code>arr+1</code>，其实在内存中就是将指针向后移动了<code>sizeof(int)</code>个单位（我们声明的是<code>int</code>类型，一般是<code>int</code>是4个字节），这样就指向了数组的第二个元素的地址（索引为1）。这时候我们对<code>arr+1</code>进行解除引用操作，即：<code>*(arr+1)</code>就可以得到数组第二个元素的值。</p>
+<p>这就意味着：我们可以通过指针来操作数组。</p>
+<p>第四章还有个是指针和结构<code>struct</code>的关系：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Mystruct</span>&#123;</span><br><span class="hljs-keyword">int</span> weight;<br><span class="hljs-keyword">double</span> height;<br>&#125;<br><br>Mystruct s = &#123;<span class="hljs-number">130</span>,<span class="hljs-number">187</span>&#125;;<br>Mystruct* ps = &amp;s;  <span class="hljs-comment">//让ps指针指向s的地址</span><br>ps-&gt;weight;   <span class="hljs-comment">//结构指针通过-&gt;来访问结构成员，这时候即为s中的weight成员</span><br>ps-&gt;height;<br></code></pre></td></tr></table></figure>
 
-<ul>
-<li><p>HTTP响应：</p>
-</li>
-<li><p>服务器—响应—客户端</p>
-</li>
-<li><p>响应体：</p>
-</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml">accept: text/html                                                      支持的数据类型<br>accept-encoding: gzip, deflate, br                                      编码类型<br>accept-language: zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7                    语言控制<br>cache-control:                                                          缓存控制<br></code></pre></td></tr></table></figure>
+
+
+
 
 
             </div>
@@ -303,7 +280,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Java/">-Java</a>
+                      <a class="hover-with-bg" href="/categories/C/">-C++</a>
                     
                   </div>
                 
@@ -311,7 +288,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Web%E5%90%8E%E7%AB%AF/">-Web后端</a>
+                      <a class="hover-with-bg" href="/tags/%E5%9F%BA%E7%A1%80/">-基础</a>
                     
                   </div>
                 
@@ -328,9 +305,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/05/15/JavaWeb%E4%B8%AD%E7%9A%84ServletContext/">
+                      <a href="/2021/07/08/C-%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">JavaWeb中的ServletContext</span>
+                        <span class="hidden-mobile">C++中的面向对象</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -338,8 +315,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/05/09/Java%E4%B8%AD%E7%9A%84GUI%E7%BC%96%E7%A8%8B/">
-                        <span class="hidden-mobile">Java中的GUI编程</span>
+                      <a href="/2021/07/03/C-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">
+                        <span class="hidden-mobile">C++内存模型</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

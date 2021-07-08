@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.3k 字
+      1.8k 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      14
+      20
        分钟
     </span>
   
@@ -241,14 +241,13 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2 分钟前
+                  本文最后更新于：5 天前
                 
               </p>
             
             <div class="markdown-body">
               <p>在我们点击运行时候，其实编译器做了两件事：编译和链接。编译是检查你的文件可行性并且编译成一种为<code>.obj</code>格式的中间文件，而链接是把你在这个文件中使用到的头文件或者是在其他文件中使用的全局变量导入进来，最后形成一个可执行文件<code>exe</code>。</p>
-<p>头文件：</p>
-<p>一般我们在写一个<code>.cpp</code>文件第一步是写<code>#include&lt;&gt;</code>，这个就是将一个库导入。其实<code>#include</code>做的事很简单，如果将VS编译过程中的输出中间文件打开，我们会发现输出了一个<code>.i</code>文件，在文件中会看到，其实就是简单的将导入的库复制过来到你所引用文件中。</p>
+<h1 id="头文件："><a href="#头文件：" class="headerlink" title="头文件："></a>头文件：</h1><p>一般我们在写一个<code>.cpp</code>文件第一步是写<code>#include&lt;&gt;</code>，这个就是将一个库导入。其实<code>#include</code>做的事很简单，如果将VS编译过程中的输出中间文件打开，我们会发现输出了一个<code>.i</code>文件，在文件中会看到，其实就是简单的将导入的库复制过来到你所引用文件中。</p>
 <p>在我们自己创建一个<code>.h</code>头文件时候，我们一般将这些内容放在其中：</p>
 <ul>
 <li>函数原型（注意不是函数定义）</li>
@@ -262,8 +261,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">ifndef</span> 头文件名</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> 头文件名</span><br>……内容<br><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span>    </span><br></code></pre></td></tr></table></figure>
 
 <p>在编译器第一次遇到该文件时，会查看<code>#ifndef</code>和<code>#endif</code>中的内容。如果在一个文件中已经定义过了，那个编译器就会直接跳到#<code>#endif</code>后面。</p>
-<p>存储持续性、作用域和链接性</p>
-<p>在C++中，有四种存储持续性：</p>
+<h1 id="存储持续性、作用域和链接性："><a href="#存储持续性、作用域和链接性：" class="headerlink" title="存储持续性、作用域和链接性："></a>存储持续性、作用域和链接性：</h1><p>在C++中，有四种存储持续性：</p>
 <ul>
 <li>自动存储持续性，这种比如在一个函数中所定义的变量，在该函数开始被调用时被输入到栈内存中，在函数时执行结束后被释放。</li>
 <li>静态存储持续性：在C++中使用<code>static</code>定义的变量，它们在整个程序运行中都一直存在。</li>
@@ -328,9 +326,19 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">strcount</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* str)</span></span>&#123;<br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> total = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">int</span> x = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i &lt; <span class="hljs-number">3</span>;i++)&#123;<br>  x++;<br>  total += x;<br>  &#125;<br>cout&lt;&lt;x&lt;&lt;endl;<br>cout&lt;&lt;total&lt;&lt;endl;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>如果将上面这个函数多调用几次，你会发现<code>total</code>的值并不会归0，但是<code>x</code>的值会归0。</p>
-<p>最后再来聊聊<code>const</code>修饰符。<code>const</code>是在内存初始化后，防止对它进行修改的修饰符。但是如果一个值用<code>const</code>进行修饰后，就隐性说明它是被<code>static</code>所修饰，成为了一个内部链接性的变量。如果我们想把它变成外部链接性，只需要在<code>const</code>前面加上<code>extern</code>覆盖原来的<code>static</code>即可。</p>
+<h1 id="再聊const："><a href="#再聊const：" class="headerlink" title="再聊const："></a>再聊const：</h1><p>再来聊聊<code>const</code>修饰符。<code>const</code>是在内存初始化后，防止对它进行修改的修饰符。但是如果一个值用<code>const</code>进行修饰后，就隐性说明它是被<code>static</code>所修饰，成为了一个内部链接性的变量。如果我们想把它变成外部链接性，只需要在<code>const</code>前面加上<code>extern</code>覆盖原来的<code>static</code>即可。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//file1</span><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> x = <span class="hljs-number">100</span>;<br><span class="hljs-keyword">extern</span> <span class="hljs-keyword">int</span> y = <span class="hljs-number">100</span>;<br><br><span class="hljs-comment">//file2</span><br><span class="hljs-keyword">extern</span> <span class="hljs-keyword">int</span> x;   <span class="hljs-comment">//报错，链接性问题</span><br><span class="hljs-keyword">extern</span> <span class="hljs-keyword">int</span> y;   <span class="hljs-comment">//可以使用，因为在file1中使用extern对const隐性的static进行覆盖</span><br></code></pre></td></tr></table></figure>
 
+<h1 id="new运算符："><a href="#new运算符：" class="headerlink" title="new运算符："></a>new运算符：</h1><p>第一次接触到<code>new</code>是在指针，那时候<code>new</code>一般拿来在堆内存中寻找到一个足够的空间来满足动态需求。但是在第九章中，<code>new</code>运算符有一种变体，叫做<strong>定位运算符</strong>。要使用，我们得先引入头文件<code>new</code>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#inclde<span class="hljs-meta-string">&lt;new&gt;</span></span><br><span class="hljs-keyword">double</span>* pd1,pd2;<br><span class="hljs-keyword">char</span> buffer[<span class="hljs-number">512</span>];<br>pd1 = <span class="hljs-keyword">new</span> <span class="hljs-keyword">double</span>[<span class="hljs-number">5</span>];    <span class="hljs-comment">//pd1指针在堆内存中进行分配</span><br>pd2 = <span class="hljs-built_in"><span class="hljs-keyword">new</span></span> (buffer)<span class="hljs-keyword">double</span> [<span class="hljs-number">5</span>]; <span class="hljs-comment">//pd2在buffer数组中分配空间</span><br></code></pre></td></tr></table></figure>
+
+<p>且使用定位<code>new</code>运算符，它不会跟踪哪些内存已经使用，如果我们在上面的例子里再初始化一个在<code>buffer</code>数组中的指针<code>pd3</code>,打印<code>pd3</code>和<code>pd2</code>的地址，你会发现它们是一样的初始地址。这不会像普通<code>new</code>运算符，重新分配地址。</p>
+<p>另外，使用<code>delete</code>无法释放使用定位<code>new</code>分配的内存，在上面这个例子里，如果<code>buffer</code>是由普通<code>new</code>创建，想释放它们，只能将整个<code>buffer</code>释放掉。</p>
+<h1 id="名称空间："><a href="#名称空间：" class="headerlink" title="名称空间："></a>名称空间：</h1><p>域解析运算符：<code>::</code></p>
+<p>这个没办法说明白，看例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostreamm&gt;</span></span><br><span class="hljs-keyword">namespace</span> xx&#123;<br>    <span class="hljs-keyword">int</span> x = <span class="hljs-number">100</span>;   <span class="hljs-comment">//在叫xx的名称空间中定义一个x =100</span><br>&#125;<br><span class="hljs-keyword">int</span> x = <span class="hljs-number">100</span>;   <span class="hljs-comment">//定义一个全局变量x = 100</span><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">mian</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-keyword">using</span> std::cout;      <span class="hljs-comment">//只使用std名称空间里的cout和endl,单独导入会避免不同名称空间中重名问题</span><br>    <span class="hljs-keyword">using</span> std::endl;<br>    cout&lt;&lt;xx::x&lt;&lt;endl;   <span class="hljs-comment">//值是100，是xx命名空间里的x</span><br>    cout&lt;&lt;::x&lt;&lt;endl;     <span class="hljs-comment">//值也是100，但是是全局变量x</span><br>    cout&lt;&lt;&amp;xx::x&lt;&lt;endl;  <span class="hljs-comment">//打印地址</span><br>    cout&lt;&lt;&amp;::x&lt;&lt;endl;    <br>&#125;<br><br><br></code></pre></td></tr></table></figure>
+
+<p>我们同样可以在名称空间里放结构，函数，<code>const</code>定义的变量。只要正确使用就好。</p>
 
             </div>
             <hr>
@@ -364,6 +372,12 @@
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2021/07/04/C-%E4%B8%AD%E7%9A%84%E6%8C%87%E9%92%88/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">C++中的指针</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
