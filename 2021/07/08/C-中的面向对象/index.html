@@ -14,7 +14,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="其实怎么说呢，因为学过Java的原因，所以C++中的面向对象（OOP）对我来说并不是那么难理解。">
+  <meta name="description" content="因为学过Java的原因，所以C++中的面向对象（OOP）对我来说并不是那么难理解。">
   <meta name="author" content="Oxygen">
   <meta name="keywords" content="">
   
@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      682 字
+      679 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      9
        分钟
     </span>
   
@@ -241,12 +241,12 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：3 天前
+                  本文最后更新于：几秒前
                 
               </p>
             
             <div class="markdown-body">
-              <p>其实怎么说呢，因为学过Java的原因，所以C++中的面向对象（OOP）对我来说并不是那么难理解。</p>
+              <p>因为学过Java的原因，所以C++中的面向对象（OOP）对我来说并不是那么难理解。</p>
 <span id="more"></span>　　
 
 <h1 id="OOP："><a href="#OOP：" class="headerlink" title="OOP："></a>OOP：</h1><p>大体来说：类是抽象的，比如：狗，就是一个类。但是对象则是具体的，比如：我家养了柴犬叫豆豆，这就具体对了一个对象。类中可以包含很多特征（成员函数以及变量），方便我们来描述它（对象调用这些成员函数，用类中这些参数来描述这个对象）。</p>
@@ -254,7 +254,7 @@
 <p>在C++中也存在公有对象<code>public</code>和私有对象<code>private</code>，下列是一般格式：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#ifndf 头文件名</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> 头文件名    <span class="hljs-comment">//注意：这里类名一般写C风格。比如：PERSON_H_</span></span><br><span class="hljs-class"><span class="hljs-keyword">class</span> 类名&#123;</span><br><span class="hljs-keyword">private</span>:<br>私有对象（一般是变量）<br>……<br><span class="hljs-keyword">public</span>：<br>公有对象（一般为函数的原形）<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-<h1 id="构造函数："><a href="#构造函数：" class="headerlink" title="构造函数："></a>构造函数：</h1><h2 id="默认构造函数："><a href="#默认构造函数：" class="headerlink" title="默认构造函数："></a>默认构造函数：</h2><p>这个和Java的标准类相同，需要构造函数在公有对象中，同样的，在没有声明带参数的构造函数时，C++会自动创建一个没有参数的构造函数。但是当我们创建了一个带参数的构造函数时，我们也需要将这个没有参数的构造函数进行声明，我们将这个没有参数的构造函数叫做：默认构造函数。</p>
+<h1 id="构造函数："><a href="#构造函数：" class="headerlink" title="构造函数："></a>构造函数：</h1><h2 id="默认构造函数："><a href="#默认构造函数：" class="headerlink" title="默认构造函数："></a>默认构造函数：</h2><p>这个和Java的标准类相同，需要构造函数在公有对象中，同样的，在没有声明带参数的构造函数时，C++会自动创建一个没有参数的构造函数。但是当我们创建了一个带参数的构造函数时，我们也需要将这个没有参数的构造函数进行声明。<strong>默认构造函数，要么都没有参数，要么所有的参数都有默认值。</strong></p>
 <h2 id="析构函数："><a href="#析构函数：" class="headerlink" title="析构函数："></a>析构函数：</h2><p>和Java不同的是，C++中有一种特有的函数：析构函数。它用<code>~构造函数名</code>来对类中的构造函数进行回收。一般我们只需要写出来即可，对它的函数内容无需关心。</p>
 <p>举个例子：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//以老生常谈的student类来举例</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> once   <span class="hljs-comment">//C++风格写法，和ifndef……endif作用相同</span></span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">student</span>:</span>&#123;<br><span class="hljs-keyword">private</span>:<br>   <span class="hljs-keyword">char</span> name[<span class="hljs-number">20</span>];<br>   <span class="hljs-keyword">unsigned</span> age;<br>   <br><span class="hljs-keyword">public</span>:<br><span class="hljs-function">student <span class="hljs-title">studet</span><span class="hljs-params">()</span></span>; <span class="hljs-comment">//默认构造函数</span><br><span class="hljs-function">student <span class="hljs-title">student</span><span class="hljs-params">(<span class="hljs-keyword">char</span> n[<span class="hljs-number">20</span>],<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> a)</span></span>;   <span class="hljs-comment">//构造函数重载</span><br>~student;    <span class="hljs-comment">//析构函数</span><br>&#125;<br></code></pre></td></tr></table></figure>
@@ -278,7 +278,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%9F%BA%E7%A1%80/">-基础</a>
+                      <a class="hover-with-bg" href="/tags/OOP/">-OOP</a>
                     
                   </div>
                 
@@ -295,9 +295,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/07/11/C-%E4%B8%AD%E5%AF%B9%E7%B1%BB%E7%9A%84%E6%93%8D%E4%BD%9C/">
+                      <a href="/2021/07/18/C-%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%92%8C%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">C++中对类的操作</span>
+                        <span class="hidden-mobile">C++中的类和动态内存分配</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
