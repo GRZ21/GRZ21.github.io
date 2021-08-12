@@ -14,13 +14,29 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
+  <meta name="description" content="看完了《C++ Primer Plus》，之后又买了本《C++ Primer》。但是讲真话，《C++ Primer》的确没那么好懂，给的源码都断断续续的，这个搞得人很不舒服……">
   <meta name="author" content="Oxygen">
   <meta name="keywords" content="">
   
-  <title>标签 - Oxygen</title>
+  <title>C++一阶段的总结 - Oxygen</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
@@ -48,7 +64,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -159,17 +175,50 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="标签">
+            <span class="h2" id="subtitle" title="C++一阶段的总结">
               
             </span>
 
             
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-08-12 20:18" pubdate>
+        2021年8月12日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      711 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      9
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
           </div>
 
-          
-            <div class="scroll-down-bar">
-              <i class="iconfont icon-arrowdown"></i>
-            </div>
           
         </div>
       </div>
@@ -178,24 +227,106 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">C++一阶段的总结</h1>
+            
+              <p class="note note-info">
                 
+                  本文最后更新于：1 分钟前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>看完了《C++ Primer Plus》，之后又买了本《C++ Primer》。但是讲真话，《C++ Primer》的确没那么好懂，给的源码都断断续续的，这个搞得人很不舒服……</p>
+<span id="more"></span>　
 
-<div class="text-center tagcloud">
-  <a href="/tags/MySQL/" style="font-size: 26.25px; color: #558ac5">-MySQL</a> <a href="/tags/OOP/" style="font-size: 18.75px; color: #99abe0">-OOP</a> <a href="/tags/STL/" style="font-size: 15px; color: #bbe">-STL</a> <a href="/tags/Web%E5%89%8D%E7%AB%AF/" style="font-size: 18.75px; color: #99abe0">-Web前端</a> <a href="/tags/Web%E5%90%8E%E7%AB%AF/" style="font-size: 26.25px; color: #558ac5">-Web后端</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 30px; color: #337ab7">-基础</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 22.5px; color: #779bd3">-杂谈</a> <a href="/tags/%E7%95%AA%E5%A4%96/" style="font-size: 15px; color: #bbe">-番外</a>
-</div>
+<p>《C++ Primer》强在比较全（C++11标准多），看完《C++ Primer Plus》之后再看，也算查漏补缺，基础部分都是跳着看，都差不多：C++历史，变量类型，控制流语句，指针，数组，结构。基本都大差不差，难的是C++ OOP那块：什么虚函数，虚继承，多重继承，函数指针。在看《C++ Prime Plus》时候看的就云里雾里的。</p>
+<p>其实花了两个月看完《C++ Primer Plus》，C++现在说到底就三部分：基础C++部分（有点编程基础很快能过掉），OOP部分，STL部分，还有一些是杂项（I/O、RTTI运行时识别、异常处理这种）。</p>
+<p>基础部分比较抠细节（看《C++ Primer》就能感觉出来），比如：const限定符和指针，个人感觉挺吃理解的（<code>const int* const p = &amp;x</code>，这种解释出来成中文都挺拗口：p是一个指向常量x的常量指针），很多地方都很抠细节，我翻看C++面试题也喜欢抠基础部分这些难理解的地方，唉。</p>
+<p>STL部分，容器库，迭代器库，算法库，多查查文档，这些接口还是比较好使的（文档是真的好用）。但是STL里面的泛型编程的确也很惊艳，这块以后还得买书去看。</p>
+<p>OOP部分，继承还是挺绕的，不难理解，就是在写的时候，很绕。以及在基类和派生类中出现的析构函数调用顺序，看过很多次了，但是还是不太懂。</p>
+<p>杂项里面：异常处理是一块大头，I/O也是。I/O中对于cout和cin的输出格式化倒也还好。但是在文件输出和输入，不是很好理解……嗯，反正学的不好。异常部分（我还是没搞懂异常部分到底是干啥的，抛出异常再捕获，输出一句话，到底为啥）。RTTI有个关键词，<code>dymanic_cast</code>，这东西就很怪。还有<code>const_cast</code>。</p>
+<p>最后就是C++ 11新特性了，《C++ Primer》这本书比较偏向于使用新特性，比如范围for循环，好用就是有点怪（不太好控制，我还是喜欢普通for，写习惯了，得改）。</p>
+<p>总的来说，《C++ Primer Plus》是本好书，《C++ Primer》看很多人说当字典就好。我寻思再把《C++ Primer》看一遍，也算补上在《C++ Primer Plus》里缺少的玩意，了解，知道有就行。</p>
+<p>学C++也不知道到底图啥，Java不太想学……感觉Java大头就是JavaEE，后面全是框架，没意思。还是学C++这种造轮子好玩点（也没准以后转Java）。再说吧，就这样。</p>
 
-              </div>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/C/">-C++</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%9D%82%E8%B0%88/">-杂谈</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/08/06/C-STL%E5%BA%93%E5%92%8Cstring%E7%B1%BB/">
+                        <span class="hidden-mobile">C++STL库和string类</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -299,9 +430,15 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
 
 
 
