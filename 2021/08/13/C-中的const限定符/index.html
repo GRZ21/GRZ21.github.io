@@ -14,11 +14,11 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="指针是C/C++的特色所在，但是也让人头疼不已。 我只能讲讲我现在理解的指针。">
+  <meta name="description" content="这个限定符单独拿出来说，是因为这个const太搞了，这个限定符绝对比Java中的final搞心态的多。">
   <meta name="author" content="Oxygen">
   <meta name="keywords" content="">
   
-  <title>C++中的指针 - Oxygen</title>
+  <title>C++中的const限定符 - Oxygen</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -175,7 +175,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="C++中的指针">
+            <span class="h2" id="subtitle" title="C++中的const限定符">
               
             </span>
 
@@ -185,8 +185,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-07-04 09:32" pubdate>
-        2021年7月4日 上午
+      <time datetime="2021-08-13 20:13" pubdate>
+        2021年8月13日 晚上
       </time>
     </span>
   
@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      808 字
+      645 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      11
+      9
        分钟
     </span>
   
@@ -237,41 +237,27 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">C++中的指针</h1>
+            <h1 style="display: none">C++中的const限定符</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 个月前
+                  本文最后更新于：1 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <p>指针是C/C++的特色所在，但是也让人头疼不已。 我只能讲讲我现在理解的指针。</p>
-<span id="more"></span>　　
+              <p>这个限定符单独拿出来说，是因为这个<code>const</code>太搞了，这个限定符绝对比Java中的<code>final</code>搞心态的多。</p>
+<span id="more"></span>　
 
-<p>指针应该是在复合类型那一章初次接触。首先明确一个概念，指针就是一个地址。比如<code>int* x</code>,指的就是<code>&amp;*x</code>。其中这个解除引用运算符<code>*</code>会让人很疑惑。举个例子：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">int</span>* x;<br>*x = <span class="hljs-number">100</span>;<br>x = &amp;*x;  <br></code></pre></td></tr></table></figure>
+<p>const限定符在C/C++中都是表示它所修饰的变为常量，即：不可修改。</p>
+<p>但是在C++中，变量的复合类型有很多，比如指针和引用，以及<code>const</code>在函数不同位置所表示的意思也不尽相同。以下是几种用法：</p>
+<h1 id="const和引用："><a href="#const和引用：" class="headerlink" title="const和引用："></a><code>const</code>和引用：</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//const和引用</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-comment">//非常量引用无法指向常量对象，但是常量对象引用可以指向非常量对象（可以绑定字面值）</span><br>	<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> x = <span class="hljs-number">10</span>;<br>	<span class="hljs-comment">//int &amp;y = x; 无法绑定</span><br>	<span class="hljs-keyword">int</span> y = <span class="hljs-number">10</span>;<br>	<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span>&amp; z = y; <span class="hljs-comment">//可以绑定</span><br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>在<code>int</code>类型后面跟了一个<code>*</code>，但是这个是用来定义<code>x</code>是一个指针。但是接下来<code>*x</code>又是什么？其实就是这个<code>int</code>类型指针<code>x</code>其中的值。最后一句是为了说明指针其实就是一个地址。</p>
-<p>每定义一个指针，一般就会出现这几个问题：这个指针是什么类型？指针指向什么类型？指针又指向哪里？</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//还是用int* x做例子</span><br><span class="hljs-keyword">int</span>* x;<br>*x = <span class="hljs-number">100</span>;<br><span class="hljs-comment">//这个指针是int*类型，指向int类型，值是100。</span><br><br><span class="hljs-comment">//接下来看点复杂的</span><br><span class="hljs-keyword">int</span> **ptr; <span class="hljs-comment">//指针类型是int**,指针所指向的的类型是 int*</span><br><span class="hljs-built_in"><span class="hljs-keyword">int</span></span> (*ptr)[<span class="hljs-number">3</span>]; <span class="hljs-comment">//指针类型是int(*)[3]，指针所指向的的类型是 int()[3]</span><br><span class="hljs-keyword">int</span> *(*ptr)[<span class="hljs-number">4</span>]; <span class="hljs-comment">//指针类型是int*(*)[4]，指针所指向的的类型是 int* ()[4]</span><br></code></pre></td></tr></table></figure>
+<p>引用基本不算太难，非常量或常量都可以用一个<code>const</code>常量数值来接收，但是能接受<code>const</code>常量数值只有<code>const</code>常量。</p>
+<h1 id="const和指针："><a href="#const和指针：" class="headerlink" title="const和指针："></a><code>const</code>和指针：</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//const和指针</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> x = <span class="hljs-number">10</span>;<br>    <span class="hljs-keyword">int</span> y = <span class="hljs-number">10</span>;<br>    <br>	<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span>* <span class="hljs-keyword">const</span> i = &amp;x;    <span class="hljs-comment">//i是一个指向常量数值的常量指针</span><br>	<span class="hljs-comment">//第一个const意思是指向一个常量数值，第二个const意思是指针i是一个常量指针（即：指针地址不可以改变）</span><br><br>	<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> <span class="hljs-keyword">const</span>* j = &amp;y;    <span class="hljs-comment">//尽管y不是常量，但是依旧可以绑定为常量值，代表指针保留的值不变（j存储的副本就是10）</span><br>	<span class="hljs-keyword">int</span> p = *j + <span class="hljs-number">1</span>; <span class="hljs-comment">//但是原来的y还是可以通过解除引用修改，因为y不是常量</span><br>	cout &lt;&lt; p;  <span class="hljs-comment">//这时候打印出来是11，y并不是一个常量</span><br><br>	<span class="hljs-comment">//int* q = &amp;x;  无法通过，非指向常量值指针无法指向常量数值</span><br>	<span class="hljs-comment">//int* const r;  无法通过，常量指针必须初始化</span><br>    <br>    <span class="hljs-comment">//更深层次的const分配</span><br>    <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span>** pp2; <span class="hljs-comment">//二重常量指针，pp2是指向指针的地址的常量指针</span><br>    <span class="hljs-keyword">int</span>* p1;<br>    <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> n = <span class="hljs-number">13</span>;<br>    <span class="hljs-comment">//pp2 = &amp;p1;   //语法合理，但是编译不通过，引发混乱</span><br>    *pp2 = &amp;n;<br>    *p1 = <span class="hljs-number">10</span>; <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>从语法的角度来说：</p>
-<ul>
-<li>指针是什么类型：一般只要把指针声明语句里的指针名字去掉，剩下的部分就是这个指针的类型。</li>
-<li>指针指向什么类型：把指针声明语句中的指针名字和名字左边的指针声明符<code>*</code>去掉，剩下的就是指针所指向的类型。</li>
-</ul>
-<p>接下来，在C++中，更让人觉得迷惑的地方是指针和数组的关系。举个例子：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">int</span> arr[<span class="hljs-number">4</span>] = &#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>&#125;;<br>*arr = arr[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;  <span class="hljs-comment">//数组索引从0开始</span><br>arr = &amp;arr[<span class="hljs-number">0</span>];<br>*(arr+<span class="hljs-number">1</span>) = arr[<span class="hljs-number">1</span>] = <span class="hljs-number">2</span>;  <span class="hljs-comment">//没错，数组名其实也是一个指针，我们可以对数组名进行解除引用，来获得其中的值。</span><br><span class="hljs-comment">//其实在C++中，数组中括号中的索引本质就是在内存中移动指针的位置（我怀疑Java也是，因为Java因为数组越界会报空指针异常错误）。</span><br></code></pre></td></tr></table></figure>
-
-<p>在上面这个例子中，当<code>arr</code>是数组时，它的类型是<code>int</code>，但是当它成为了一个指针时，它的类型是<code>int*</code>。arr作为指针时，它指向数组的第一个元素的地址（索引为0）。当对指针<code>arr</code>操作时，比如：<code>arr+1</code>，其实在内存中就是将指针向后移动了<code>sizeof(int)</code>个单位（我们声明的是<code>int</code>类型，一般是<code>int</code>是4个字节），这样就指向了数组的第二个元素的地址（索引为1）。这时候我们对<code>arr+1</code>进行解除引用操作，即：<code>*(arr+1)</code>就可以得到数组第二个元素的值。</p>
-<p>这就意味着：我们可以通过指针来操作数组。</p>
-<p>第四章还有个是指针和结构<code>struct</code>的关系：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Mystruct</span>&#123;</span><br><span class="hljs-keyword">int</span> weight;<br><span class="hljs-keyword">double</span> height;<br>&#125;<br><br>Mystruct s = &#123;<span class="hljs-number">130</span>,<span class="hljs-number">187</span>&#125;;<br>Mystruct* ps = &amp;s;  <span class="hljs-comment">//让ps指针指向s的地址</span><br>ps-&gt;weight;   <span class="hljs-comment">//结构指针通过-&gt;来访问结构成员，这时候即为s中的weight成员</span><br>ps-&gt;height;<br></code></pre></td></tr></table></figure>
-
-
-
-
+<p>如果数据类型不是指针，可以将非<code>const</code>数据或<code>const</code>数据的地址赋值给指向<code>const</code>的指针，但是只能将非<code>const</code>的<strong>数据的地址</strong>赋给非<code>const</code>指针，不可以赋给<code>const</code>指针。</p>
+<h1 id="const和函数头："><a href="#const和函数头：" class="headerlink" title="const和函数头："></a><code>const</code>和函数头：</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> <span class="hljs-title">num</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span>;    <span class="hljs-comment">//代表num函数的返回值是int类型的常量</span><br>  <br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">num</span> <span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> <span class="hljs-keyword">const</span></span>;    <span class="hljs-comment">//代表num函数不能隐式的修改参数x的值</span><br>  <br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">num</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> x)</span></span>;    <span class="hljs-comment">//代表参数x是常量，不可修改</span><br><br></code></pre></td></tr></table></figure>
 
 
             </div>
@@ -307,18 +293,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/07/08/C-%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">C++中的面向对象</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/07/03/C-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">
-                        <span class="hidden-mobile">C++内存模型</span>
+                      <a href="/2021/08/12/C-%E4%B8%80%E9%98%B6%E6%AE%B5/">
+                        <span class="hidden-mobile">C++一阶段的总结</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
