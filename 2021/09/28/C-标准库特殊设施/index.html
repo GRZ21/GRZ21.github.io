@@ -14,11 +14,11 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
+  <meta name="description" content="C++在STL库里提供了一些有意思的玩意儿，比如随机数生成和正则表达式。随机数分布正好就是最近学的概率论那些个分布。C++可以根据你提供的分布的特征来生成符合随机分布特征的数。">
   <meta name="author" content="Oxygen">
   <meta name="keywords" content="">
   
-  <title>C++标准库特殊设施 - Oxygen</title>
+  <title>C++标准库特殊设施（1） - Oxygen</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -175,7 +175,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="C++标准库特殊设施">
+            <span class="h2" id="subtitle" title="C++标准库特殊设施（1）">
               
             </span>
 
@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      234 字
+      889 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      13
        分钟
     </span>
   
@@ -237,12 +237,74 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">C++标准库特殊设施</h1>
+            <h1 style="display: none">C++标准库特殊设施（1）</h1>
             
             <div class="markdown-body">
-              <p>C++在STL库里提供了一些有意思的玩意儿，比如随机数生成和正则表达式。随机数分布正好就是最近学的概率论那些个分布。C++可以根据你提供的分布的特征来生成符合随机分布特征的数。正则表达式写起来……嗯，有点Lambda那个味道。</p>
-<p> 随机数生成：</p>
-<p>在早先我写随机数的方法，一般是调用C方法库中的<code>ctime</code>,<code>cstdlib</code>这两个库中的<code>rand</code>函数（<code>ctime</code>里的<code>time(0)</code>提供随机数种子）来生成随机数。但是有时候有些问题，<code>rand</code>函数总是那些个数（最小值0，最大值32767），且有时候程序需要一些符合分布的随机数，<code>rand</code>函数无法做到。所以，我后来使用C++中定义在<code>random</code>头文件中的随机数引擎和随机数分布类来生成随机数。</p>
+              <p>C++在STL库里提供了一些有意思的玩意儿，比如随机数生成和正则表达式。随机数分布正好就是最近学的概率论那些个分布。C++可以根据你提供的分布的特征来生成符合随机分布特征的数。</p>
+<span id="more"></span>　　
+
+<h1 id="随机数生成："><a href="#随机数生成：" class="headerlink" title="随机数生成："></a>随机数生成：</h1><p>在早先我写随机数的方法，一般是调用C方法库中的<code>ctime</code>,<code>cstdlib</code>这两个库中的<code>rand</code>函数（<code>ctime</code>里的<code>time(0)</code>提供随机数种子）来生成随机数。但是有时候有些问题，<code>rand</code>函数总是那些个数（最小值0，最大值32767），且有时候程序需要一些符合分布的随机数，<code>rand</code>函数无法做到。所以，我后来使用C++中定义在<code>random</code>头文件中的随机数引擎和随机数分布类来生成随机数。</p>
+<h2 id="一，随机数引擎"><a href="#一，随机数引擎" class="headerlink" title="一，随机数引擎"></a>一，随机数引擎</h2><p>随机数引擎是一个带有状态的随机性源头，其状态决定了它将生成哪一个随机值序列，注意这并非随机数。每次以operator()调用它，就可以产出一个随机的无正负号值，并且内部状态改变，使得可以此后再产出一个新随机值。</p>
+<h3 id="1、默认引擎：default-random-engine"><a href="#1、默认引擎：default-random-engine" class="headerlink" title="1、默认引擎：default_random_engine"></a>1、默认引擎：<code>default_random_engine</code></h3><h3 id="2、基础引擎：提供各种基本算法用以生成随机值"><a href="#2、基础引擎：提供各种基本算法用以生成随机值" class="headerlink" title="2、基础引擎：提供各种基本算法用以生成随机值"></a>2、基础引擎：提供各种基本算法用以生成随机值</h3><pre><code>（1）std::linear_congruential_engine
+（2）std::mersenne_twister_engine
+（3）std::subtract_with_carry_engine
+</code></pre>
+<h3 id="3、引擎适配器：根据一个基础引擎而初始化"><a href="#3、引擎适配器：根据一个基础引擎而初始化" class="headerlink" title="3、引擎适配器：根据一个基础引擎而初始化"></a>3、引擎适配器：根据一个基础引擎而初始化</h3><pre><code>    （1）std::discard_block_engine
+    （2）std::independent_bits_engine
+    （3）std::shuffle_order_engine
+</code></pre>
+<h3 id="4、适配器并带预定义参数："><a href="#4、适配器并带预定义参数：" class="headerlink" title="4、适配器并带预定义参数："></a>4、适配器并带预定义参数：</h3><pre><code>（1）minstd_rand0
+（2）minstd_rand
+（3）mt19937
+（4）mt19937_64
+（5）ranlux24_base
+（6）ranlux48_base
+（7）ranlux24
+（8）ranlux48
+（9）knuth_b
+</code></pre>
+<h2 id="二、C-提供的分布"><a href="#二、C-提供的分布" class="headerlink" title="二、C++提供的分布"></a>二、C++提供的分布</h2><p>所谓分布是把引擎产生的随机数转换为真实而有用的随机数。产出数的概率取决于使用何种分布，后者可根据程序员的需要被参数化。</p>
+<p>针对不同的随机值类型，C++标准库提供了多种分布：线性、正态/高斯、指数、伽马、伯努利等。</p>
+<h3 id="1、均匀分布"><a href="#1、均匀分布" class="headerlink" title="1、均匀分布"></a>1、均匀分布</h3><pre><code>（1）uniform_int_distribution  ： IntType
+（2）uniform_real_distribution :  RealType
+</code></pre>
+<h3 id="2、伯努利分布"><a href="#2、伯努利分布" class="headerlink" title="2、伯努利分布"></a>2、伯努利分布</h3><pre><code>（1）bernoulli_distribution           ：   bool
+（2）binomial_distribution           :   IntType
+（3）geometric_distribution           ：   IntType
+（4）negative_binomial_distribution :   IntType
+</code></pre>
+<h3 id="3、泊松分布"><a href="#3、泊松分布" class="headerlink" title="3、泊松分布"></a>3、泊松分布</h3><pre><code>（1）poisson_distribution：          IntType
+（2）exponential_distribution:       RealType
+（3）gamma_distribution：            RealType
+（4）weibull_distribution:           RealType
+ (5)extreme_value_distribution:     RealType
+</code></pre>
+<h3 id="4、正态分布"><a href="#4、正态分布" class="headerlink" title="4、正态分布"></a>4、正态分布</h3><pre><code>（1）normal_distribution：          RealType
+（2）lognormal_distribution:        RealType
+（3）chi_squared_distribution：     RealType
+（4）cauchy_distribution:           RealType
+（5）fisher_f_distribution:         RealType
+（6）student_t_distribution:        RealType
+</code></pre>
+<h3 id="5、抽样分布"><a href="#5、抽样分布" class="headerlink" title="5、抽样分布"></a>5、抽样分布</h3><pre><code>（1）discrete_distribution：                IntType
+（2）piecewise_constant_distribution:       RealType
+（3）piecewise_linear_distribution：        RealType
+</code></pre>
+<h2 id="三、随机数生成实例"><a href="#三、随机数生成实例" class="headerlink" title="三、随机数生成实例"></a>三、随机数生成实例</h2><p>至此，我们只需要记住：</p>
+<p><strong>随机数 = 随机数引擎 + 分布</strong></p>
+<p>即可完成随机数的生成，至于选择何种引擎和分布方式，由自己决定，可查看引擎和分布的详细含义及结合自己的需要来决定。</p>
+<p>另外，所有的引擎和分布都包含在头文件 random 中，因此需要包含此头文件。</p>
+<p>生成随机数的三步骤：</p>
+<p>1、选择引擎<br>2、选择分布<br>3、使用引擎+分布，生成随机数</p>
+<p>以下是代码示例，正态分布（均值4，方差1.5）：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;random&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	default_random_engine e;  <span class="hljs-comment">//随机数引擎</span><br>	normal_distribution&lt;&gt;<span class="hljs-built_in">n</span>(<span class="hljs-number">4</span>, <span class="hljs-number">1.5</span>); <span class="hljs-comment">//均值4，方差1.5</span><br>	vector&lt;<span class="hljs-keyword">unsigned</span>&gt;<span class="hljs-built_in">vals</span>(<span class="hljs-number">9</span>);    <span class="hljs-comment">//9个元素均为0</span><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">size_t</span> i = <span class="hljs-number">0</span>; i != <span class="hljs-number">200</span>; ++i) &#123;<br>		<span class="hljs-keyword">unsigned</span> v = <span class="hljs-built_in">lround</span>(<span class="hljs-built_in">n</span>(e));   <span class="hljs-comment">//舍入到最接近的整数</span><br>		<span class="hljs-keyword">if</span> (v &lt; vals.<span class="hljs-built_in">size</span>())   <span class="hljs-comment">//如果在统计范围内</span><br>			++vals[v];    <span class="hljs-comment">//统计出现多少次</span><br>	&#125;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">size_t</span> j = <span class="hljs-number">0</span>; j != vals.<span class="hljs-built_in">size</span>(); ++j)<br>		cout &lt;&lt; j &lt;&lt; <span class="hljs-string">&quot;: &quot;</span> &lt;&lt; <span class="hljs-built_in">string</span>(vals[j], <span class="hljs-string">&#x27;*&#x27;</span> )&lt;&lt; endl;<br>		<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs markdown">0: <span class="hljs-strong">**<span class="hljs-emphasis">*</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">1: <span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">**<span class="hljs-emphasis">*</span></span></span></span><br><span class="hljs-emphasis"><span class="hljs-strong"><span class="hljs-emphasis"><span class="hljs-strong">2: <span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">**</span></span></span></span></span><br><span class="hljs-strong"><span class="hljs-emphasis"><span class="hljs-strong"><span class="hljs-emphasis"><span class="hljs-strong">3: **</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">**</span></span></span></span></span><br><span class="hljs-strong"><span class="hljs-emphasis"><span class="hljs-strong"><span class="hljs-emphasis"><span class="hljs-strong">4: **</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span>*</span></span></span></span><br><span class="hljs-strong"><span class="hljs-emphasis"><span class="hljs-strong">5: **</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">**</span></span></span><br><span class="hljs-strong"><span class="hljs-emphasis"><span class="hljs-strong">6: **</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span></span></span><br><span class="hljs-emphasis"><span class="hljs-strong">7: <span class="hljs-strong">****</span>*</span></span><br><span class="hljs-strong">8: <span class="hljs-emphasis">*</span></span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
 
             </div>
             <hr>
