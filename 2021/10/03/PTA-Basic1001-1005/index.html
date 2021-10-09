@@ -243,7 +243,7 @@
               <p>以下是PTA　Basic等级的1-5题我的解答，分值：97/100。</p>
 <span id="more"></span>　
 
-<h1 id="第一题（15-15）："><a href="#第一题（15-15）：" class="headerlink" title="第一题（15/15）："></a>第一题（15/15）：</h1><p>对任何一个正整数 <em>n</em>，如果它是偶数，那么把它砍掉一半；如果它是奇数，那么把 (3<em>n</em>+1) 砍掉一半。这样一直反复砍下去，最后一定在某一步得到 <em>n</em>=1。卡拉兹在 1950 年的世界数学家大会上公布了这个猜想，传说当时耶鲁大学师生齐动员，拼命想证明这个貌似很傻很天真的命题，结果闹得学生们无心学业，一心只证 (3<em>n</em>+1)，以至于有人说这是一个阴谋，卡拉兹是在蓄意延缓美国数学界教学与科研的进展……</p>
+<h1 id="1001（15-15）："><a href="#1001（15-15）：" class="headerlink" title="1001（15/15）："></a>1001（15/15）：</h1><p>对任何一个正整数 <em>n</em>，如果它是偶数，那么把它砍掉一半；如果它是奇数，那么把 (3<em>n</em>+1) 砍掉一半。这样一直反复砍下去，最后一定在某一步得到 <em>n</em>=1。卡拉兹在 1950 年的世界数学家大会上公布了这个猜想，传说当时耶鲁大学师生齐动员，拼命想证明这个貌似很傻很天真的命题，结果闹得学生们无心学业，一心只证 (3<em>n</em>+1)，以至于有人说这是一个阴谋，卡拉兹是在蓄意延缓美国数学界教学与科研的进展……</p>
 <p>我们今天的题目不是证明卡拉兹猜想，而是对给定的任一不超过 1000 的正整数 <em>n</em>，简单地数一下，需要多少步（砍几下）才能得到 <em>n</em>=1？</p>
 <h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>每个测试输入包含 1 个测试用例，即给出正整数 <em>n</em> 的值。</p>
 <h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>输出从 <em>n</em> 计算到 1 需要的步数。</p>
@@ -255,7 +255,7 @@
 
 <h2 id="分析与心得："><a href="#分析与心得：" class="headerlink" title="分析与心得："></a>分析与心得：</h2><p>15分的白给题，挺弱智的，学过点语言的应该都能写出来。</p>
 <hr>
-<h1 id="第二题（20-20）："><a href="#第二题（20-20）：" class="headerlink" title="第二题（20/20）："></a>第二题（20/20）：</h1><p>读入一个正整数 <em>n</em>，计算其各位数字之和，用汉语拼音写出和的每一位数字。</p>
+<h1 id="1002（20-20）："><a href="#1002（20-20）：" class="headerlink" title="1002（20/20）："></a>1002（20/20）：</h1><p>读入一个正整数 <em>n</em>，计算其各位数字之和，用汉语拼音写出和的每一位数字。</p>
 <h3 id="输入格式：-1"><a href="#输入格式：-1" class="headerlink" title="输入格式："></a>输入格式：</h3><p>每个测试输入包含 1 个测试用例，即给出自然数 <em>n</em> 的值。这里保证 <em>n</em> 小于 10100。</p>
 <h3 id="输出格式：-1"><a href="#输出格式：-1" class="headerlink" title="输出格式："></a>输出格式：</h3><p>在一行内输出 <em>n</em> 的各位数字之和的每一位，拼音数字间有 1 空格，但一行中最后一个拼音数字后没有空格。</p>
 <h3 id="输入样例：-1"><a href="#输入样例：-1" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs">1234567890987654321123456789<br>结尾无空行<br></code></pre></td></tr></table></figure>
@@ -271,7 +271,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-keyword">int</span> n,s=<span class="hljs-number">0</span>;<br>cin&gt;&gt;n;<br><span class="hljs-keyword">while</span>(n)&#123;<br>    s+=n%<span class="hljs-number">10</span>;<br>    n/=<span class="hljs-number">10</span>;<br>&#125;<br>cout&lt;&lt;s;<br><span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h1 id="第三题（17-20）："><a href="#第三题（17-20）：" class="headerlink" title="第三题（17/20）："></a>第三题（17/20）：</h1><p>“<strong>答案正确</strong>”是自动判题系统给出的最令人欢喜的回复。本题属于 PAT 的“<strong>答案正确</strong>”大派送 —— 只要读入的字符串满足下列条件，系统就输出“<strong>答案正确</strong>”，否则输出“<strong>答案错误</strong>”。</p>
+<h1 id="1003（17-20）："><a href="#1003（17-20）：" class="headerlink" title="1003（17/20）："></a>1003（17/20）：</h1><p>“<strong>答案正确</strong>”是自动判题系统给出的最令人欢喜的回复。本题属于 PAT 的“<strong>答案正确</strong>”大派送 —— 只要读入的字符串满足下列条件，系统就输出“<strong>答案正确</strong>”，否则输出“<strong>答案错误</strong>”。</p>
 <p>得到“<strong>答案正确</strong>”的条件是：</p>
 <ol>
 <li>字符串中必须仅有 <code>P</code>、 <code>A</code>、 <code>T</code>这三种字符，不可以包含其它字符；</li>
@@ -289,7 +289,7 @@
 
 <h2 id="分析和心得："><a href="#分析和心得：" class="headerlink" title="分析和心得："></a>分析和心得：</h2><p>这题只拿了17分，我拿到这题就想用正则表达式来写（字符串的匹配问题），这个正则表达式在测试里的确可以通过，但是在测试点里有错误，有点难顶。使用方法没啥好说的，都是在正则表达式库中的方法。具体解法还没看，看完再补。</p>
 <hr>
-<h1 id="第四题（20-20）："><a href="#第四题（20-20）：" class="headerlink" title="第四题（20/20）："></a>第四题（20/20）：</h1><p>读入 <em>n</em>（&gt;0）名学生的姓名、学号、成绩，分别输出成绩最高和成绩最低学生的姓名和学号。</p>
+<h1 id="1004（20-20）："><a href="#1004（20-20）：" class="headerlink" title="1004（20/20）："></a>1004（20/20）：</h1><p>读入 <em>n</em>（&gt;0）名学生的姓名、学号、成绩，分别输出成绩最高和成绩最低学生的姓名和学号。</p>
 <h3 id="输入格式：-3"><a href="#输入格式：-3" class="headerlink" title="输入格式："></a>输入格式：</h3><p>每个测试输入包含 1 个测试用例，格式为</p>
 <figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs tap">第<span class="hljs-number"> 1 </span>行：正整数 n<br>第<span class="hljs-number"> 2 </span>行：第<span class="hljs-number"> 1 </span>个学生的姓名 学号 成绩<br>第<span class="hljs-number"> 3 </span>行：第<span class="hljs-number"> 2 </span>个学生的姓名 学号 成绩<br>  ... ... ...<br>第 n+1 行：第 n 个学生的姓名 学号 成绩<br></code></pre></td></tr></table></figure>
 
@@ -305,7 +305,7 @@
 <p>后来我实在没办法就只能上谷歌搜了一下，看到结构时候我就明白了，OOP是白学了，写个类简单的事，居然拿<code>map</code>关联容器来做，我当时就觉得自己像个啥b……，知道用OOP之后就很快写出来了。</p>
 <p>这题中满分是100分，将最大值一开始设置为-1，最小值设为101，将传入的数不停的和这两个数比较，得到最终的值输出即可。</p>
 <hr>
-<h1 id="第五题（25-25）："><a href="#第五题（25-25）：" class="headerlink" title="第五题（25/25）："></a>第五题（25/25）：</h1><p>卡拉兹(Callatz)猜想已经在1001中给出了描述。在这个题目里，情况稍微有些复杂。</p>
+<h1 id="1005（25-25）："><a href="#1005（25-25）：" class="headerlink" title="1005（25/25）："></a>1005（25/25）：</h1><p>卡拉兹(Callatz)猜想已经在1001中给出了描述。在这个题目里，情况稍微有些复杂。</p>
 <p>当我们验证卡拉兹猜想的时候，为了避免重复计算，可以记录下递推过程中遇到的每一个数。例如对 <em>n</em>=3 进行验证的时候，我们需要计算 3、5、8、4、2、1，则当我们对 <em>n</em>=5、8、4、2 进行验证的时候，就可以直接判定卡拉兹猜想的真伪，而不需要重复计算，因为这 4 个数已经在验证3的时候遇到过了，我们称 5、8、4、2 是被 3“覆盖”的数。我们称一个数列中的某个数 <em>n</em> 为“关键数”，如果 <em>n</em> 不能被数列中的其他数字所覆盖。</p>
 <p>现在给定一系列待验证的数字，我们只需要验证其中的几个关键数，就可以不必再重复验证余下的数字。你的任务就是找出这些关键数字，并按从大到小的顺序输出它们。</p>
 <h3 id="输入格式：-4"><a href="#输入格式：-4" class="headerlink" title="输入格式："></a>输入格式：</h3><p>每个测试输入包含 1 个测试用例，第 1 行给出一个正整数 <em>K</em> (&lt;100)，第 2 行给出 <em>K</em> 个互不相同的待验证的正整数 <em>n</em> (1&lt;<em>n</em>≤100)的值，数字间用空格隔开。</p>
@@ -351,6 +351,12 @@
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2021/10/09/PTA-Basic1006-1010/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">PTA-Basic1006-1010</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
