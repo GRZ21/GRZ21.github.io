@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.3k 字
+      1.6k 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      20
+      25
        分钟
     </span>
   
@@ -270,6 +270,9 @@
 <li>当n比E之前的数小数点后的位数多或等于位数时，直接在末尾追加n比小数点后的位数多的位数的0，再删除小数点即可。例如：-1.2E+10，直接在末尾追加10-1 = 9个0，再删除小数点即可。</li>
 </ul>
 <p>总的来说，这题不比以前那些题，拿到手就直接能做……有点难度的。</p>
+<p>我原来的思路写的也贴一下，尽管不对，但是舍不得删，唉。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cmath&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	string s;<br>	cin &gt;&gt; s;<br>	<span class="hljs-keyword">int</span> i;<br>	vector&lt;<span class="hljs-keyword">int</span>&gt;vi1,vi2;<br>	<span class="hljs-keyword">for</span> (i = <span class="hljs-number">3</span>; i &lt; s.<span class="hljs-built_in">size</span>(); i++) &#123;<br>		<span class="hljs-keyword">if</span> (s[i] != <span class="hljs-string">&#x27;E&#x27;</span>) &#123;<br>			vi1.<span class="hljs-built_in">push_back</span>(s[i]-<span class="hljs-string">&#x27;0&#x27;</span>);<br>		&#125;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (s[i] == <span class="hljs-string">&#x27;E&#x27;</span>)<br>			<span class="hljs-keyword">break</span>;<br>	&#125;<br>	<span class="hljs-keyword">double</span> x = <span class="hljs-number">0.0</span>;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; vi1.<span class="hljs-built_in">size</span>(); j++) &#123;<br>		x += vi1[j] * <span class="hljs-built_in">pow</span>(<span class="hljs-number">10</span>, -(j + <span class="hljs-number">1</span>));<br>	&#125;<br>	<br>	<span class="hljs-keyword">if</span> (s[<span class="hljs-number">0</span>] == <span class="hljs-string">&#x27;+&#x27;</span>)<br>		x = s[<span class="hljs-number">1</span>] - <span class="hljs-string">&#x27;0&#x27;</span> + x;<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (s[<span class="hljs-number">0</span>] == <span class="hljs-string">&#x27;-&#x27;</span>)<br>		x = (s[<span class="hljs-number">1</span>] - <span class="hljs-string">&#x27;0&#x27;</span> + x) * <span class="hljs-number">-1</span>;<br><br>	<span class="hljs-keyword">int</span> flag = i;<br>	<span class="hljs-keyword">for</span> (i = i+<span class="hljs-number">2</span>; i &lt; s.<span class="hljs-built_in">size</span>(); i++)<br>		vi2.<span class="hljs-built_in">push_back</span>(s[i]-<span class="hljs-string">&#x27;0&#x27;</span>);<br><br>	<br>	vector&lt;<span class="hljs-keyword">int</span>&gt;vn;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> vi2_it = vi2.<span class="hljs-built_in">rbegin</span>(); vi2_it != vi2.<span class="hljs-built_in">rend</span>(); vi2_it++) &#123;<br>		vn.<span class="hljs-built_in">push_back</span>(*vi2_it);<br>	&#125;<br><br>	<span class="hljs-keyword">double</span>  y = <span class="hljs-number">0.0</span>;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; vn.<span class="hljs-built_in">size</span>(); j++) &#123;<br>			y += vn[j] * <span class="hljs-built_in">pow</span>(<span class="hljs-number">10</span>, j);<br>	&#125;<br><br>	<span class="hljs-keyword">if</span> (s[flag + <span class="hljs-number">1</span>] == <span class="hljs-string">&#x27;+&#x27;</span>)<br>		y *= <span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (s[flag + <span class="hljs-number">1</span>] == <span class="hljs-string">&#x27;-&#x27;</span>)<br>		y *= <span class="hljs-number">-1</span>;<br><br>	y = <span class="hljs-built_in">pow</span>(<span class="hljs-number">10</span>, y);<br><br>	cout.<span class="hljs-built_in">setf</span>(ios_base::fixed);<br>	<span class="hljs-comment">//cout.precision(static_cast&lt;std::streamsize&gt;(vi1.size())+vi2.size()+1);</span><br>	cout &lt;&lt;noshowpoint&lt;&lt; x*y;<br><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 
             </div>
             <hr>
@@ -303,6 +306,12 @@
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2021/10/24/PAT-Basic-1026/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">PAT-Basic-1026</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
