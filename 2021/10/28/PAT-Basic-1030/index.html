@@ -14,12 +14,11 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="今天本来想去图书馆继续看数据结构的，书扔了好多天了……，要25号才给进，想了想还是回来写题吧……
-今天是PAT Basic1022">
+  <meta name="description" content="PAT Basic 1030，题目不长，但是需要想一下……">
   <meta name="author" content="Oxygen">
   <meta name="keywords" content="">
   
-  <title>PAT-Basic 1022 - Oxygen</title>
+  <title>PAT-Basic 1030 - Oxygen</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -176,7 +175,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="PAT-Basic 1022">
+            <span class="h2" id="subtitle" title="PAT-Basic 1030">
               
             </span>
 
@@ -186,8 +185,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-10-21 14:59" pubdate>
-        2021年10月21日 下午
+      <time datetime="2021-10-28 19:48" pubdate>
+        2021年10月28日 晚上
       </time>
     </span>
   
@@ -198,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      518 字
+      637 字
     </span>
   
 
@@ -208,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      10
        分钟
     </span>
   
@@ -238,26 +237,24 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">PAT-Basic 1022</h1>
+            <h1 style="display: none">PAT-Basic 1030</h1>
             
             <div class="markdown-body">
-              <p>今天本来想去图书馆继续看数据结构的，书扔了好多天了……，要25号才给进，想了想还是回来写题吧……</p>
-<p>今天是PAT Basic1022</p>
-<span id="more"></span>　
+              <p>PAT Basic 1030，题目不长，但是需要想一下……</p>
+<span id="more"></span>
 
-<h1 id="1022（20-20）：D进制的A-B"><a href="#1022（20-20）：D进制的A-B" class="headerlink" title="1022（20/20）：D进制的A+B"></a>1022（20/20）：<strong>D进制的A+B</strong></h1><p>链接：<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805260223102976/problems/994805299301433344">题目详情 (pintia.cn)</a></p>
-<p>输入两个非负 10 进制整数 <em>A</em> 和 <em>B</em> (≤230−1)，输出 <em>A</em>+<em>B</em> 的 <em>D</em> (1&lt;<em>D</em>≤10)进制数。</p>
-<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在一行中依次给出 3 个整数 <em>A</em>、<em>B</em> 和 <em>D</em>。</p>
-<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>输出 <em>A</em>+<em>B</em> 的 <em>D</em> 进制数。</p>
-<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs in">123 456 8<br></code></pre></td></tr></table></figure>
+<h1 id="1030：完美数列"><a href="#1030：完美数列" class="headerlink" title="1030：完美数列"></a>1030：完美数列</h1><p>给定一个正整数数列，和正整数 <em>p</em>，设这个数列中的最大值是 <em>M</em>，最小值是 <em>m</em>，如果 <em>M</em>≤<em>m**p</em>，则称这个数列是完美数列。</p>
+<p>现在给定参数 <em>p</em> 和一些正整数，请你从中选择尽可能多的数构成一个完美数列。</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入第一行给出两个正整数 <em>N</em> 和 <em>p</em>，其中 <em>N</em>（≤105）是输入的正整数的个数，<em>p</em>（≤109）是给定的参数。第二行给出 <em>N</em> 个正整数，每个数不超过 109。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>在一行中输出最多可以选择多少个数可以用它们组成一个完美数列。</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs in">10 8<br>2 3 20 4 5 1 6 7 8 9<br>结尾无空行<br></code></pre></td></tr></table></figure>
 
-<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs out">1103<br></code></pre></td></tr></table></figure>
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs out">8<br></code></pre></td></tr></table></figure>
 
-<h2 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-keyword">int</span> a, b, x, remainder;  <span class="hljs-comment">//数A，数B，进制数D，余数</span><br>	cin &gt;&gt; a &gt;&gt; b &gt;&gt; x;<br>	<span class="hljs-keyword">int</span> sum = a + b; <span class="hljs-comment">//算出A以及B两个数的和</span><br>	<span class="hljs-keyword">int</span> n = sum/x;  <span class="hljs-comment">//算出商数</span><br>	vector&lt;<span class="hljs-keyword">int</span>&gt;vi;   <span class="hljs-comment">//创建存储余数的容器</span><br>	<span class="hljs-keyword">if</span> (x &gt; sum)  <span class="hljs-comment">//当进制数D大于AB两数之和时</span><br>		cout &lt;&lt; sum;  <span class="hljs-comment">//直接输出和</span><br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) <span class="hljs-comment">//如果商数为0</span><br>		cout &lt;&lt; <span class="hljs-number">0</span>;   <span class="hljs-comment">//输出0</span><br>	<span class="hljs-keyword">while</span> (n != <span class="hljs-number">0</span>) &#123;  <span class="hljs-comment">//当余数不为0时</span><br>		remainder = sum % x;  <span class="hljs-comment">//求出余数</span><br>		n = sum / x; <span class="hljs-comment">//继续算出下一个商数</span><br>		vi.<span class="hljs-built_in">push_back</span>(remainder); <span class="hljs-comment">//将余数存入到容器中</span><br>		sum = n;  <span class="hljs-comment">//将和重置为商数</span><br>	&#125;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> vi_it = vi.<span class="hljs-built_in">rbegin</span>(); vi_it != vi.<span class="hljs-built_in">rend</span>(); vi_it++)<br>		cout &lt;&lt; *vi_it;   <span class="hljs-comment">//使用逆向迭代器对容器中的数输出</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> n, p, x=<span class="hljs-number">0</span>,num;  <span class="hljs-comment">//x用来记录索引</span><br>    vector&lt;<span class="hljs-keyword">long</span>&gt;vi;<br>    cin &gt;&gt; n &gt;&gt; p;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;   <span class="hljs-comment">//循环输入</span><br>        cin &gt;&gt; num;<br>        vi.<span class="hljs-built_in">push_back</span>(num);<br>    &#125;<br>    <span class="hljs-built_in">sort</span>(vi.<span class="hljs-built_in">begin</span>(), vi.<span class="hljs-built_in">end</span>());   <span class="hljs-comment">//对这些数进行排序</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;   <br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i+x; j &lt; n; j++) &#123;  <br>            <span class="hljs-keyword">if</span> (vi[j] &gt; vi[i] * p) <span class="hljs-comment">//当vi[j]&gt;vi[i]*p，即当vi容器出现了max时，跳出循环</span><br>                <span class="hljs-keyword">break</span>;<br>            <span class="hljs-keyword">if</span> (j - i + <span class="hljs-number">1</span> &gt; x)  <span class="hljs-comment">//如果j-i+1时的值大于x索引时</span><br>                x = j - i + <span class="hljs-number">1</span>; <span class="hljs-comment">//将这个值赋给x（更新x的值）</span><br>        &#125;<br>    &#125;<br>    cout &lt;&lt; x &lt;&lt; endl;  <span class="hljs-comment">//将x输出</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>心得与解析：</p>
-<p>这题需要会算进制转换。十进制数转某进制，就是对该数对某进制进行取余，之后算出来的商用于下一次对某进制再次进行取余，直到商数为0。每次的余数逆向写就是该进制下的数。</p>
-<p>知道上面这个就很好写了，但是需要考虑两个极端情况。当该数（被除数）比某进制数要小时，直接输出该数即可，而不是输出0；还有一点是当被除数为0时，直接输出0即可（这两个测试点我一开始没过，后来琢磨了一下发现加两个判断就行）。</p>
+<h2 id="心得与解析："><a href="#心得与解析：" class="headerlink" title="心得与解析："></a>心得与解析：</h2><p>这题我一开始的思路是直接找出容器中的最小的数，乘以p，之后将这个结果和容器中的其他数比较，如果比min*p的乘积小，那么就存入到一个新容器中，这样得到的就是一个完美数列。测试输出也是8，但是第一个测试点就是过不了……不知道为什么……（我个人猜测是没有比对剩下的数，因为后面有的数可能乘起来比前面的数乘起来包含的数还要多）。</p>
+<p>而AC代码是对容器中所有的数进行排序，之后也是用另一个循环进行比对。这里用了一个x来记录下标，其中j-i+1是为了获得当前数列长度（i，j都是索引）。因为是按照升序排列，所以当i-j+1长度大于x下标时，说明有了更长的数列。</p>
 
             </div>
             <hr>
@@ -292,18 +289,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/10/22/PAT-Basic-1023/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">PAT-Basic 1023</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/10/20/PAT-Basic1021/">
-                        <span class="hidden-mobile">PAT-Basic 1021</span>
+                      <a href="/2021/10/28/PTA-Basic1029/">
+                        <span class="hidden-mobile">PTA Basic 1029</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
