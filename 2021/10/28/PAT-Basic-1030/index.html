@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      637 字
+      645 字
     </span>
   
 
@@ -251,10 +251,12 @@
 
 <h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs out">8<br></code></pre></td></tr></table></figure>
 
+<h2 id="解析："><a href="#解析：" class="headerlink" title="解析："></a>解析：</h2><p>这题我一开始的思路是直接找出容器中的最小的数，乘以p，之后将这个结果和容器中的其他数比较，如果比min*p的乘积小，那么就存入到一个新容器中，这样得到的就是一个完美数列。测试输出也是8，但是第一个测试点就是过不了……不知道为什么……（我个人猜测是没有比对剩下的数，因为后面有的数可能乘起来比前面的数乘起来包含的数还要多）。</p>
+<p>而AC代码是对容器中所有的数进行排序，之后也是用另一个循环进行比对。这里用了一个x来记录下标，其中j-i+1是为了获得当前数列长度（i，j都是索引）。因为是按照升序排列，所以当i-j+1长度大于x下标时，说明有了更长的数列。这时候i-j+1赋值给x即可。</p>
 <h2 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> n, p, x=<span class="hljs-number">0</span>,num;  <span class="hljs-comment">//x用来记录索引</span><br>    vector&lt;<span class="hljs-keyword">long</span>&gt;vi;<br>    cin &gt;&gt; n &gt;&gt; p;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;   <span class="hljs-comment">//循环输入</span><br>        cin &gt;&gt; num;<br>        vi.<span class="hljs-built_in">push_back</span>(num);<br>    &#125;<br>    <span class="hljs-built_in">sort</span>(vi.<span class="hljs-built_in">begin</span>(), vi.<span class="hljs-built_in">end</span>());   <span class="hljs-comment">//对这些数进行排序</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;   <br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i+x; j &lt; n; j++) &#123;  <br>            <span class="hljs-keyword">if</span> (vi[j] &gt; vi[i] * p) <span class="hljs-comment">//当vi[j]&gt;vi[i]*p，即当vi容器出现了max时，跳出循环</span><br>                <span class="hljs-keyword">break</span>;<br>            <span class="hljs-keyword">if</span> (j - i + <span class="hljs-number">1</span> &gt; x)  <span class="hljs-comment">//如果j-i+1时的值大于x索引时</span><br>                x = j - i + <span class="hljs-number">1</span>; <span class="hljs-comment">//将这个值赋给x（更新x的值）</span><br>        &#125;<br>    &#125;<br>    cout &lt;&lt; x &lt;&lt; endl;  <span class="hljs-comment">//将x输出</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h2 id="心得与解析："><a href="#心得与解析：" class="headerlink" title="心得与解析："></a>心得与解析：</h2><p>这题我一开始的思路是直接找出容器中的最小的数，乘以p，之后将这个结果和容器中的其他数比较，如果比min*p的乘积小，那么就存入到一个新容器中，这样得到的就是一个完美数列。测试输出也是8，但是第一个测试点就是过不了……不知道为什么……（我个人猜测是没有比对剩下的数，因为后面有的数可能乘起来比前面的数乘起来包含的数还要多）。</p>
-<p>而AC代码是对容器中所有的数进行排序，之后也是用另一个循环进行比对。这里用了一个x来记录下标，其中j-i+1是为了获得当前数列长度（i，j都是索引）。因为是按照升序排列，所以当i-j+1长度大于x下标时，说明有了更长的数列。</p>
+
+
 
             </div>
             <hr>
@@ -288,6 +290,12 @@
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2021/10/30/PAT-Basic-1033/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">PAT-Basic 1033</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

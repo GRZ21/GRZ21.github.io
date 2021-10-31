@@ -198,7 +198,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      518 字
+      515 字
     </span>
   
 
@@ -253,11 +253,10 @@
 
 <h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs out">1103<br></code></pre></td></tr></table></figure>
 
+<h2 id="解析："><a href="#解析：" class="headerlink" title="解析："></a>解析：</h2><p>这题需要会算进制转换。十进制数转某进制，就是对该数对某进制进行取余，之后算出来的商用于下一次对某进制再次进行取余，直到商数为0。每次的余数逆向写就是该进制下的数。</p>
+<p>知道上面这个就很好写了，但是需要考虑两个极端情况。当该数（被除数）比某进制数要小时，直接输出该数即可，而不是输出0；还有一点是当被除数为0时，直接输出0即可（这两个测试点我一开始没过，后来琢磨了一下发现加两个判断就行）。</p>
 <h2 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-keyword">int</span> a, b, x, remainder;  <span class="hljs-comment">//数A，数B，进制数D，余数</span><br>	cin &gt;&gt; a &gt;&gt; b &gt;&gt; x;<br>	<span class="hljs-keyword">int</span> sum = a + b; <span class="hljs-comment">//算出A以及B两个数的和</span><br>	<span class="hljs-keyword">int</span> n = sum/x;  <span class="hljs-comment">//算出商数</span><br>	vector&lt;<span class="hljs-keyword">int</span>&gt;vi;   <span class="hljs-comment">//创建存储余数的容器</span><br>	<span class="hljs-keyword">if</span> (x &gt; sum)  <span class="hljs-comment">//当进制数D大于AB两数之和时</span><br>		cout &lt;&lt; sum;  <span class="hljs-comment">//直接输出和</span><br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) <span class="hljs-comment">//如果商数为0</span><br>		cout &lt;&lt; <span class="hljs-number">0</span>;   <span class="hljs-comment">//输出0</span><br>	<span class="hljs-keyword">while</span> (n != <span class="hljs-number">0</span>) &#123;  <span class="hljs-comment">//当余数不为0时</span><br>		remainder = sum % x;  <span class="hljs-comment">//求出余数</span><br>		n = sum / x; <span class="hljs-comment">//继续算出下一个商数</span><br>		vi.<span class="hljs-built_in">push_back</span>(remainder); <span class="hljs-comment">//将余数存入到容器中</span><br>		sum = n;  <span class="hljs-comment">//将和重置为商数</span><br>	&#125;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> vi_it = vi.<span class="hljs-built_in">rbegin</span>(); vi_it != vi.<span class="hljs-built_in">rend</span>(); vi_it++)<br>		cout &lt;&lt; *vi_it;   <span class="hljs-comment">//使用逆向迭代器对容器中的数输出</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>心得与解析：</p>
-<p>这题需要会算进制转换。十进制数转某进制，就是对该数对某进制进行取余，之后算出来的商用于下一次对某进制再次进行取余，直到商数为0。每次的余数逆向写就是该进制下的数。</p>
-<p>知道上面这个就很好写了，但是需要考虑两个极端情况。当该数（被除数）比某进制数要小时，直接输出该数即可，而不是输出0；还有一点是当被除数为0时，直接输出0即可（这两个测试点我一开始没过，后来琢磨了一下发现加两个判断就行）。</p>
 
             </div>
             <hr>

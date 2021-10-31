@@ -14,11 +14,11 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="应该说是昨天和前天，课太多了。说实话。只能在水课时候写写，但是效果并不好……唉。">
+  <meta name="description" content="今天是1033，最后一个测试点没过……很烦，这题有点像1029，但是有有点不一样……">
   <meta name="author" content="Oxygen">
   <meta name="keywords" content="">
   
-  <title>PTA Basic 1029 - Oxygen</title>
+  <title>PAT-Basic 1033 - Oxygen</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -175,7 +175,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="PTA Basic 1029">
+            <span class="h2" id="subtitle" title="PAT-Basic 1033">
               
             </span>
 
@@ -185,8 +185,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-10-28 19:21" pubdate>
-        2021年10月28日 晚上
+      <time datetime="2021-10-30 20:57" pubdate>
+        2021年10月30日 晚上
       </time>
     </span>
   
@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      854 字
+      869 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13
+      14
        分钟
     </span>
   
@@ -237,26 +237,28 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">PTA Basic 1029</h1>
+            <h1 style="display: none">PAT-Basic 1033</h1>
             
             <div class="markdown-body">
-              <p>应该说是昨天和前天，课太多了。说实话。只能在水课时候写写，但是效果并不好……唉。</p>
+              <p>今天是1033，最后一个测试点没过……很烦，这题有点像1029，但是有有点不一样……</p>
 <span id="more"></span>
 
-<h1 id="1029：旧键盘"><a href="#1029：旧键盘" class="headerlink" title="1029：旧键盘"></a>1029：旧键盘</h1><p>旧键盘上坏了几个键，于是在敲一段文字的时候，对应的字符就不会出现。现在给出应该输入的一段文字、以及实际被输入的文字，请你列出肯定坏掉的那些键。</p>
-<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在 2 行中分别给出应该输入的文字、以及实际被输入的文字。每段文字是不超过 80 个字符的串，由字母 A-Z（包括大、小写）、数字 0-9、以及下划线 <code>_</code>（代表空格）组成。题目保证 2 个字符串均非空。</p>
-<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>按照发现顺序，在一行中输出坏掉的键。其中英文字母只输出大写，每个坏键只输出一次。题目保证至少有 1 个坏键。</p>
-<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs in">7_This_is_a_test<br>_hs_s_a_es<br>结尾无空行<br></code></pre></td></tr></table></figure>
+<h1 id="1033（17-20）：旧键盘打字"><a href="#1033（17-20）：旧键盘打字" class="headerlink" title="1033（17/20）：旧键盘打字"></a>1033（17/20）：旧键盘打字</h1><p>链接：<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805260223102976/problems/994805288530460672">题目详情 (pintia.cn)</a></p>
+<p>旧键盘上坏了几个键，于是在敲一段文字的时候，对应的字符就不会出现。现在给出应该输入的一段文字、以及坏掉的那些键，打出的结果文字会是怎样？</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在 2 行中分别给出坏掉的那些键、以及应该输入的文字。其中对应英文字母的坏键以大写给出；每段文字是不超过 105 个字符的串。可用的字符包括字母 [<code>a</code>-<code>z</code>, <code>A</code>-<code>Z</code>]、数字 <code>0</code>-<code>9</code>、以及下划线 <code>_</code>（代表空格）、<code>,</code>、<code>.</code>、<code>-</code>、<code>+</code>（代表上档键）。题目保证第 2 行输入的文字串非空。</p>
+<p>注意：如果上档键坏掉了，那么大写的英文字母无法被打出。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>在一行中输出能够被打出的结果文字。如果没有一个字符能被打出，则输出空行。</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs in">7+IE.<br>7_This_is_a_test.<br>结尾无空行<br></code></pre></td></tr></table></figure>
 
-<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs out">7TI<br>结尾无空行<br></code></pre></td></tr></table></figure>
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs out">_hs_s_a_tst<br>结尾无空行<br></code></pre></td></tr></table></figure>
 
-<h2 id="解析："><a href="#解析：" class="headerlink" title="解析："></a>解析：</h2><p>这题我一开始我的思路是将str1字符转换为字符，存入到一个容器中，之后再去除掉str1中str2出现过的字符。这样剩下的就是坏掉的键。但是有个问题，str1去除掉str2中出现的字符后，剩下的会有重复的字符，我旧又想到了去重。但是去完重后和题目输出不一致（容器去重需要先排序，这会打乱原先在题中给出的字符顺序）。</p>
-<h2 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">int</span> ACSII[<span class="hljs-number">200</span>]&#123; <span class="hljs-number">0</span> &#125;;   <span class="hljs-comment">//用来记录字符出现的次数的数组</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    string str1, str2;<br>    <span class="hljs-built_in">getline</span>(cin, str1);<br>    <span class="hljs-built_in">getline</span>(cin, str2);<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> i : str2)<br>    &#123;<br>        ACSII[<span class="hljs-built_in">toupper</span>(i)] = <span class="hljs-number">1</span>;  <span class="hljs-comment">//将str2中的字符转为大写，并且对应到ASCII数组索引中，将这些出现过的字符索引对应数字改为1</span><br>    &#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> i : str1)<br>    &#123;<br>        <span class="hljs-keyword">if</span> (ACSII[<span class="hljs-built_in">toupper</span>(i)] == <span class="hljs-number">0</span>) <span class="hljs-comment">//如果在ASCII数组中索引对应的值为0，输出（为0说明没有在str2中出现过）</span><br>        &#123;<br>            cout &lt;&lt; <span class="hljs-built_in"><span class="hljs-keyword">char</span></span>(<span class="hljs-built_in">toupper</span>(i));<br>            ACSII[<span class="hljs-built_in">toupper</span>(i)] = <span class="hljs-number">1</span>; <span class="hljs-comment">//并且将这些字符出现时对应的索引的数字转为1（控制输出，每个字符只能输出一次）</span><br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="解析："><a href="#解析：" class="headerlink" title="解析："></a>解析：</h2><p>这题在于怎么处理<code>+</code>这个符号，当<code>+</code>出现时，对第一个中要将大写转为小写，对第二个字符中出现的大写字母则应该直接删除掉。在我的代码使用了<code>remove</code>函数和<code>remove_if</code>函数，这两个函数都是移除容器中满足条件的项目，并返回迭代器（并不是真的删除），所以需要配合<code>erase</code>方法来对容器中的元素进行删除。<code>remove_if</code>函数相对于<code>remove</code>函数可以接受一个一元谓词的函数来作为执行策略，所以在我的代码中，我自己定义了一个判断大写字母的函数（g++编译器原因，无法通过<code>cctype</code>中的<code>isupper()</code>方法，只能自己定义一个）。</p>
+<h2 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">char</span> c[<span class="hljs-number">300</span>];<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	string a,b;<br>	<span class="hljs-built_in">getline</span>(cin,a);<br>	<span class="hljs-built_in">getline</span>(cin,b);<br>	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;a.<span class="hljs-built_in">length</span>();i++)&#123;<br>		c[a[i]]=<span class="hljs-number">1</span>;<br>		<span class="hljs-keyword">if</span>(a[i]&gt;=<span class="hljs-string">&#x27;A&#x27;</span>&amp;&amp;a[i]&lt;=<span class="hljs-string">&#x27;Z&#x27;</span>)&#123;<br>			c[a[i]-<span class="hljs-string">&#x27;A&#x27;</span>+<span class="hljs-string">&#x27;a&#x27;</span>]=<span class="hljs-number">1</span>;<br>		&#125;<br>		<span class="hljs-keyword">if</span>(c[<span class="hljs-string">&#x27;+&#x27;</span>]==<span class="hljs-number">1</span>)&#123;<br>			<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> l=<span class="hljs-string">&#x27;A&#x27;</span>;l&lt;=<span class="hljs-string">&#x27;Z&#x27;</span>;l++)&#123;<br>				c[l]=<span class="hljs-number">1</span>;<br>			&#125;<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;b.<span class="hljs-built_in">length</span>();i++)&#123;<br>		<span class="hljs-keyword">if</span>(c[b[i]]==<span class="hljs-number">1</span>)&#123;<br>			<br>		&#125;<span class="hljs-keyword">else</span>&#123;<br>			cout&lt;&lt;b[i];<br>		&#125;<br>	&#125;<br>    cout&lt;&lt;endl;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
-<p>但是AC代码就很简单了，直接将str1和str2比较，且用了一个字符数组来控制每个字符只能出现一次。我在后来的改进中也使用了这种办法，但是很遗憾的是只能拿到12分……</p>
-<h3 id="我的解答："><a href="#我的解答：" class="headerlink" title="我的解答："></a>我的解答：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cctype&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-keyword">int</span> ASCII[<span class="hljs-number">256</span>]&#123; <span class="hljs-number">0</span> &#125;;<br>	string s, t,str;<br>	<span class="hljs-built_in">getline</span>(cin, s);<br>	<span class="hljs-built_in">getline</span>(cin, t);<br>	vector&lt;<span class="hljs-keyword">char</span>&gt;vc, vh;<br><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; s.<span class="hljs-built_in">size</span>(); i++) &#123;  <span class="hljs-comment">//循环将s的字符转为大写</span><br>		<span class="hljs-keyword">if</span> (s[i] &gt;= <span class="hljs-string">&#x27;a&#x27;</span> &amp;&amp; s[i] &lt; <span class="hljs-string">&#x27;z&#x27;</span>)<br>			s[i] = <span class="hljs-built_in">toupper</span>(s[i]);<br>		vc.<span class="hljs-built_in">push_back</span>(s[i]);<br><br>	&#125;<br><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; t.<span class="hljs-built_in">size</span>(); j++) &#123;  <span class="hljs-comment">//循环将字符转为大写</span><br>		<span class="hljs-keyword">if</span> (t[j] &gt;= <span class="hljs-string">&#x27;a&#x27;</span> &amp;&amp; t[j] &lt;= <span class="hljs-string">&#x27;z&#x27;</span>)<br>			t[j] = <span class="hljs-built_in">toupper</span>(t[j]);<br>		vh.<span class="hljs-built_in">push_back</span>(t[j]);<br>	&#125;<br>	<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> vh_it = vh.<span class="hljs-built_in">begin</span>(); vh_it != vh.<span class="hljs-built_in">end</span>(); vh_it++)  <span class="hljs-comment">//删除掉在t中出现过的字符</span><br>		vc.<span class="hljs-built_in">erase</span>(<span class="hljs-built_in">remove</span>(vc.<span class="hljs-built_in">begin</span>(), vc.<span class="hljs-built_in">end</span>(), *vh_it), vc.<span class="hljs-built_in">end</span>());<br><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; vc.<span class="hljs-built_in">size</span>(); i++)  <span class="hljs-comment">//将剩下的字符转为字符串</span><br>		str += vc[i];<br><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> c : str) &#123;   <span class="hljs-comment">//h</span><br>		<span class="hljs-keyword">if</span> (ASCII[c] == <span class="hljs-number">0</span>) &#123;<br>			cout &lt;&lt; c;<br>			ASCII[c] = <span class="hljs-number">1</span>;<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>我的答案最后一个测试点说实话不知道为什么通过不了，就很奇怪……唉。</p>
+<h3 id="我的解答："><a href="#我的解答：" class="headerlink" title="我的解答："></a>我的解答：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cctype&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isUpper</span><span class="hljs-params">(<span class="hljs-keyword">char</span> c)</span> </span>&#123;   <span class="hljs-comment">//判断是否为大写字母</span><br>	<span class="hljs-keyword">return</span> (c &gt;= <span class="hljs-string">&#x27;A&#x27;</span> &amp;&amp; c &lt;= <span class="hljs-string">&#x27;Z&#x27;</span>);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	string s1, s2;<br>	<span class="hljs-built_in">getline</span>(cin, s1); <span class="hljs-comment">//读两个字符串</span><br>	<span class="hljs-built_in">getline</span>(cin, s2);<br><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; s1.<span class="hljs-built_in">size</span>(); i++) &#123;<br>		<span class="hljs-keyword">if</span> (s1[i] == <span class="hljs-string">&#x27;+&#x27;</span>)   <span class="hljs-comment">//当s1中有+号时，将整个s1中的大写字符全部转为小写</span><br>			<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; s1.<span class="hljs-built_in">size</span>(); j++)<br>				s1[j] = <span class="hljs-built_in">tolower</span>(s1[j]);<br>	&#125;<br><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; s1.<span class="hljs-built_in">size</span>(); i++) &#123;<br>		<span class="hljs-keyword">if</span> (s1[i] == <span class="hljs-string">&#x27;+&#x27;</span>) &#123;  <span class="hljs-comment">//当s1中有+时，将s2中所有的大写字母全部移除掉</span><br>			s2.<span class="hljs-built_in">erase</span>(<span class="hljs-built_in">remove_if</span>(s2.<span class="hljs-built_in">begin</span>(), s2.<span class="hljs-built_in">end</span>(), isUpper), s2.<span class="hljs-built_in">end</span>());<br>		&#125;<br>	&#125;<br><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> s1_it = s1.<span class="hljs-built_in">begin</span>(); s1_it != s1.<span class="hljs-built_in">end</span>(); s1_it++) &#123;  <span class="hljs-comment">//使用s1中出现过的字符对s2去重</span><br>		s2.<span class="hljs-built_in">erase</span>(<span class="hljs-built_in">remove</span>(s2.<span class="hljs-built_in">begin</span>(), s2.<span class="hljs-built_in">end</span>(), *s1_it), s2.<span class="hljs-built_in">end</span>());<br>	&#125;<br><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> i : s2)  <span class="hljs-comment">//打印出s2剩下的字符</span><br>		cout &lt;&lt; i;<br>	<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
             </div>
@@ -292,9 +294,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/10/28/PAT-Basic-1030/">
+                      <a href="/2021/10/30/PAT-Basic-1032/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">PAT-Basic 1030</span>
+                        <span class="hidden-mobile">PAT-Basic 1032</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -302,8 +304,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/10/25/PAT-Basic-1028/">
-                        <span class="hidden-mobile">PAT-Basic 1028</span>
+                      <a href="/2021/10/28/PAT-Basic-1030/">
+                        <span class="hidden-mobile">PAT-Basic 1030</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

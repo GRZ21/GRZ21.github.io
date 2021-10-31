@@ -198,7 +198,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      640 字
+      637 字
     </span>
   
 
@@ -208,7 +208,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10
+      9
        分钟
     </span>
   
@@ -253,11 +253,10 @@
 
 <h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs out">0:2<br>1:3<br>3:1<br>结尾无空行<br></code></pre></td></tr></table></figure>
 
+<h2 id="解析："><a href="#解析：" class="headerlink" title="解析："></a>解析：</h2><p>这题15分，如果做过前面题目应该直到，PAT-Basic的题目挺喜欢这种输入一个基本类型无法存储的数字题目。一般思路都是输入一个数字字符串，再将其中的每个数字字符转换为数字，存储到容器或者数组中，再进行下一步操作。</p>
+<p>第二个难点是判断数字出现了多少次。我一开始想先排序再写个判断，但是想了想感觉不好实现，因为没办法将出现的数字和出现的次数对应起来。后来我上网了找了找，发现很多都是用一个0-9的数组来记录。于是我就想到了算法库中的<code>count</code>方法。当返回值是0时，不输出，当返回值不是0时，按照题目格式输出即可。</p>
 <h2 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	string num;    <span class="hljs-comment">//设置字符串</span><br>	vector&lt;<span class="hljs-keyword">int</span>&gt;vi;  <span class="hljs-comment">//创建容器vi</span><br>	cin &gt;&gt; num;   <span class="hljs-comment">//输入字符串num</span><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; num.<span class="hljs-built_in">size</span>(); i++) &#123;<br>		vi.<span class="hljs-built_in">push_back</span>(num[i]-<span class="hljs-string">&#x27;0&#x27;</span>);   <span class="hljs-comment">//将字符转换为对应的数字</span><br>	&#125;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;   <span class="hljs-comment">//i代表0-9中的10个数</span><br>		<span class="hljs-keyword">if</span> (<span class="hljs-built_in">count</span>(vi.<span class="hljs-built_in">begin</span>(), vi.<span class="hljs-built_in">end</span>(), i) == <span class="hljs-number">0</span>) <span class="hljs-comment">//使用count判断0-9每位数在vi容器中出现了多少次，如果次数等于0</span><br>			<span class="hljs-keyword">continue</span>;           <span class="hljs-comment">//略过进行下一次循环，不输出</span><br>		<span class="hljs-keyword">else</span>   <span class="hljs-comment">//如果次数不为0</span><br>			cout &lt;&lt; i &lt;&lt; <span class="hljs-string">&quot;:&quot;</span> &lt;&lt; <span class="hljs-built_in">count</span>(vi.<span class="hljs-built_in">begin</span>(), vi.<span class="hljs-built_in">end</span>(), i) &lt;&lt; endl; <span class="hljs-comment">//输出</span><br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>心得与体会：</p>
-<p>这题15分，如果做过前面题目应该直到，PAT-Basic的题目挺喜欢这种输入一个基本类型无法存储的数字题目。一般思路都是输入一个数字字符串，再将其中的每个数字字符转换为数字，存储到容器或者数组中，再进行下一步操作。</p>
-<p>第二个难点是判断数字出现了多少次。我一开始想先排序再写个判断，但是想了想感觉不好实现，因为没办法将出现的数字和出现的次数对应起来。后来我上网了找了找，发现很多都是用一个0-9的数组来记录。于是我就想到了算法库中的<code>count</code>方法。当返回值是0时，不输出，当返回值不是0时，按照题目格式输出即可。</p>
 
             </div>
             <hr>
@@ -292,7 +291,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/10/21/PAT-Baisc1022/">
+                      <a href="/2021/10/21/PAT-Baisc-1022/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">PAT-Basic 1022</span>
                         <span class="visible-mobile">上一篇</span>
