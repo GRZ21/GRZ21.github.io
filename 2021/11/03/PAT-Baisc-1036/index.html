@@ -14,11 +14,11 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="1035的排序我实在不会……今天这题是在Linux下写的，测试点4过不去，17/20。">
+  <meta name="description" content="">
   <meta name="author" content="Oxygen">
   <meta name="keywords" content="">
   
-  <title>PAT-Basic 1036 - Oxygen</title>
+  <title>PAT-Baisc-1036 - Oxygen</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -175,7 +175,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="PAT-Basic 1036">
+            <span class="h2" id="subtitle" title="PAT-Baisc-1036">
               
             </span>
 
@@ -185,8 +185,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-11-02 22:17" pubdate>
-        2021年11月2日 晚上
+      <time datetime="2021-11-03 19:16" pubdate>
+        2021年11月3日 晚上
       </time>
     </span>
   
@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      661 字
+      702 字
     </span>
   
 
@@ -237,24 +237,23 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">PAT-Basic 1036</h1>
+            <h1 style="display: none">PAT-Baisc-1036</h1>
             
             <div class="markdown-body">
-              <p>1035的排序我实在不会……今天这题是在Linux下写的，测试点4过不去，17/20。</p>
-<span id="more"></span>
+              <h1 id="1036（20-20）：在霍格沃茨找零钱"><a href="#1036（20-20）：在霍格沃茨找零钱" class="headerlink" title="1036（20/20）：在霍格沃茨找零钱"></a>1036（20/20）：<strong>在霍格沃茨找零钱</strong></h1><p>链接：<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805260223102976/problems/994805284923359232">题目详情 (pintia.cn)</a></p>
+<p>如果你是哈利·波特迷，你会知道魔法世界有它自己的货币系统 —— 就如海格告诉哈利的：“十七个银西可(Sickle)兑一个加隆(Galleon)，二十九个纳特(Knut)兑一个西可，很容易。”现在，给定哈利应付的价钱 <em>P</em> 和他实付的钱 <em>A</em>，你的任务是写一个程序来计算他应该被找的零钱。</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在 1 行中分别给出 <em>P</em> 和 <em>A</em>，格式为 <code>Galleon.Sickle.Knut</code>，其间用 1 个空格分隔。这里 <code>Galleon</code> 是 [0, 107] 区间内的整数，<code>Sickle</code> 是 [0, 17) 区间内的整数，<code>Knut</code> 是 [0, 29) 区间内的整数。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>在一行中用与输入同样的格式输出哈利应该被找的零钱。如果他没带够钱，那么输出的应该是负数。</p>
+<h3 id="输入样例-1："><a href="#输入样例-1：" class="headerlink" title="输入样例 1："></a>输入样例 1：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs in">10.16.27 14.1.28<br>结尾无空行<br></code></pre></td></tr></table></figure>
 
-<h1 id="1036（17-20）：跟奥巴马一起编程"><a href="#1036（17-20）：跟奥巴马一起编程" class="headerlink" title="1036（17/20）：跟奥巴马一起编程"></a>1036（17/20）：<strong>跟奥巴马一起编程</strong></h1><p>链接：美国总统奥巴马不仅呼吁所有人都学习编程，甚至以身作则编写代码，成为美国历史上首位编写计算机代码的总统。2014 年底，为庆祝“计算机科学教育周”正式启动，奥巴马编写了很简单的计算机代码：在屏幕上画一个正方形。现在你也跟他一起画吧！</p>
-<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在一行中给出正方形边长 <em>N</em>（3≤<em>N</em>≤20）和组成正方形边的某种字符 C，间隔一个空格。</p>
-<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>输出由给定字符 C 画出的正方形。但是注意到行间距比列间距大，所以为了让结果看上去更像正方形，我们输出的行数实际上是列数的 50%（四舍五入取整）。</p>
-<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs in">10 a<br>结尾无空行<br></code></pre></td></tr></table></figure>
+<h3 id="输出样例-1："><a href="#输出样例-1：" class="headerlink" title="输出样例 1："></a>输出样例 1：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs out">3.2.1<br>结尾无空行<br></code></pre></td></tr></table></figure>
 
-<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs out">aaaaaaaaaa<br>a        a<br>a        a<br>a        a<br>aaaaaaaaaa<br>结尾无空行<br></code></pre></td></tr></table></figure>
+<h3 id="输入样例-2："><a href="#输入样例-2：" class="headerlink" title="输入样例 2："></a>输入样例 2：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs in">14.1.28 10.16.27<br>结尾无空行<br></code></pre></td></tr></table></figure>
 
-<h2 id="解析："><a href="#解析：" class="headerlink" title="解析："></a>解析：</h2><p>这题不难，这个图形只需要分为三部分来进行打印输出即可。第一层，中间层，以及最后一层。总层数根据输入的第一个数四舍五入（使用<code>round</code>函数）。第一层和最后一层照常打印，中间层打印第一个字符和最后一个字符，其他的都打空格就行。</p>
-<h2 id="AC解答："><a href="#AC解答：" class="headerlink" title="AC解答："></a>AC解答：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> N;<br>    <span class="hljs-keyword">char</span> c;<br>    cin &gt;&gt; N &gt;&gt; c;<br>    <span class="hljs-keyword">int</span> t = N / <span class="hljs-number">2</span> + N % <span class="hljs-number">2</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; N; i++)<br>        cout &lt;&lt; c;<br>    cout &lt;&lt; endl;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; t - <span class="hljs-number">2</span>; i++) &#123;<br>        cout &lt;&lt; c;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>; k &lt; N - <span class="hljs-number">2</span>; k++)<br>            cout &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;<br>        cout &lt;&lt; c &lt;&lt; endl;<br>    &#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; N; i++)<br>        cout &lt;&lt; c;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="输出样例-2："><a href="#输出样例-2：" class="headerlink" title="输出样例 2："></a>输出样例 2：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs out">-3.2.1<br>结尾无空行<br></code></pre></td></tr></table></figure>
 
-<p>我的测试点4错了，莫名其妙的……</p>
-<h3 id="我的解答（17-20）："><a href="#我的解答（17-20）：" class="headerlink" title="我的解答（17/20）："></a>我的解答（17/20）：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;math.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;    <br>    <span class="hljs-keyword">int</span> x;<br>    <span class="hljs-keyword">char</span> c;<br>    cin &gt;&gt; x &gt;&gt;c;<br>    <span class="hljs-keyword">int</span> n=<span class="hljs-built_in">round</span>(x/<span class="hljs-number">2</span>);   <span class="hljs-comment">//获得层数</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>;j&lt;x;j++)&#123;  <span class="hljs-comment">//输出第一层</span><br>        cout &lt;&lt; c ;<br>    &#125;<br>    cout &lt;&lt; endl; <span class="hljs-comment">//换行</span><br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;n<span class="hljs-number">-1</span>;i++)&#123;   <span class="hljs-comment">//i是第二行，i小于n-1，即打印到倒数第二行</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>;j&lt;x;j++)&#123;  <span class="hljs-comment">//打印字符</span><br>            <span class="hljs-keyword">if</span>(j==<span class="hljs-number">0</span>||j==x<span class="hljs-number">-1</span>)  <span class="hljs-comment">//当j在第一个位置和最后一个位置</span><br>                cout &lt;&lt;c;  <span class="hljs-comment">//打印字符</span><br>            <span class="hljs-keyword">else</span> <br>                cout &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;  <span class="hljs-comment">//其他的空格</span><br>        &#125;<br>        cout &lt;&lt; endl;  <span class="hljs-comment">//换行</span><br>    &#125;<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>;j&lt;x;j++)&#123; <span class="hljs-comment">//输出最后一行</span><br>        cout &lt;&lt; c ;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br> &#125;<br></code></pre></td></tr></table></figure>
+<h2 id="解析："><a href="#解析：" class="headerlink" title="解析："></a>解析：</h2><p>白给题，搞清楚换算关系即可。如果实付小于应付，那么负号应该只出现在第一位不为0的数字上，后面的单位就不应该再带符号。</p>
+<h2 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Price</span>&#123;</span>   <span class="hljs-comment">//定义一个价格类，分别对应应付价格和实际付的钱</span><br>	<span class="hljs-keyword">int</span> k;   <span class="hljs-comment">//纳特</span><br>	<span class="hljs-keyword">int</span> s;   <span class="hljs-comment">//银西可</span><br>	<span class="hljs-keyword">int</span> g;   <span class="hljs-comment">//加隆</span><br>&#125;;<br>	<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	Price p,a;<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d.%d.%d %d.%d.%d&quot;</span>, &amp;p.g, &amp;p.s, &amp;p.k, &amp;a.g,&amp;a.s,&amp;a.k);  <span class="hljs-comment">//读入</span><br>	<span class="hljs-keyword">int</span> sump =p.g*<span class="hljs-number">17</span>*<span class="hljs-number">29</span>+p.s*<span class="hljs-number">29</span>+p.k;   <span class="hljs-comment">//将应付价格全部转换为最小单位纳特</span><br>	<span class="hljs-keyword">int</span> suma = a.g*<span class="hljs-number">17</span>*<span class="hljs-number">29</span>+a.s*<span class="hljs-number">29</span>+a.k;  <span class="hljs-comment">//将实付价格也转换为最小单位纳特</span><br>	<span class="hljs-keyword">if</span>(sump&lt;suma)&#123;    <span class="hljs-comment">//如果实付大于应付，找钱（为正）</span><br>		<span class="hljs-keyword">int</span> c = suma - sump;   <span class="hljs-comment">//算出应该找的钱</span><br>		<span class="hljs-keyword">int</span> cg = c/<span class="hljs-number">493</span>;   <span class="hljs-comment">//算出加隆</span><br>		<span class="hljs-keyword">int</span> cs = c%<span class="hljs-number">493</span>/<span class="hljs-number">29</span>;  <span class="hljs-comment">//算出银西可</span><br>		<span class="hljs-keyword">int</span> ck = c-cg*<span class="hljs-number">493</span>-cs*<span class="hljs-number">29</span>;  <span class="hljs-comment">//算出纳特</span><br>		cout&lt;&lt;cg&lt;&lt;<span class="hljs-string">&quot;.&quot;</span>&lt;&lt;cs&lt;&lt;<span class="hljs-string">&quot;.&quot;</span>&lt;&lt;ck;  <span class="hljs-comment">//打印</span><br>	&#125;<span class="hljs-keyword">else</span>&#123;    <span class="hljs-comment">//如果应付价格小于实付（为负）</span><br>		<span class="hljs-keyword">int</span> c = suma - sump;     <span class="hljs-comment">//算出应该少的钱</span><br>		<span class="hljs-keyword">int</span> cg = c/<span class="hljs-number">493</span>;     <span class="hljs-comment">//算出加隆</span><br>		<span class="hljs-keyword">int</span> cs = c%<span class="hljs-number">493</span>/<span class="hljs-number">29</span>;    <span class="hljs-comment">//算出银西可</span><br>		<span class="hljs-keyword">int</span> ck = c-cg*<span class="hljs-number">493</span>-cs*<span class="hljs-number">29</span>;    <span class="hljs-comment">//算出纳特</span><br>		<span class="hljs-keyword">if</span>(cg!=<span class="hljs-number">0</span>)&#123;   <span class="hljs-comment">//如果应该欠的钱加隆不为0</span><br>			cs*=<span class="hljs-number">-1</span>;   <span class="hljs-comment">//将后面两个单位的负号去掉</span><br>			ck*=<span class="hljs-number">-1</span>;<br>		&#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(cg==<span class="hljs-number">0</span>&amp;&amp;cs!=<span class="hljs-number">0</span>)   <span class="hljs-comment">//如果加隆为0但是银西可不为0</span><br>			ck*=<span class="hljs-number">-1</span>;   <span class="hljs-comment">//去掉最小单位的负号</span><br>		cout&lt;&lt;cg&lt;&lt;<span class="hljs-string">&quot;.&quot;</span>&lt;&lt;cs&lt;&lt;<span class="hljs-string">&quot;.&quot;</span>&lt;&lt;ck;   <span class="hljs-comment">//输出</span><br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
             </div>
@@ -290,18 +289,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/11/03/PAT-Baisc-1036/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">PAT-Baisc-1036</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/11/01/PAT-Basic-1034/">
-                        <span class="hidden-mobile">PAT-Basic 1034</span>
+                      <a href="/2021/11/02/PAT-Basic-1036/">
+                        <span class="hidden-mobile">PAT-Basic 1036</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
