@@ -4,6 +4,56 @@
   
   
   <entry>
+    <title>PAT-Basic 1042</title>
+    <link href="/2021/11/08/PAT-Basic-1042/"/>
+    <url>/2021/11/08/PAT-Basic-1042/</url>
+    
+    <content type="html"><![CDATA[<p>套路题，还是数组索引和数组索引对应的数的题……</p><span id="more"></span><p>1042（20/20)：<strong>字符统计</strong></p><p>链接：<a href="https://pintia.cn/problem-sets/994805260223102976/problems/994805280817135616">题目详情 (pintia.cn)</a></p><p>请编写程序，找出一段给定文字中出现最频繁的那个英文字母。</p><h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在一行中给出一个长度不超过 1000 的字符串。字符串由 ASCII 码表中任意可见字符及空格组成，至少包含 1 个英文字母，以回车结束（回车不算在内）。</p><h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>在一行中输出出现频率最高的那个英文字母及其出现次数，其间以空格分隔。如果有并列，则输出按字母序最小的那个字母。统计时不区分大小写，输出小写字母。</p><h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs in">This is a simple TEST.  There ARE numbers and other symbols 1&amp;2&amp;3...........<br>结尾无空行<br></code></pre></td></tr></table></figure><h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs out">e 7<br>结尾无空行<br></code></pre></td></tr></table></figure><p>解析：</p><p>开一个128长度的数组，对应ASCII码中的数。题目要求只统计字母且将大写字母忽略为小写字母，使用<code>isalpha()</code>和<code>tolower</code>函数即可。</p><p>且当出现次数相同时输出第一个较小的，用STL库中的方法完美符合（默认返回第一个迭代器）。</p><p>解答：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br><span class="hljs-keyword">int</span> ASCII[<span class="hljs-number">128</span>]&#123; <span class="hljs-number">0</span> &#125;;   <span class="hljs-comment">//创建一个长度为128的数组</span><br>string s;<br><span class="hljs-built_in">getline</span>(cin, s);  <span class="hljs-comment">//输入字符串</span><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> s1_it = s.<span class="hljs-built_in">begin</span>(); s1_it != s.<span class="hljs-built_in">end</span>(); s1_it++) &#123;<br><span class="hljs-keyword">if</span> (<span class="hljs-built_in">isalpha</span>(*s1_it)!=<span class="hljs-number">0</span>) &#123;   <span class="hljs-comment">//对字符进行判断，当不为0时，即为字母</span><br>ASCII[<span class="hljs-built_in">tolower</span>(*s1_it)]++; <span class="hljs-comment">//将该字符转为小写且看作数组索引，对该索引+1</span><br>&#125;<br>&#125;<br><br><span class="hljs-keyword">int</span> n = *<span class="hljs-built_in">max_element</span>(ASCII, ASCII + <span class="hljs-number">128</span>);  <span class="hljs-comment">//找到ASCII数组最大的数</span><br><span class="hljs-keyword">int</span> k = <span class="hljs-built_in">max_element</span>(ASCII, ASCII + <span class="hljs-number">128</span>) - ASCII;  <span class="hljs-comment">//找到最大的数的迭代器减去begin()，再转为(char)，即为对应的字符</span><br>cout &lt;&lt;(<span class="hljs-keyword">char</span>)k&lt;&lt;<span class="hljs-string">&quot; &quot;</span>&lt;&lt;n; <span class="hljs-comment">//输出</span><br><span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>-PAT</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>-PAT</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>PAT-Basic 1041</title>
+    <link href="/2021/11/08/PAT-Basic-1041/"/>
+    <url>/2021/11/08/PAT-Basic-1041/</url>
+    
+    <content type="html"><![CDATA[<p>15分的白给题，感觉近期题目都不咋难，除了最后一题……</p><span id="more"></span><h1 id="1041（15-15）：1041-考试座位号"><a href="#1041（15-15）：1041-考试座位号" class="headerlink" title="1041（15/15）：1041 考试座位号"></a>1041（15/15）：<strong>1041 考试座位号</strong></h1><p>链接：<a href="https://pintia.cn/problem-sets/994805260223102976/problems/994805281567916032">题目详情 (pintia.cn)</a></p><p>每个 PAT 考生在参加考试时都会被分配两个座位号，一个是试机座位，一个是考试座位。正常情况下，考生在入场时先得到试机座位号码，入座进入试机状态后，系统会显示该考生的考试座位号码，考试时考生需要换到考试座位就座。但有些考生迟到了，试机已经结束，他们只能拿着领到的试机座位号码求助于你，从后台查出他们的考试座位号码。</p><h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入第一行给出一个正整数 <em>N</em>（≤1000），随后 <em>N</em> 行，每行给出一个考生的信息：<code>准考证号 试机座位号 考试座位号</code>。其中<code>准考证号</code>由 16 位数字组成，座位从 1 到 <em>N</em> 编号。输入保证每个人的准考证号都不同，并且任何时候都不会把两个人分配到同一个座位上。</p><p>考生信息之后，给出一个正整数 <em>M</em>（≤<em>N</em>），随后一行中给出 <em>M</em> 个待查询的试机座位号码，以空格分隔。</p><h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>对应每个需要查询的试机座位号码，在一行中输出对应考生的准考证号和考试座位号码，中间用 1 个空格分隔。</p><h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs in">4<br>3310120150912233 2 4<br>3310120150912119 4 1<br>3310120150912126 1 3<br>3310120150912002 3 2<br>2<br>3 4<br>结尾无空行<br></code></pre></td></tr></table></figure><h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs out">3310120150912002 2<br>3310120150912119 1<br>结尾无空行<br></code></pre></td></tr></table></figure><h2 id="解析："><a href="#解析：" class="headerlink" title="解析："></a>解析：</h2><p>创建一个考生类，有考生号，试机座位，考试座位三个属性。之后将这些考生存进一个容器，之后再将迟到考生的试机座位号和容器中考生比较即可，输出相同的考生的考号和考试座位。</p><h2 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Student</span>&#123;</span>    <span class="hljs-comment">//学生类</span><br>    string exam;    <span class="hljs-comment">//考生号</span><br>    <span class="hljs-keyword">int</span> tn;     <span class="hljs-comment">//试机座位</span><br>    <span class="hljs-keyword">int</span> rn;       <span class="hljs-comment">//考试座位</span><br>&#125;;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">int</span> x;<br>    cin &gt;&gt; x;<br>    vector&lt;Student&gt;vs;   <span class="hljs-comment">//创建容器</span><br>    <span class="hljs-keyword">while</span>(x)&#123;<br>        Student stu;  <br>        cin &gt;&gt; stu.exam&gt;&gt;stu.tn&gt;&gt;stu.rn;  <span class="hljs-comment">//循环输入</span><br>        vs.<span class="hljs-built_in">push_back</span>(stu);  <span class="hljs-comment">//将这些学生存入一个容器中</span><br>        x--;<br>    &#125;<br>    <br>    <span class="hljs-keyword">int</span> n,s;<br>    cin&gt;&gt;n;<br>    <span class="hljs-keyword">while</span>(n)&#123;<br>        cin &gt;&gt; s;    <span class="hljs-comment">//迟到的考生的试机座位号</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> vs_it=vs.<span class="hljs-built_in">begin</span>();vs_it!=vs.<span class="hljs-built_in">end</span>();vs_it++)&#123;<br>            <span class="hljs-keyword">if</span>(vs_it-&gt;tn==s)   <span class="hljs-comment">//遍历容器，当容器中有相同试机号时</span><br>                cout &lt;&lt; vs_it-&gt;exam&lt;&lt;<span class="hljs-string">&#x27; &#x27;</span>&lt;&lt;vs_it-&gt;rn&lt;&lt; endl; <span class="hljs-comment">//输出该考生的考生号和ka</span><br>           &#125;<br>        n--;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>-PAT</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>-PAT</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>PAT-Basic 1039</title>
     <link href="/2021/11/06/PAT-Basic-1039/"/>
     <url>/2021/11/06/PAT-Basic-1039/</url>
