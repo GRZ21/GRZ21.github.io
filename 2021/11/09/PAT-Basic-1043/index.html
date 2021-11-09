@@ -14,11 +14,11 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="套路题，还是数组索引和数组索引对应的数的题……">
+  <meta name="description" content="不难，写循环就行……我本来以为写这么多循环要超时来着……结果还好。">
   <meta name="author" content="Oxygen">
   <meta name="keywords" content="">
   
-  <title>PAT-Basic 1042 - Oxygen</title>
+  <title>PAT-Basic 1043 - Oxygen</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -175,7 +175,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="PAT-Basic 1042">
+            <span class="h2" id="subtitle" title="PAT-Basic 1043">
               
             </span>
 
@@ -185,8 +185,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-11-08 19:07" pubdate>
-        2021年11月8日 晚上
+      <time datetime="2021-11-09 18:46" pubdate>
+        2021年11月9日 晚上
       </time>
     </span>
   
@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      485 字
+      641 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      11
        分钟
     </span>
   
@@ -237,26 +237,22 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">PAT-Basic 1042</h1>
+            <h1 style="display: none">PAT-Basic 1043</h1>
             
             <div class="markdown-body">
-              <p>套路题，还是数组索引和数组索引对应的数的题……</p>
+              <p>不难，写循环就行……我本来以为写这么多循环要超时来着……结果还好。</p>
 <span id="more"></span>
 
-<p>1042（20/20)：<strong>字符统计</strong></p>
-<p>链接：<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805260223102976/problems/994805280817135616">题目详情 (pintia.cn)</a></p>
-<p>请编写程序，找出一段给定文字中出现最频繁的那个英文字母。</p>
-<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在一行中给出一个长度不超过 1000 的字符串。字符串由 ASCII 码表中任意可见字符及空格组成，至少包含 1 个英文字母，以回车结束（回车不算在内）。</p>
-<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>在一行中输出出现频率最高的那个英文字母及其出现次数，其间以空格分隔。如果有并列，则输出按字母序最小的那个字母。统计时不区分大小写，输出小写字母。</p>
-<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs in">This is a simple TEST.  There ARE numbers and other symbols 1&amp;2&amp;3...........<br>结尾无空行<br></code></pre></td></tr></table></figure>
+<h1 id="1043（20-20）：输出PATest"><a href="#1043（20-20）：输出PATest" class="headerlink" title="1043（20/20）：输出PATest"></a>1043（20/20）：输出PATest</h1><p>链接：<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805260223102976/problems/994805280074743808">题目详情 (pintia.cn)</a></p>
+<p>给定一个长度不超过 104 的、仅由英文字母构成的字符串。请将字符重新调整顺序，按 <code>PATestPATest....</code> 这样的顺序输出，并忽略其它字符。当然，六种字符的个数不一定是一样多的，若某种字符已经输出完，则余下的字符仍按 PATest 的顺序打印，直到所有字符都被输出。</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在一行中给出一个长度不超过 104 的、仅由英文字母构成的非空字符串。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>在一行中按题目要求输出排序后的字符串。题目保证输出非空。</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs in">redlesPayBestPATTopTeePHPereatitAPPT<br>结尾无空行<br></code></pre></td></tr></table></figure>
 
-<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs out">e 7<br>结尾无空行<br></code></pre></td></tr></table></figure>
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs out">PATestPATestPTetPTePePee<br>结尾无空行<br></code></pre></td></tr></table></figure>
 
-<p>解析：</p>
-<p>开一个128长度的数组，对应ASCII码中的数。题目要求只统计字母且将大写字母忽略为小写字母，使用<code>isalpha()</code>和<code>tolower</code>函数即可。</p>
-<p>且当出现次数相同时输出第一个较小的，用STL库中的方法完美符合（默认返回第一个迭代器）。</p>
-<p>解答：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-keyword">int</span> ASCII[<span class="hljs-number">128</span>]&#123; <span class="hljs-number">0</span> &#125;;   <span class="hljs-comment">//创建一个长度为128的数组</span><br>	string s;<br>	<span class="hljs-built_in">getline</span>(cin, s);  <span class="hljs-comment">//输入字符串</span><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> s1_it = s.<span class="hljs-built_in">begin</span>(); s1_it != s.<span class="hljs-built_in">end</span>(); s1_it++) &#123;<br>		<span class="hljs-keyword">if</span> (<span class="hljs-built_in">isalpha</span>(*s1_it)!=<span class="hljs-number">0</span>) &#123;   <span class="hljs-comment">//对字符进行判断，当不为0时，即为字母</span><br>			ASCII[<span class="hljs-built_in">tolower</span>(*s1_it)]++; <span class="hljs-comment">//将该字符转为小写且看作数组索引，对该索引+1</span><br>		&#125;	<br>	&#125;<br><br>	<span class="hljs-keyword">int</span> n = *<span class="hljs-built_in">max_element</span>(ASCII, ASCII + <span class="hljs-number">128</span>);  <span class="hljs-comment">//找到ASCII数组最大的数</span><br>	<span class="hljs-keyword">int</span> k = <span class="hljs-built_in">max_element</span>(ASCII, ASCII + <span class="hljs-number">128</span>) - ASCII;  <span class="hljs-comment">//找到最大的数的迭代器减去begin()，再转为(char)，即为对应的字符</span><br>	cout &lt;&lt;(<span class="hljs-keyword">char</span>)k&lt;&lt;<span class="hljs-string">&quot; &quot;</span>&lt;&lt;n; <span class="hljs-comment">//输出</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="解析："><a href="#解析：" class="headerlink" title="解析："></a>解析：</h2><p>用数组记录输入的字符串中出现的次数。只关注<code>PATest</code>这6个字母出现的次数即可。输出总循环次数用6个字母中出现最多的次数来控制。输出一个就<code>break</code>即可。</p>
+<h2 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    string str;<br>    cin &gt;&gt; str;<br>    vector&lt;<span class="hljs-keyword">int</span>&gt;<span class="hljs-built_in">vi</span>(<span class="hljs-number">128</span>);  <span class="hljs-comment">//存放每个字母出现次数的容器</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; str.<span class="hljs-built_in">size</span>(); i++) &#123;<br>        vi[str[i]]++;    <span class="hljs-comment">//将字符转换为数字，将这些数字作为索引，将这些索引对应的数加1</span><br>    &#125;<br>    <span class="hljs-keyword">int</span> P = vi[<span class="hljs-number">80</span>], A = vi[<span class="hljs-number">65</span>], T = vi[<span class="hljs-number">84</span>], e = vi[<span class="hljs-number">101</span>], s = vi[<span class="hljs-number">115</span>], t = vi[<span class="hljs-number">116</span>];  <span class="hljs-comment">//得到6个字母出现的次数</span><br>    vector&lt;<span class="hljs-keyword">int</span>&gt;vn;<br>    vn.<span class="hljs-built_in">push_back</span>(P);vn.<span class="hljs-built_in">push_back</span>(A);vn.<span class="hljs-built_in">push_back</span>(T);   <br>    vn.<span class="hljs-built_in">push_back</span>(e);vn.<span class="hljs-built_in">push_back</span>(s);vn.<span class="hljs-built_in">push_back</span>(t);   <span class="hljs-comment">//将这6个字母存入一个容器中</span><br>    <span class="hljs-keyword">int</span> n = *<span class="hljs-built_in">max_element</span>(vn.<span class="hljs-built_in">begin</span>(), vn.<span class="hljs-built_in">end</span>());    <span class="hljs-comment">//找出6个字母中出现的最大值</span><br>    <span class="hljs-keyword">while</span> (n) &#123;     <span class="hljs-comment">//开始循环</span><br>        <span class="hljs-keyword">for</span> (; P != <span class="hljs-number">0</span>;) &#123;     <span class="hljs-comment">//当P不为0</span><br>            <span class="hljs-keyword">if</span> (P != <span class="hljs-number">0</span>) &#123;    <br>                cout &lt;&lt; <span class="hljs-string">&#x27;P&#x27;</span>;  <span class="hljs-comment">//输出字符P</span><br>                P--;    <span class="hljs-comment">//P的出现次数-1，这里不把P--写在for中是因为进行一次循环就直接跳出了，写在for中）</span><br>                <span class="hljs-keyword">break</span>;   <span class="hljs-comment">//跳出循环，下面同上</span><br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (; A != <span class="hljs-number">0</span>;) &#123;<br>            <span class="hljs-keyword">if</span> (A != <span class="hljs-number">0</span>) &#123;<br>                cout &lt;&lt; <span class="hljs-string">&#x27;A&#x27;</span>;<br>                A--;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (; T != <span class="hljs-number">0</span>;) &#123;<br>            <span class="hljs-keyword">if</span> (T != <span class="hljs-number">0</span>) &#123;<br>                cout &lt;&lt; <span class="hljs-string">&#x27;T&#x27;</span>;<br>                T--;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (; e != <span class="hljs-number">0</span>;) &#123;<br>            <span class="hljs-keyword">if</span> (e != <span class="hljs-number">0</span>) &#123;<br>                cout &lt;&lt; <span class="hljs-string">&#x27;e&#x27;</span>;<br>                e--;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br><br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (; s != <span class="hljs-number">0</span>;) &#123;<br>            <span class="hljs-keyword">if</span> (s != <span class="hljs-number">0</span>) &#123;<br>                cout &lt;&lt; <span class="hljs-string">&#x27;s&#x27;</span>;<br>                s--;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br><br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (; t != <span class="hljs-number">0</span>;) &#123;<br>            <span class="hljs-keyword">if</span> (t != <span class="hljs-number">0</span>) &#123;<br>                cout &lt;&lt; <span class="hljs-string">&#x27;t&#x27;</span>;<br>                t--;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br>        n--;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
             </div>
@@ -292,9 +288,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/11/09/PAT-Basic-1043/">
+                      <a href="/2021/11/09/PAT-Basic-1044/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">PAT-Basic 1043</span>
+                        <span class="hidden-mobile">PAT-Basic 1044</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -302,8 +298,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/11/08/PAT-Basic-1041/">
-                        <span class="hidden-mobile">PAT-Basic 1041</span>
+                      <a href="/2021/11/08/PAT-Basic-1042/">
+                        <span class="hidden-mobile">PAT-Basic 1042</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
