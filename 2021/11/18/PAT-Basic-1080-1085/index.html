@@ -1,0 +1,526 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="近期挺忙的，忙C++期末考试啥的，老实说，我不怕写普通编程题，但是有的OOP里多态继承是真的操蛋……调来调去的，还有虚函数，动态联编，静态联编那些玩意。
+Basic等级的题前几题难度都开始下降……我体感是这样的，没以前的难了……">
+  <meta name="author" content="Oxygen">
+  <meta name="keywords" content="">
+  
+  <title>PAT-Basic 1080-1085 - Oxygen</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"grz21.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Oxygen</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="PAT-Basic 1080-1085">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-11-18 19:20" pubdate>
+        2021年11月18日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      31
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">PAT-Basic 1080-1085</h1>
+            
+            <div class="markdown-body">
+              <p>近期挺忙的，忙C++期末考试啥的，老实说，我不怕写普通编程题，但是有的OOP里多态继承是真的操蛋……调来调去的，还有虚函数，动态联编，静态联编那些玩意。</p>
+<p>Basic等级的题前几题难度都开始下降……我体感是这样的，没以前的难了……</p>
+<span id="more"></span>
+
+<h1 id="1080（15-15）：检查密码"><a href="#1080（15-15）：检查密码" class="headerlink" title="1080（15/15）：检查密码"></a>1080（15/15）：<strong>检查密码</strong></h1><p>链接：<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805260223102976/problems/994805261217153024">题目详情 - 1081 检查密码 (15 分) (pintia.cn)</a></p>
+<p>本题要求你帮助某网站的用户注册模块写一个密码合法性检查的小功能。该网站要求用户设置的密码必须由不少于6个字符组成，并且只能有英文字母、数字和小数点 <code>.</code>，还必须既有字母也有数字。</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入第一行给出一个正整数 N（≤ 100），随后 N 行，每行给出一个用户设置的密码，为不超过 80 个字符的非空字符串，以回车结束。</p>
+<p><strong>注意：</strong> 题目保证不存在只有小数点的输入。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>对每个用户的密码，在一行中输出系统反馈信息，分以下5种：</p>
+<ul>
+<li>如果密码合法，输出<code>Your password is wan mei.</code>；</li>
+<li>如果密码太短，不论合法与否，都输出<code>Your password is tai duan le.</code>；</li>
+<li>如果密码长度合法，但存在不合法字符，则输出<code>Your password is tai luan le.</code>；</li>
+<li>如果密码长度合法，但只有字母没有数字，则输出<code>Your password needs shu zi.</code>；</li>
+<li>如果密码长度合法，但只有数字没有字母，则输出<code>Your password needs zi mu.</code>。</li>
+</ul>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs in">5<br>123s<br>zheshi.wodepw<br>1234.5678<br>WanMei23333<br>pass*word.6<br></code></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs out">Your password is tai duan le.<br>Your password needs shu zi.<br>Your password needs zi mu.<br>Your password is wan mei.<br>Your password is tai luan le.<br></code></pre></td></tr></table></figure>
+
+<h2 id="解析："><a href="#解析：" class="headerlink" title="解析："></a>解析：</h2><p>15分的老规矩，很常规的一道题，判断字符串中的字符就行，没必要整那些花里胡哨的方法……直接判断就行，用几个变量来记录值就可以。</p>
+<h2 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">int</span> x;<br>	cin&gt;&gt;x;<br>	<span class="hljs-built_in">getchar</span>();<br>	<span class="hljs-keyword">while</span>(x--)&#123;    <span class="hljs-comment">//开始循环</span><br>		string s;     <br>		<span class="hljs-built_in">getline</span>(cin,s);		<br>		<span class="hljs-keyword">if</span>(s.<span class="hljs-built_in">size</span>()&lt;<span class="hljs-number">6</span>)    <span class="hljs-comment">//对该字符串长度进行判断，小于6直接输出密码太短</span><br>			cout&lt;&lt;<span class="hljs-string">&quot;Your password is tai duan le.&quot;</span>&lt;&lt;endl;<br>		<span class="hljs-keyword">else</span>&#123;     <span class="hljs-comment">//长度大于6</span><br>			<span class="hljs-keyword">int</span> zm = <span class="hljs-number">0</span>,sz = <span class="hljs-number">0</span>,dh = <span class="hljs-number">0</span>,qt = <span class="hljs-number">0</span>;   <span class="hljs-comment">//创建字母，数字，点号，其他字符的计数变量</span><br>			<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i&lt;s.<span class="hljs-built_in">size</span>();i++)&#123;   <span class="hljs-comment">//对这个字符串进行循环</span><br>				<span class="hljs-keyword">if</span>(s[i]&gt;=<span class="hljs-string">&#x27;a&#x27;</span>&amp;&amp;s[i]&lt;=<span class="hljs-string">&#x27;z&#x27;</span>||s[i]&gt;=<span class="hljs-string">&#x27;A&#x27;</span>&amp;&amp;s[i]&lt;=<span class="hljs-string">&#x27;Z&#x27;</span>)  <span class="hljs-comment">//当字符为字母时</span><br>					zm++;       <span class="hljs-comment">//字母计数+1</span><br>				<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(s[i]&gt;=<span class="hljs-string">&#x27;0&#x27;</span>&amp;&amp;s[i]&lt;=<span class="hljs-string">&#x27;9&#x27;</span>)    <span class="hljs-comment">//当字符为数字</span><br> 					sz++;      <span class="hljs-comment">//数字计数+1</span><br>				<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(s[i]==<span class="hljs-string">&#x27;.&#x27;</span>)    <span class="hljs-comment">//当字符为点号</span><br>					dh++;     <span class="hljs-comment">//点号计数+1</span><br>				<span class="hljs-keyword">else</span>      <span class="hljs-comment">//如果是除了字母，数字，点号之外的其他字符</span><br>					qt++;   <span class="hljs-comment">//其他字符计数+1</span><br>		&#125;<br>			<span class="hljs-keyword">if</span>(qt!=<span class="hljs-number">0</span>)   <span class="hljs-comment">//如果含有其他的字符，输出密码太乱了</span><br>				cout&lt;&lt;<span class="hljs-string">&quot;Your password is tai luan le.&quot;</span>&lt;&lt;endl;<br>			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(zm==<span class="hljs-number">0</span>)  <span class="hljs-comment">//不含字母，输出密码需要字母</span><br>				cout&lt;&lt;<span class="hljs-string">&quot;Your password needs zi mu.&quot;</span>&lt;&lt;endl;<br>			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(sz==<span class="hljs-number">0</span>)   <span class="hljs-comment">//不含数字，输出密码需要数字</span><br>				cout&lt;&lt;<span class="hljs-string">&quot;Your password needs shu zi.&quot;</span>&lt;&lt;endl;	<br>			<span class="hljs-keyword">else</span>   <span class="hljs-comment">//都符合，输出完美</span><br>				cout&lt;&lt;<span class="hljs-string">&quot;Your password is wan mei.&quot;</span>&lt;&lt;endl;<br>	&#125;<br>&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="1081（20-20）：射击比赛"><a href="#1081（20-20）：射击比赛" class="headerlink" title="1081（20/20）：射击比赛"></a>1081（20/20）：<strong>射击比赛</strong></h1><p>链接：<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805260223102976/problems/994805260990660608">题目详情 - 1082 射击比赛 (20 分) (pintia.cn)</a></p>
+<p>本题目给出的射击比赛的规则非常简单，谁打的弹洞距离靶心最近，谁就是冠军；谁差得最远，谁就是菜鸟。本题给出一系列弹洞的平面坐标(x,y)，请你编写程序找出冠军和菜鸟。我们假设靶心在原点(0,0)。</p>
+<h3 id="输入格式：-1"><a href="#输入格式：-1" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在第一行中给出一个正整数 N（≤ 10 000）。随后 N 行，每行按下列格式给出：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">ID x y</span><br></code></pre></td></tr></table></figure>
+
+<p>其中 <code>ID</code> 是运动员的编号（由 4 位数字组成）；<code>x</code> 和 <code>y</code> 是其打出的弹洞的平面坐标(<code>x</code>,<code>y</code>)，均为整数，且 0 ≤ |<code>x</code>|, |<code>y</code>| ≤ 100。题目保证每个运动员的编号不重复，且每人只打 1 枪。</p>
+<h3 id="输出格式：-1"><a href="#输出格式：-1" class="headerlink" title="输出格式："></a>输出格式：</h3><p>输出冠军和菜鸟的编号，中间空 1 格。题目保证他们是唯一的。</p>
+<h3 id="输入样例：-1"><a href="#输入样例：-1" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs in">3<br>0001 5 7<br>1020 -1 3<br>0233 0 -1<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h3 id="输出样例：-1"><a href="#输出样例：-1" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs out">0233 0001<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h2 id="解析：-1"><a href="#解析：-1" class="headerlink" title="解析："></a>解析：</h2><p>水题，创建一个射击者类，带三个属性。算出距离存入容器，同时将这个对象也存入一个容器。找出最大距离和最小距离的索引。在存放射击者的容器中找出对应的对象即可。</p>
+<h2 id="解答：-1"><a href="#解答：-1" class="headerlink" title="解答："></a>解答：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cmath&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Shooter</span>&#123;</span>    <span class="hljs-comment">//创建射击者类，包含三个属性，id，x坐标，y坐标</span><br>	string id;<br>	<span class="hljs-keyword">int</span> x;<br>	<span class="hljs-keyword">int</span> y;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">int</span> k;<br>	cin&gt;&gt;k;<br>	vector&lt;<span class="hljs-keyword">double</span>&gt;vd;<br>	vector&lt;Shooter&gt;vs;<br>	<span class="hljs-keyword">while</span>(k--)&#123;   <span class="hljs-comment">//开始循环</span><br>		Shooter s;<br>		cin&gt;&gt;s.id&gt;&gt;s.x&gt;&gt;s.y;   <span class="hljs-comment">//输入射击者的姓名，射击的x坐标，y坐标</span><br>		vs.<span class="hljs-built_in">push_back</span>(s); <span class="hljs-comment">//将这个对象存入容器</span><br>		vd.<span class="hljs-built_in">push_back</span>(<span class="hljs-built_in">sqrt</span>((<span class="hljs-keyword">double</span>)s.x*s.x+s.y*s.y));  <span class="hljs-comment">//算出这个点到（靶心）原点的距离</span><br>	&#125;<br>	<span class="hljs-keyword">int</span> max = <span class="hljs-built_in">max_element</span>(vd.<span class="hljs-built_in">begin</span>(),vd.<span class="hljs-built_in">end</span>())-vd.<span class="hljs-built_in">begin</span>();  <span class="hljs-comment">//寻找到最大值</span><br>	<span class="hljs-keyword">int</span> min = <span class="hljs-built_in">min_element</span>(vd.<span class="hljs-built_in">begin</span>(),vd.<span class="hljs-built_in">end</span>())-vd.<span class="hljs-built_in">begin</span>();  <span class="hljs-comment">//寻找到最小值</span><br>	cout&lt;&lt;vs[min].id&lt;&lt;<span class="hljs-string">&quot; &quot;</span>&lt;&lt;vs[max].id;   <span class="hljs-comment">//距离最大，分数越低。距离越小，分数越高，输出</span><br><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="1083（20-20）：是否存在相等的差"><a href="#1083（20-20）：是否存在相等的差" class="headerlink" title="1083（20/20）：是否存在相等的差"></a>1083（20/20）：<strong>是否存在相等的差</strong></h1><p>链接：<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805260223102976/problems/994805260780945408">题目详情 - 1083 是否存在相等的差 (20 分) (pintia.cn)</a></p>
+<p>给定 N 张卡片，正面分别写上 1、2、……、N，然后全部翻面，洗牌，在背面分别写上 1、2、……、N。将每张牌的正反两面数字相减（大减小），得到 N 个非负差值，其中是否存在相等的差？</p>
+<h3 id="输入格式：-2"><a href="#输入格式：-2" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入第一行给出一个正整数 N（2 ≤ N ≤ 10 000），随后一行给出 1 到 N 的一个洗牌后的排列，第 i 个数表示正面写了 i 的那张卡片背面的数字。</p>
+<h3 id="输出格式：-2"><a href="#输出格式：-2" class="headerlink" title="输出格式："></a>输出格式：</h3><p>按照“差值 重复次数”的格式从大到小输出重复的差值及其重复的次数，每行输出一个结果。</p>
+<h3 id="输入样例：-2"><a href="#输入样例：-2" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs in">8<br>3 5 8 6 2 1 4 7<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h3 id="输出样例：-2"><a href="#输出样例：-2" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs out">5 2<br>3 3<br>2 2<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h2 id="解析：-2"><a href="#解析：-2" class="headerlink" title="解析："></a>解析：</h2><p>水题，明着说索引和索引记录的数属于是。唯一要注意的就是重复出现，那么就是说出现起码两次，进行循环时需要注意一下（不然你写的大于0，就算结果对了，它也判定是错的）。至于差……直接不用管，两个数减了取绝对值就行了（<code>abs()</code>方法）。</p>
+<h2 id="解答：-2"><a href="#解答：-2" class="headerlink" title="解答："></a>解答：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cmath&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">int</span> n;<br>    cin &gt;&gt; n;<br>    vector&lt;<span class="hljs-keyword">int</span>&gt;vi, <span class="hljs-built_in">vn</span>(<span class="hljs-number">10000</span>);    <span class="hljs-comment">//vi用来存放写入的数字，vn用来记录差的出现次数</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;   <span class="hljs-comment">//开始循环</span><br>        <span class="hljs-keyword">int</span> x;<br>        cin &gt;&gt; x;<br>        vi.<span class="hljs-built_in">push_back</span>(x);   <span class="hljs-comment">//将这些数放入容器中</span><br>    &#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; vi.<span class="hljs-built_in">size</span>(); i++) &#123;<br>        <span class="hljs-keyword">int</span> num = <span class="hljs-built_in">abs</span>(i + <span class="hljs-number">1</span> - vi[i]);  <span class="hljs-comment">//加1的原因是push_back是从索引0开始，但是不存在第0张牌，这里+1代表第一张牌</span><br>        vn[num]++;  <span class="hljs-comment">//将这个num作为索引，在vn对应的数+1</span><br>    &#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = vn.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>; i&gt;= <span class="hljs-number">0</span>; i--)   <span class="hljs-comment">//逆序输出就得</span><br>        <span class="hljs-keyword">if</span> (vn[i] &gt;= <span class="hljs-number">2</span>)  <span class="hljs-comment">//当对应索引这个数大于等于2时</span><br>            cout &lt;&lt; i &lt;&lt; <span class="hljs-string">&#x27; &#x27;</span>&lt;&lt; vn[i] &lt;&lt; endl;  <span class="hljs-comment">//输出索引和对应的数字</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/PAT/">-PAT</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/PAT/">-PAT</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/11/23/PAT-Basic-1076-1080/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">PAT-Basic 1076-1080</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/11/16/PAT-Basic-1086-1090/">
+                        <span class="hidden-mobile">PAT-Basic 1086-1090</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

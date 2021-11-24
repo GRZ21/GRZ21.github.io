@@ -1,0 +1,564 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="就那样呗，最近忙复习（预习），带着做就完了。">
+  <meta name="author" content="Oxygen">
+  <meta name="keywords" content="">
+  
+  <title>PAT-Basic 1076-1080 - Oxygen</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"grz21.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Oxygen</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="PAT-Basic 1076-1080">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-11-23 19:06" pubdate>
+        2021年11月23日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      91
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">PAT-Basic 1076-1080</h1>
+            
+            <div class="markdown-body">
+              <p>就那样呗，最近忙复习（预习），带着做就完了。</p>
+<span id="more"></span>
+
+<h1 id="1076（15-15）：Wifi密码"><a href="#1076（15-15）：Wifi密码" class="headerlink" title="1076（15/15）：Wifi密码"></a>1076（15/15）：<strong>Wifi密码</strong></h1><p>链接：<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805260223102976/problems/994805262622244864">题目详情 - 1076 Wifi密码 (15 分) (pintia.cn)</a></p>
+<p>下面是微博上流传的一张照片：“各位亲爱的同学们，鉴于大家有时需要使用 wifi，又怕耽误亲们的学习，现将 wifi 密码设置为下列数学题答案：A-1；B-2；C-3；D-4；请同学们自己作答，每两日一换。谢谢合作！！~”—— 老师们为了促进学生学习也是拼了…… 本题就要求你写程序把一系列题目的答案按照卷子上给出的对应关系翻译成 wifi 的密码。这里简单假设每道选择题都有 4 个选项，有且只有 1 个正确答案。</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入第一行给出一个正整数 N（≤ 100），随后 N 行，每行按照 <code>编号-答案</code> 的格式给出一道题的 4 个选项，<code>T</code> 表示正确选项，<code>F</code> 表示错误选项。选项间用空格分隔。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>在一行中输出 wifi 密码。</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs in">8<br>A-T B-F C-F D-F<br>C-T B-F A-F D-F<br>A-F D-F C-F B-T<br>B-T A-F C-F D-F<br>B-F D-T A-F C-F<br>A-T C-F B-F D-F<br>D-T B-F C-F A-F<br>C-T A-F B-F D-F<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs out">13224143<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h2 id="解析："><a href="#解析：" class="headerlink" title="解析："></a>解析：</h2><p>不难，写一个WiFi类，这个类有四个属性，来存放四个字符串s（题号-T/F）。之后对每个存放的字符串继续遍历，如果<code>s[2]==&#39;T&#39;</code></p>
+<p>那么说明是对的，这时候对题号进行操作，将题号变为字符再减去64（’A’）就可以转为对应的数字。</p>
+<h2 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">WIfi</span>      //创建<span class="hljs-title">wifi</span>类，该类包含四个属性，分别对应4个题号</span><br><span class="hljs-class">&#123;</span><br>	string A;<br>	string B;<br>	string C;<br>	string D;<br>&#125;;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-keyword">int</span> n;<br>	cin &gt;&gt; n;<br>	vector&lt;WIfi&gt;vw;<br>	<span class="hljs-keyword">while</span> (n--) &#123;<br>		WIfi w;    <span class="hljs-comment">//创建wifi对象</span><br>		cin &gt;&gt; w.A &gt;&gt; w.B &gt;&gt; w.C &gt;&gt; w.D;   <span class="hljs-comment">//输入</span><br>		vw.<span class="hljs-built_in">push_back</span>(w);  <span class="hljs-comment">//存到容器中</span><br>	&#125;<br><br>	vector&lt;<span class="hljs-keyword">int</span>&gt;vi;    <span class="hljs-comment">//创建存储正确题号的容器</span><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> vw_it = vw.<span class="hljs-built_in">begin</span>(); vw_it != vw.<span class="hljs-built_in">end</span>(); vw_it++) &#123;   <span class="hljs-comment">//对vw容器进行遍历</span><br>		<span class="hljs-keyword">if</span> ((*vw_it).A[<span class="hljs-number">2</span>] == <span class="hljs-string">&#x27;T&#x27;</span>) &#123;      <span class="hljs-comment">//如果题是对的</span><br>			vi.<span class="hljs-built_in">push_back</span>((*vw_it).A[<span class="hljs-number">0</span>] - <span class="hljs-number">64</span>);  <span class="hljs-comment">//放入题号对应的数字</span><br>		&#125;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ((*vw_it).B[<span class="hljs-number">2</span>] == <span class="hljs-string">&#x27;T&#x27;</span>) &#123;   <br>			vi.<span class="hljs-built_in">push_back</span>((*vw_it).B[<span class="hljs-number">0</span>] - <span class="hljs-number">64</span>);<br>		&#125;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ((*vw_it).C[<span class="hljs-number">2</span>] == <span class="hljs-string">&#x27;T&#x27;</span>) &#123;<br>			vi.<span class="hljs-built_in">push_back</span>((*vw_it).C[<span class="hljs-number">0</span>] - <span class="hljs-number">64</span>);<br>		&#125;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ((*vw_it).D[<span class="hljs-number">2</span>] == <span class="hljs-string">&#x27;T&#x27;</span>) &#123;<br>			vi.<span class="hljs-built_in">push_back</span>((*vw_it).D[<span class="hljs-number">0</span>] - <span class="hljs-number">64</span>);<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> x : vi)     <span class="hljs-comment">//遍历</span><br>		cout &lt;&lt; x;   <span class="hljs-comment">//输出</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="1077（20-20）：互评成绩计算"><a href="#1077（20-20）：互评成绩计算" class="headerlink" title="1077（20/20）：互评成绩计算"></a>1077（20/20）：<strong>互评成绩计算</strong></h1><p>链接：<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805260223102976/problems/994805262303477760">题目详情 - 1077 互评成绩计算 (20 分) (pintia.cn)</a></p>
+<p>在浙大的计算机专业课中，经常有互评分组报告这个环节。一个组上台介绍自己的工作，其他组在台下为其表现评分。最后这个组的互评成绩是这样计算的：所有其他组的评分中，去掉一个最高分和一个最低分，剩下的分数取平均分记为 <em>G</em>1；老师给这个组的评分记为 <em>G</em>2。该组得分为 (<em>G</em>1+<em>G</em>2)/2，最后结果四舍五入后保留整数分。本题就要求你写个程序帮助老师计算每个组的互评成绩。</p>
+<h3 id="输入格式：-1"><a href="#输入格式：-1" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入第一行给出两个正整数 <em>N</em>（&gt; 3）和 <em>M</em>，分别是分组数和满分，均不超过 100。随后 <em>N</em> 行，每行给出该组得到的 <em>N</em> 个分数（均保证为整型范围内的整数），其中第 1 个是老师给出的评分，后面 <em>N</em>−1 个是其他组给的评分。合法的输入应该是 [0,<em>M</em>] 区间内的整数，若不在合法区间内，则该分数须被忽略。题目保证老师的评分都是合法的，并且每个组至少会有 3 个来自同学的合法评分。</p>
+<h3 id="输出格式：-1"><a href="#输出格式：-1" class="headerlink" title="输出格式："></a>输出格式：</h3><p>为每个组输出其最终得分。每个得分占一行。</p>
+<h3 id="输入样例：-1"><a href="#输入样例：-1" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs in">6 50<br>42 49 49 35 38 41<br>36 51 50 28 -1 30<br>40 36 41 33 47 49<br>30 250 -25 27 45 31<br>48 0 0 50 50 1234<br>43 41 36 29 42 29<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h3 id="输出样例：-1"><a href="#输出样例：-1" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs out">42<br>33<br>41<br>31<br>37<br>39<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h2 id="解析：-1"><a href="#解析：-1" class="headerlink" title="解析："></a>解析：</h2><p>这题看懂题目意思就行。输入分数进容器时候对输入的分数进行判断，不满足的直接不存。之后保存第一个分数（老师的评分），再将容器中最大值和最小值去掉，求出平均值。在求总分时候记得除以2.0，这样才可以四舍五入（我用的<code>round()</code>函数，其实直接+0.5再转成<code>int</code>类型也不是不行）。</p>
+<h2 id="解答：-1"><a href="#解答：-1" class="headerlink" title="解答："></a>解答：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cmath&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;numeric&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-keyword">int</span> n, max;<br>	cin &gt;&gt; n &gt;&gt; max;     <span class="hljs-comment">//输入多少组和评分的最大值</span><br>	<span class="hljs-keyword">int</span> a = n;           <span class="hljs-comment">//将多少组保存下来，n在下面循环值会变</span><br>	vector&lt;<span class="hljs-keyword">int</span>&gt;vi,vn;<br>	<span class="hljs-keyword">while</span> (n--) &#123;           <br>		<span class="hljs-keyword">int</span> score;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; a; i++) &#123;  <span class="hljs-comment">//开始输入评分（这里其实数量还是n，因为自己没法给自己评分，但是多了老师，等于没变）</span><br>			cin &gt;&gt; score;<br>			<span class="hljs-keyword">if</span> (score &gt;= <span class="hljs-number">0</span> &amp;&amp; score &lt;= max)  <span class="hljs-comment">//如果在[0,max]范围内</span><br>				vi.<span class="hljs-built_in">push_back</span>(score);  <span class="hljs-comment">//将这个分数放入容器</span><br>		&#125;<br>		<span class="hljs-keyword">int</span> teacherScore = *vi.<span class="hljs-built_in">begin</span>();  <span class="hljs-comment">//得到老师的评分（容器第一个就是）</span><br>		vi.<span class="hljs-built_in">erase</span>(vi.<span class="hljs-built_in">begin</span>());  <span class="hljs-comment">//在容器中把老师的评分删掉</span><br>		vi.<span class="hljs-built_in">erase</span>(<span class="hljs-built_in">max_element</span>(vi.<span class="hljs-built_in">begin</span>(), vi.<span class="hljs-built_in">end</span>()));  <span class="hljs-comment">//删掉容器中的最大值</span><br>		vi.<span class="hljs-built_in">erase</span>(<span class="hljs-built_in">min_element</span>(vi.<span class="hljs-built_in">begin</span>(), vi.<span class="hljs-built_in">end</span>()));  <span class="hljs-comment">//删掉容器中的最小值</span><br>		<span class="hljs-keyword">int</span> avg = <span class="hljs-number">0</span>,sum = <span class="hljs-number">0</span>;<br>		avg = <span class="hljs-built_in">round</span>(<span class="hljs-built_in">accumulate</span>(vi.<span class="hljs-built_in">begin</span>(), vi.<span class="hljs-built_in">end</span>(),<span class="hljs-number">0</span>)/vi.<span class="hljs-built_in">size</span>());   <span class="hljs-comment">//得到平均分</span><br>		sum = <span class="hljs-built_in">round</span>((avg + teacherScore) / <span class="hljs-number">2.0</span>);  <span class="hljs-comment">//这里得除以2.0转成double才能四舍五入，直接除以2就不对了</span><br>		vn.<span class="hljs-built_in">push_back</span>(sum);   <span class="hljs-comment">//将sum存入新容器</span><br>		vi.<span class="hljs-built_in">clear</span>();   <span class="hljs-comment">//将vi容器清空，准备进行下一轮循环</span><br>	&#125; <br><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> x : vn)    <span class="hljs-comment">//循环输出各组的最总得分</span><br>		cout &lt;&lt; x &lt;&lt; endl;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="1078（0-20）：字符串压缩与解压"><a href="#1078（0-20）：字符串压缩与解压" class="headerlink" title="1078（0/20）：字符串压缩与解压"></a>1078（0/20）：<strong>字符串压缩与解压</strong></h1><p>链接：<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805260223102976/problems/994805262018265088">题目详情 - 1078 字符串压缩与解压 (20 分) (pintia.cn)</a></p>
+<p>文本压缩有很多种方法，这里我们只考虑最简单的一种：把由相同字符组成的一个连续的片段用这个字符和片段中含有这个字符的个数来表示。例如 <code>ccccc</code> 就用 <code>5c</code> 来表示。如果字符没有重复，就原样输出。例如 <code>aba</code> 压缩后仍然是 <code>aba</code>。</p>
+<p>解压方法就是反过来，把形如 <code>5c</code> 这样的表示恢复为 <code>ccccc</code>。</p>
+<p>本题需要你根据压缩或解压的要求，对给定字符串进行处理。这里我们简单地假设原始字符串是完全由英文字母和空格组成的非空字符串。</p>
+<h3 id="输入格式：-2"><a href="#输入格式：-2" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入第一行给出一个字符，如果是 <code>C</code> 就表示下面的字符串需要被压缩；如果是 <code>D</code> 就表示下面的字符串需要被解压。第二行给出需要被压缩或解压的不超过 1000 个字符的字符串，以回车结尾。题目保证字符重复个数在整型范围内，且输出文件不超过 1MB。</p>
+<h3 id="输出格式：-2"><a href="#输出格式：-2" class="headerlink" title="输出格式："></a>输出格式：</h3><p>根据要求压缩或解压字符串，并在一行中输出结果。</p>
+<h3 id="输入样例-1："><a href="#输入样例-1：" class="headerlink" title="输入样例 1："></a>输入样例 1：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs in">C<br>TTTTThhiiiis isssss a   tesssst CAaaa as<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h3 id="输出样例-1："><a href="#输出样例-1：" class="headerlink" title="输出样例 1："></a>输出样例 1：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs out">5T2h4is i5s a3 te4st CA3a as<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h3 id="输入样例-2："><a href="#输入样例-2：" class="headerlink" title="输入样例 2："></a>输入样例 2：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs in">D<br>5T2h4is i5s a3 te4st CA3a as10Z<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h3 id="输出样例-2："><a href="#输出样例-2：" class="headerlink" title="输出样例 2："></a>输出样例 2：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs out">TTTTThhiiiis isssss a   tesssst CAaaa asZZZZZZZZZZ<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h2 id="解析：-2"><a href="#解析：-2" class="headerlink" title="解析："></a>解析：</h2><p>讲老实话，对于这种题目我实在不太会了现在。这题分为解压和压缩。对于压缩操作，就是比对字符，但是我有一个问题是怎么才能将比较完的字符换为下一个，解答中是比完一串直接输出，<code>j=i</code>这个操作我是真没想到。</p>
+<p>解压要注意的一点是字符出现次数可能不是一个个位数，可能是一个多位数，这时候计算字符出现次数需要一点技巧：将原先的count乘10再加上现在的数（count不是一位数，那么前面肯定又出现过数，每次循环将这个数乘以10就可以了。）</p>
+<h2 id="解答：-2"><a href="#解答：-2" class="headerlink" title="解答："></a>解答：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	string s;<br>	<span class="hljs-keyword">char</span> c;<br>	cin &gt;&gt; c;<br>	cin.<span class="hljs-built_in">get</span>();<br>	<span class="hljs-built_in">getline</span>(cin, s);<br>	<span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;C&#x27;</span>) &#123;    <span class="hljs-comment">//如果是C，压缩</span><br>		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; s.<span class="hljs-built_in">size</span>(); i++) &#123;   <span class="hljs-comment">//对字符串进行循环</span><br>			<span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;                   <span class="hljs-comment">//count用来记录出现次数</span><br>			<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i; j &lt; s.<span class="hljs-built_in">size</span>(); j++)   <span class="hljs-comment">//j等于i的值，对剩余的字符进行遍历</span><br>				<span class="hljs-keyword">if</span> (s[j] == s[j + <span class="hljs-number">1</span>])   <span class="hljs-comment">//比对j和下一个字符是否相等，如果相等</span><br>					count++;    <span class="hljs-comment">//计数+1</span><br>				<span class="hljs-keyword">else</span> &#123;   <span class="hljs-comment">//不等</span><br>					<span class="hljs-keyword">if</span> (count)  <span class="hljs-comment">//如果count不为0</span><br>						cout &lt;&lt; count + <span class="hljs-number">1</span>;  <span class="hljs-comment">//+1，因为单个字符count并不会进行计数，但是还是出现了一次的，所以还得+1</span><br>					cout &lt;&lt; s[i];  <span class="hljs-comment">//输出当前字符</span><br>					i += count;  <span class="hljs-comment">//把i移动到count后的位置</span><br>					<span class="hljs-keyword">break</span>;<br>				&#125;<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">else</span> &#123;     <span class="hljs-comment">//解压操作</span><br>		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; s.<span class="hljs-built_in">size</span>(); i++) &#123;   <span class="hljs-comment">//遍历</span><br>			<span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;<br>			<span class="hljs-keyword">while</span> (s[i]&gt;=<span class="hljs-string">&#x27;0&#x27;</span>&amp;&amp;s[i]&lt;=<span class="hljs-string">&#x27;9&#x27;</span>) &#123;   <span class="hljs-comment">//当该字符是一个数字字符</span><br>				count = count * <span class="hljs-number">10</span> + s[i++] - <span class="hljs-string">&#x27;0&#x27;</span>;    <span class="hljs-comment">//数字不止一位数的情况（十位数这种就是两个字符），计算出现次数</span><br>			&#125;<br>			<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; count; j++)  <span class="hljs-comment">//循环打印</span><br>				cout &lt;&lt; s[i];<br>			<span class="hljs-keyword">if</span> (count==<span class="hljs-number">0</span>)  <span class="hljs-comment">//如果count为0（字符只出现了一次）</span><br>				cout &lt;&lt; s[i];  <span class="hljs-comment">//输出该字符就行</span><br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h1 id="1079（20-20）：延迟的回文数"><a href="#1079（20-20）：延迟的回文数" class="headerlink" title="1079（20/20）：延迟的回文数"></a>1079（20/20）：<strong>延迟的回文数</strong></h1><p>链接：<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805260223102976/problems/994805261754023936">题目详情 - 1079 延迟的回文数 (20 分) (pintia.cn)</a></p>
+<p>给定一个 <em>k</em>+1 位的正整数 <em>N</em>，写成 <em>a**k</em>⋯<em>a</em>1<em>a</em>0 的形式，其中对所有 <em>i</em> 有 0≤<em>a**i</em>&lt;10 且 <em>a*<em>k</em>&gt;0。</em>N* 被称为一个<strong>回文数</strong>，当且仅当对所有 <em>i</em> 有 <em>a**i</em>=<em>a**k</em>−<em>i</em>。零也被定义为一个回文数。</p>
+<p>非回文数也可以通过一系列操作变出回文数。首先将该数字逆转，再将逆转数与该数相加，如果和还不是一个回文数，就重复这个逆转再相加的操作，直到一个回文数出现。如果一个非回文数可以变出回文数，就称这个数为<strong>延迟的回文数</strong>。</p>
+<p>给定任意一个正整数，本题要求你找到其变出的那个回文数。</p>
+<h3 id="输入格式：-3"><a href="#输入格式：-3" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在一行中给出一个不超过1000位的正整数。</p>
+<h3 id="输出格式：-3"><a href="#输出格式：-3" class="headerlink" title="输出格式："></a>输出格式：</h3><p>对给定的整数，一行一行输出其变出回文数的过程。每行格式如下</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs armasm">A + <span class="hljs-keyword">B</span> = C<br></code></pre></td></tr></table></figure>
+
+<p>其中 <code>A</code> 是原始的数字，<code>B</code> 是 <code>A</code> 的逆转数，<code>C</code> 是它们的和。<code>A</code> 从输入的整数开始。重复操作直到 <code>C</code> 在 10 步以内变成回文数，这时在一行中输出 <code>C is a palindromic number.</code>；或者如果 10 步都没能得到回文数，最后就在一行中输出 <code>Not found in 10 iterations.</code>。</p>
+<h3 id="输入样例-1：-1"><a href="#输入样例-1：-1" class="headerlink" title="输入样例 1："></a>输入样例 1：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs in">97152<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h3 id="输出样例-1：-1"><a href="#输出样例-1：-1" class="headerlink" title="输出样例 1："></a>输出样例 1：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs out">97152 + 25179 = 122331<br>122331 + 133221 = 255552<br>255552 is a palindromic number.<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h3 id="输入样例-2：-1"><a href="#输入样例-2：-1" class="headerlink" title="输入样例 2："></a>输入样例 2：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs in">196<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h3 id="输出样例-2：-1"><a href="#输出样例-2：-1" class="headerlink" title="输出样例 2："></a>输出样例 2：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs out">196 + 691 = 887<br>887 + 788 = 1675<br>1675 + 5761 = 7436<br>7436 + 6347 = 13783<br>13783 + 38731 = 52514<br>52514 + 41525 = 94039<br>94039 + 93049 = 187088<br>187088 + 880781 = 1067869<br>1067869 + 9687601 = 10755470<br>10755470 + 07455701 = 18211171<br>Not found in 10 iterations.<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h2 id="解析：-3"><a href="#解析：-3" class="headerlink" title="解析："></a>解析：</h2><p>这题难在怎么将两个字符串相加，题中说的是不超过1000位的整数，那么C++中肯定没有一个基础类型能存，只有用string来接收。回文数的判断并不是很难，就是将索引和逆向索引进行比较即可。</p>
+<p>10次循环也没必要管那么多，反正就10次，那就循环10次，10次出不来就输出”No found…”就完了。</p>
+<p>两个坑点：</p>
+<ol>
+<li>测试点5，关于0，输入0直接就打印<code>&quot;0 + 0 = 0&quot;,&quot;0 is a palindromic number&quot;</code>就行</li>
+<li>测试点2，3，4是有可能输入进来就是一个回文数，直接输出就行，没必要进入循环。所以要先对输入的数进行一次判断。</li>
+</ol>
+<h2 id="解答：-3"><a href="#解答：-3" class="headerlink" title="解答："></a>解答：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function">string <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-keyword">const</span> string&amp; lhs,<span class="hljs-keyword">const</span> string&amp; rhs)</span></span>&#123;      <span class="hljs-comment">//两个字符串相加</span><br>	string s3;<br>	<span class="hljs-keyword">int</span> a=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=lhs.<span class="hljs-built_in">length</span>()<span class="hljs-number">-1</span>;i&gt;=<span class="hljs-number">0</span>;i--)&#123;<br>		a=(rhs[i]-<span class="hljs-string">&#x27;0&#x27;</span>)+(lhs[i]-<span class="hljs-string">&#x27;0&#x27;</span>)+a;<br>		s3=(<span class="hljs-keyword">char</span>)(a%<span class="hljs-number">10</span>+<span class="hljs-string">&#x27;0&#x27;</span>)+s3;<br>		a=a/<span class="hljs-number">10</span>;<br>	&#125;<br>	<span class="hljs-keyword">if</span>(a&gt;<span class="hljs-number">0</span>)&#123;<br>		s3=(<span class="hljs-keyword">char</span>)(a%<span class="hljs-number">10</span>+<span class="hljs-string">&#x27;0&#x27;</span>)+s3;<br>	&#125;<br>	<span class="hljs-keyword">return</span> s3;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">isPnum</span><span class="hljs-params">(<span class="hljs-keyword">const</span> string&amp; a)</span> </span>&#123;      <span class="hljs-comment">//判断是否为一个回文数</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = a.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--)   <span class="hljs-comment">//从末尾开始遍历</span><br>        <span class="hljs-keyword">if</span> (a[i] != a[a.<span class="hljs-built_in">size</span>() - i - <span class="hljs-number">1</span>])   <span class="hljs-comment">//如果后面的索引的数和后面对应索引（长度-1-i）的字符不同</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;      <span class="hljs-comment">//返回0</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;   <span class="hljs-comment">//否则返回1</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    string n, rn;<br>    cin &gt;&gt; n;     <span class="hljs-comment">//输入数</span><br>    <span class="hljs-keyword">if</span> (n == <span class="hljs-string">&quot;0&quot;</span>) &#123;  <span class="hljs-comment">//如果是0，直接输出（测试点5）</span><br>        cout &lt;&lt; <span class="hljs-string">&quot;0 + 0 = 0&quot;</span> &lt;&lt; endl &lt;&lt; <span class="hljs-string">&quot;0 is a palindromic number&quot;</span> &lt;&lt; endl;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">isPnum</span>(n)) &#123;   <span class="hljs-comment">//如果输入的数就是回文数（测试点2，3，4），直接输出</span><br>        cout &lt;&lt; n &lt;&lt; <span class="hljs-string">&quot; is a palindromic number.&quot;</span> &lt;&lt; endl;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    &#125;<br><br>    <span class="hljs-keyword">int</span> flag = <span class="hljs-number">10</span>;    <span class="hljs-comment">//10次之内</span><br>    <span class="hljs-keyword">while</span> (flag--) &#123;     <span class="hljs-comment">//循环开始</span><br>        vector&lt;<span class="hljs-keyword">int</span>&gt;vi;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = n.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--)   <span class="hljs-comment">//逆序循环</span><br>            rn += n[i];   <span class="hljs-comment">//得到反转的n</span><br>       string ssum = <span class="hljs-built_in">add</span>(n,rn);   <span class="hljs-comment">//算出两个字符串的和</span><br>       cout &lt;&lt; n &lt;&lt; <span class="hljs-string">&quot; + &quot;</span> &lt;&lt; rn &lt;&lt; <span class="hljs-string">&quot; = &quot;</span> &lt;&lt; ssum &lt;&lt; endl;   <span class="hljs-comment">//先输出加法语句再说</span><br>       <span class="hljs-keyword">if</span> (<span class="hljs-built_in">isPnum</span>(ssum)) &#123;   <span class="hljs-comment">//判断，如果是个回文数，输出，退出程序</span><br>           cout &lt;&lt; ssum &lt;&lt; <span class="hljs-string">&quot; is a palindromic number.&quot;</span> &lt;&lt; endl;<br>           <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>       &#125;<br>       n = ssum;   <span class="hljs-comment">//否则把和赋值给n，开始下一次循环</span><br>       rn = <span class="hljs-string">&quot;&quot;</span>;  <span class="hljs-comment">//将用来接受反转字符串的rn清空</span><br>    &#125;<br>    cout &lt;&lt; <span class="hljs-string">&quot;Not found in 10 iterations.&quot;</span> &lt;&lt; endl;   <span class="hljs-comment">//循环10次没结果就输出&quot;No found...&quot;</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="1080（19-25）：MOOC期终成绩"><a href="#1080（19-25）：MOOC期终成绩" class="headerlink" title="1080（19/25）：MOOC期终成绩"></a>1080（19/25）：<strong>MOOC期终成绩</strong></h1><p>链接：<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805260223102976/problems/994805261493977088">题目详情 - 1080 MOOC期终成绩 (25 分) (pintia.cn)</a></p>
+<p>对于在中国大学MOOC（<a target="_blank" rel="noopener" href="http://www.icourse163.org/">http://www.icourse163.org/</a> ）学习“数据结构”课程的学生，想要获得一张合格证书，必须首先获得不少于200分的在线编程作业分，然后总评获得不少于60分（满分100）。总评成绩的计算公式为 <em>G</em>=(<em>G<strong>mi</strong>d</em>−<em>t<strong>er</strong>m</em>×40%+<em>G<strong>f</strong>ina**l</em>×60%)，如果 <em>G<strong>mi</strong>d</em>−<em>t<strong>er</strong>m</em>&gt;<em>G<strong>f</strong>ina**l</em>；否则总评 <em>G</em> 就是 <em>G<strong>f</strong>ina**l</em>。这里 <em>G<strong>mi</strong>d</em>−<em>t<strong>er</strong>m</em> 和 <em>G<strong>f</strong>ina**l</em> 分别为学生的期中和期末成绩。</p>
+<p>现在的问题是，每次考试都产生一张独立的成绩单。本题就请你编写程序，把不同的成绩单合为一张。</p>
+<h3 id="输入格式：-4"><a href="#输入格式：-4" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在第一行给出3个整数，分别是 P（做了在线编程作业的学生数）、M（参加了期中考试的学生数）、N（参加了期末考试的学生数）。每个数都不超过10000。</p>
+<p>接下来有三块输入。第一块包含 P 个在线编程成绩 <em>G**p</em>；第二块包含 M 个期中考试成绩 <em>G<strong>mi</strong>d</em>−<em>t<strong>er</strong>m</em>；第三块包含 N 个期末考试成绩 <em>G<strong>f</strong>ina**l</em>。每个成绩占一行，格式为：<code>学生学号 分数</code>。其中<code>学生学号</code>为不超过20个字符的英文字母和数字；<code>分数</code>是非负整数（编程总分最高为900分，期中和期末的最高分为100分）。</p>
+<h3 id="输出格式：-4"><a href="#输出格式：-4" class="headerlink" title="输出格式："></a>输出格式：</h3><p>打印出获得合格证书的学生名单。每个学生占一行，格式为：</p>
+<p><code>学生学号</code> <em>G**p</em> <em>G<strong>mi</strong>d</em>−<em>t<strong>er</strong>m</em> <em>G<strong>f</strong>ina**l</em> <em>G</em></p>
+<p>如果有的成绩不存在（例如某人没参加期中考试），则在相应的位置输出“−1”。输出顺序为按照总评分数（四舍五入精确到整数）递减。若有并列，则按学号递增。题目保证学号没有重复，且至少存在1个合格的学生。</p>
+<h3 id="输入样例：-2"><a href="#输入样例：-2" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs in">6 6 7<br>01234 880<br>a1903 199<br>ydjh2 200<br>wehu8 300<br>dx86w 220<br>missing 400<br>ydhfu77 99<br>wehu8 55<br>ydjh2 98<br>dx86w 88<br>a1903 86<br>01234 39<br>ydhfu77 88<br>a1903 66<br>01234 58<br>wehu8 84<br>ydjh2 82<br>missing 99<br>dx86w 81<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h3 id="输出样例：-2"><a href="#输出样例：-2" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs out">missing 400 -1 99 99<br>ydjh2 200 98 82 88<br>dx86w 220 88 81 84<br>wehu8 300 55 84 84<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h2 id="解析：-4"><a href="#解析：-4" class="headerlink" title="解析："></a>解析：</h2><p>这题我写的没用<code>map</code>,但是最后一个测试点直接超时了，6分没拿到。其实也难怪，我写的代码里一堆循环。但是总体思路没错。</p>
+<p>我看了网上的代码才知道，原来他们都是用<code>map</code>来存放名字和对应关系，再辅以一个<code>vector</code>来找数据。<code>map</code>将学号作为<code>key</code>，将存入的顺序作为<code>value</code>，每次存入一次，将<code>value</code>增加1，这样就可以在<code>vector</code>中方便的找到相应的值，之后再对值进行操作就行。</p>
+<h2 id="解答：-4"><a href="#解答：-4" class="headerlink" title="解答："></a>解答：</h2><h3 id="AC解答："><a href="#AC解答：" class="headerlink" title="AC解答："></a>AC解答：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;map&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span>     //学生的结构</span><br><span class="hljs-class">&#123;</span><br>	string name;<br>	<span class="hljs-keyword">int</span> gp,gm, gf, g;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(<span class="hljs-keyword">const</span> node&amp; lhs, <span class="hljs-keyword">const</span> node&amp; rhs)</span> </span>&#123;    <span class="hljs-comment">//排序的执行策略</span><br>	<span class="hljs-keyword">return</span> lhs.g != rhs.g ? lhs.g &gt; rhs.g:lhs.name &lt; rhs.name;<br>&#125;<br><br>map&lt;string, <span class="hljs-keyword">int</span>&gt;idx;     <span class="hljs-comment">//创建一个map，键用来存名字，值用来存序号</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-keyword">int</span> p, m, n, score, cnt = <span class="hljs-number">1</span>;<br>	cin &gt;&gt; p &gt;&gt; m &gt;&gt; n;    <span class="hljs-comment">//循环输入</span><br>	vector&lt;node&gt;v, ans;   <span class="hljs-comment">//创建两个容器</span><br>	string s;    <span class="hljs-comment">//s用来放临时学号</span><br>    <br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; p; i++) &#123;    <span class="hljs-comment">//循环输入</span><br>		cin &gt;&gt; s &gt;&gt; score;    <span class="hljs-comment">//输入名字和分数</span><br>		<span class="hljs-keyword">if</span> (score &gt;= <span class="hljs-number">200</span>) &#123;   <span class="hljs-comment">//判断合法性，小于200存入容器</span><br>			v.<span class="hljs-built_in">push_back</span>(node&#123; s,score,<span class="hljs-number">-1</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">0</span> &#125;);  <span class="hljs-comment">//将该对象放入容器（将gm,gf初始为-1，缺考）</span><br>			idx[s] = cnt++;   <span class="hljs-comment">//每存入一个，那么cnt就+1，即该学生对应的序号</span><br>		&#125;<br>	&#125;<br><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) &#123;   <span class="hljs-comment">//对m进行循环</span><br>		cin &gt;&gt; s &gt;&gt; score; <br>		<span class="hljs-keyword">if</span> (idx[s] != <span class="hljs-number">0</span>)  <span class="hljs-comment">//如果map中对应的字符串对应的值不是0（说明存进来了，容器中有这个数）</span><br>			v[idx[s] - <span class="hljs-number">1</span>].gm = score;  <span class="hljs-comment">//在v容器中找到这个对象，将属性gm等于score</span><br>	&#125;<br><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>		cin &gt;&gt; s &gt;&gt; score;<br>		<span class="hljs-keyword">if</span> (idx[s] != <span class="hljs-number">0</span>) &#123;   <span class="hljs-comment">//如果map中对应的字符串对应的值不是0（说明存进来了，容器中有这个数）</span><br>			<span class="hljs-keyword">int</span> temp = idx[s] - <span class="hljs-number">1</span>;   <span class="hljs-comment">//获得temp（在v中的索引）</span><br>			v[temp].gf = v[temp].g = score;  <span class="hljs-comment">//期中分数没期末高，直接总分就是期末分</span><br>			<span class="hljs-keyword">if</span> (v[temp].gm &gt; v[temp].gf)  <span class="hljs-comment">//期末分比期中高，按照40%*期中分+60%*期末分就行</span><br>				v[temp].g = <span class="hljs-built_in"><span class="hljs-keyword">int</span></span>(v[temp].gm * <span class="hljs-number">0.4</span> + v[temp].gf * <span class="hljs-number">0.6</span> + <span class="hljs-number">0.5</span>);<br>		&#125;<br>	&#125;<br> <br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; v.<span class="hljs-built_in">size</span>(); i++)   <span class="hljs-comment">//对v中进行循环</span><br>		<span class="hljs-keyword">if</span> (v[i].g &gt;= <span class="hljs-number">60</span>) ans.<span class="hljs-built_in">push_back</span>(v[i]);  <span class="hljs-comment">//将总分大于等于60放入ans容器中</span><br>	<span class="hljs-built_in">sort</span>(ans.<span class="hljs-built_in">begin</span>(), ans.<span class="hljs-built_in">end</span>(), cmp);  <span class="hljs-comment">//排序</span><br><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; ans.<span class="hljs-built_in">size</span>(); i++)  <span class="hljs-comment">//循环输出</span><br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s %d %d %d %d\n&quot;</span>, ans[i].name.<span class="hljs-built_in">c_str</span>(), ans[i].gp, ans[i].gm, ans[i].gf, ans[i].g);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="我的解答："><a href="#我的解答：" class="headerlink" title="我的解答："></a>我的解答：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cmath&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Student</span> &#123;</span>   <span class="hljs-comment">//创建学生类，包含学号，临时变量gm,gf,以及存放四个成绩的容器score</span><br>    string name;<br>    <span class="hljs-keyword">int</span> gm;<br>    <span class="hljs-keyword">int</span> gf;<br>    vector&lt;<span class="hljs-keyword">int</span>&gt;score&#123;<span class="hljs-number">-1</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">-1</span>&#125;;   <span class="hljs-comment">//将容器中数全部初始为-1</span><br>&#125;;<br><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Student&amp; lhs, <span class="hljs-keyword">const</span> Student&amp; rhs)</span> </span>&#123;   <span class="hljs-comment">//排序执行策略</span><br>    <span class="hljs-keyword">return</span> lhs.score[<span class="hljs-number">3</span>] != rhs.score[<span class="hljs-number">3</span>] ? lhs.score[<span class="hljs-number">3</span>] &gt; rhs.score[<span class="hljs-number">3</span>]:lhs.name &lt; rhs.name;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">int</span> p, m, n;   <br>    vector&lt;Student&gt;vs;<br>    <span class="hljs-built_in">scanf_s</span>(<span class="hljs-string">&quot;%d%d%d&quot;</span>, &amp;p, &amp;m,&amp;n);  <span class="hljs-comment">//输入p,m,n</span><br>    <span class="hljs-comment">//cin &gt;&gt; p &gt;&gt; m &gt;&gt; n;</span><br>    <span class="hljs-keyword">while</span> (p--) &#123;   <span class="hljs-comment">//循环开始</span><br>        Student s;<br>        cin &gt;&gt; s.name &gt;&gt; s.score[<span class="hljs-number">0</span>];<br>        vs.<span class="hljs-built_in">push_back</span>(s);   <span class="hljs-comment">//将这些对象放入容器</span><br>    &#125;<br><br>    <span class="hljs-keyword">while</span> (m--) &#123;    <span class="hljs-comment">//对m进行循环</span><br>        Student s;<br>        cin &gt;&gt; s.name &gt;&gt; s.gm;<br>        <span class="hljs-keyword">int</span> vsl = vs.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; vsl; i++) &#123;  <span class="hljs-comment">//对vs容器进行循环</span><br>            <span class="hljs-keyword">if</span> (vs[i].name == s.name)  <span class="hljs-comment">//如果找到了相应的名字，那么就把相应的对象中的容器的第二个数等于gm</span><br>                vs[i].score[<span class="hljs-number">1</span>] = s.gm;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">while</span> (n--) &#123;   <span class="hljs-comment">//对n进行循环</span><br>        Student s;<br>        cin &gt;&gt; s.name &gt;&gt; s.gf;<br>        <span class="hljs-keyword">int</span> vsl = vs.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; vsl; i++) &#123;   <span class="hljs-comment">//对vs容器进行循环</span><br>            <span class="hljs-keyword">if</span> (s.name == vs[i].name)  <span class="hljs-comment">//如果找到了相应的名字，那么就把相应的对象中的容器的第三个数等于gf</span><br>                vs[i].score[<span class="hljs-number">2</span>] = s.gf;<br>        &#125;<br>    &#125;<br><br>    vector&lt;Student&gt;vsh;<br>    <span class="hljs-keyword">int</span> vsl = vs.<span class="hljs-built_in">size</span>();<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; vsl; i++) &#123;    <span class="hljs-comment">//开始循环</span><br>        <span class="hljs-keyword">if</span> (vs[i].score[<span class="hljs-number">0</span>] &gt;= <span class="hljs-number">200</span>) &#123;  <span class="hljs-comment">//如果对象中的容器的第一个数大于等于200</span><br>            <span class="hljs-keyword">if</span> (vs[i].score[<span class="hljs-number">1</span>] &gt; vs[i].score[<span class="hljs-number">2</span>])  <span class="hljs-comment">//如果对象中的容器的第二个数大于第三个数（期中分数大于期末分数）</span><br>                vs[i].score[<span class="hljs-number">3</span>] = <span class="hljs-built_in">round</span>(vs[i].score[<span class="hljs-number">1</span>] * <span class="hljs-number">0.4</span> + vs[i].score[<span class="hljs-number">2</span>] * <span class="hljs-number">0.6</span>);<span class="hljs-comment">//按题目算出结果给第四个数（总分）</span><br>            <span class="hljs-keyword">else</span><br>                vs[i].score[<span class="hljs-number">3</span>] = vs[i].score[<span class="hljs-number">2</span>];  <span class="hljs-comment">//否则，总分就是期末分数</span><br>            <span class="hljs-keyword">if</span>(vs[i].score[<span class="hljs-number">3</span>]&gt;=<span class="hljs-number">60</span>)  <span class="hljs-comment">//如果总分大于60，将这个对象存入vsh新容器中</span><br>                vsh.<span class="hljs-built_in">push_back</span>(vs[i]);<br>        &#125;<br>    &#125;<br>    <span class="hljs-built_in">sort</span>(vsh.<span class="hljs-built_in">begin</span>(), vsh.<span class="hljs-built_in">end</span>(), cmp);  <span class="hljs-comment">//排序，循环输出</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> vsh_it = vsh.<span class="hljs-built_in">begin</span>(); vsh_it != vsh.<span class="hljs-built_in">end</span>(); vsh_it++)<br>        <span class="hljs-comment">//cout &lt;&lt; (*vsh_it).name &lt;&lt; &quot; &quot; &lt;&lt; (*vsh_it).score[0] &lt;&lt; &quot; &quot; &lt;&lt; (*vsh_it).score[1] &lt;&lt; &quot; &quot; &lt;&lt; (*vsh_it).score[2] &lt;&lt; &quot; &quot; &lt;&lt; (*vsh_it).score[3] &lt;&lt; &#x27;\n&#x27;;</span><br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s %d %d %d %d\n&quot;</span>, (*vsh_it).name.<span class="hljs-built_in">c_str</span>(), (*vsh_it).score[<span class="hljs-number">0</span>], (*vsh_it).score[<span class="hljs-number">1</span>], (*vsh_it).score[<span class="hljs-number">2</span>], (*vsh_it).score[<span class="hljs-number">3</span>]);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/PAT/">-PAT</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/PAT/">-PAT</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/11/18/PAT-Basic-1080-1085/">
+                        <span class="hidden-mobile">PAT-Basic 1080-1085</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
