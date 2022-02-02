@@ -1,0 +1,542 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="应该算某种意义后一篇了，但是还有不少做错的没搞完……">
+  <meta name="author" content="Oxygen">
+  <meta name="keywords" content="">
+  
+  <title>PAT-Baisc 1071-1075 - Oxygen</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"grz21.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Oxygen</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="PAT-Baisc 1071-1075">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-20 21:28" pubdate>
+        2021年12月20日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      63
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">PAT-Baisc 1071-1075</h1>
+            
+            <div class="markdown-body">
+              <p>应该算某种意义后一篇了，但是还有不少做错的没搞完……</p>
+<span id="more"></span>
+
+<h1 id="1071（15-15）：小赌怡情："><a href="#1071（15-15）：小赌怡情：" class="headerlink" title="1071（15/15）：小赌怡情："></a>1071（15/15）：<strong>小赌怡情</strong>：</h1><p>链接：<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805260223102976/problems/994805264312549376">题目详情 - 1071 小赌怡情 (15 分) (pintia.cn)</a></p>
+<p>常言道“小赌怡情”。这是一个很简单的小游戏：首先由计算机给出第一个整数；然后玩家下注赌第二个整数将会比第一个数大还是小；玩家下注 t 个筹码后，计算机给出第二个数。若玩家猜对了，则系统奖励玩家 t 个筹码；否则扣除玩家 t 个筹码。</p>
+<p>注意：玩家下注的筹码数不能超过自己帐户上拥有的筹码数。当玩家输光了全部筹码后，游戏就结束。</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在第一行给出 2 个正整数 T 和 K（≤ 100），分别是系统在初始状态下赠送给玩家的筹码数、以及需要处理的游戏次数。随后 K 行，每行对应一次游戏，顺序给出 4 个数字：</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gcode"><span class="hljs-symbol">n1</span> b t <span class="hljs-symbol">n2</span><br></code></pre></td></tr></table></figure>
+
+<p>其中 <code>n1</code> 和 <code>n2</code> 是计算机先后给出的两个[0, 9]内的整数，保证两个数字不相等。<code>b</code> 为 0 表示玩家赌<code>小</code>，为 1 表示玩家赌<code>大</code>。<code>t</code> 表示玩家下注的筹码数，保证在整型范围内。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>对每一次游戏，根据下列情况对应输出（其中 <code>t</code> 是玩家下注量，<code>x</code> 是玩家当前持有的筹码量）：</p>
+<ul>
+<li>玩家赢，输出 <code>Win t! Total = x.</code>；</li>
+<li>玩家输，输出 <code>Lose t. Total = x.</code>；</li>
+<li>玩家下注超过持有的筹码量，输出 <code>Not enough tokens. Total = x.</code>；</li>
+<li>玩家输光后，输出 <code>Game Over.</code> 并结束程序。</li>
+</ul>
+<h3 id="输入样例-1："><a href="#输入样例-1：" class="headerlink" title="输入样例 1："></a>输入样例 1：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs in">100 4<br>8 0 100 2<br>3 1 50 1<br>5 1 200 6<br>7 0 200 8<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h3 id="输出样例-1："><a href="#输出样例-1：" class="headerlink" title="输出样例 1："></a>输出样例 1：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs out">Win 100!  Total = 200.<br>Lose 50.  Total = 150.<br>Not enough tokens.  Total = 150.<br>Not enough tokens.  Total = 150.<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h3 id="输入样例-2："><a href="#输入样例-2：" class="headerlink" title="输入样例 2："></a>输入样例 2：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs in">100 4<br>8 0 100 2<br>3 1 200 1<br>5 1 200 6<br>7 0 200 8<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h3 id="输出样例-2："><a href="#输出样例-2：" class="headerlink" title="输出样例 2："></a>输出样例 2：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs out">Win 100!  Total = 200.<br>Lose 200.  Total = 0.<br>Game Over.<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h2 id="解析："><a href="#解析：" class="headerlink" title="解析："></a>解析：</h2><p>水题，分情况判断就行……</p>
+<h2 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-keyword">int</span> money,fre;<br>	cin&gt;&gt;money&gt;&gt;fre;<br>	<span class="hljs-keyword">while</span>(fre--)&#123;    <span class="hljs-comment">//每次机会减1</span><br>		<span class="hljs-keyword">int</span> n1,b,t,n2;<br>		cin&gt;&gt;n1&gt;&gt;b&gt;&gt;t&gt;&gt;n2;<br>		<span class="hljs-keyword">if</span>(money==<span class="hljs-number">0</span>)&#123;          <span class="hljs-comment">//如果没钱了</span><br>			cout&lt;&lt;<span class="hljs-string">&quot;Game Over.&quot;</span>&lt;&lt;endl;  <span class="hljs-comment">//输出游戏结束，跳出循环</span><br>			<span class="hljs-keyword">break</span>;<br>		&#125;<br>		<span class="hljs-keyword">if</span>(t&gt;money)&#123;     <span class="hljs-comment">//剩的钱不够了下注，说明没有这么多钱</span><br>			cout&lt;&lt;<span class="hljs-string">&quot;Not enough tokens.  Total = &quot;</span>&lt;&lt;money&lt;&lt;<span class="hljs-string">&quot;.&quot;</span>&lt;&lt;endl;<br>			<span class="hljs-keyword">continue</span>;<br>		&#125;<br>		<span class="hljs-keyword">if</span>(n1&gt;n2)   <br>			<span class="hljs-keyword">if</span>(b==<span class="hljs-number">0</span>)&#123;<br>				money+=t;<br>				cout&lt;&lt;<span class="hljs-string">&quot;Win &quot;</span>&lt;&lt;t&lt;&lt;<span class="hljs-string">&quot;!  Total = &quot;</span>&lt;&lt;money&lt;&lt;<span class="hljs-string">&quot;.&quot;</span>&lt;&lt;endl;<br>			&#125;<br>			<span class="hljs-keyword">else</span>&#123;<br>				money-=t;<br>				cout&lt;&lt;<span class="hljs-string">&quot;Lose &quot;</span>&lt;&lt;t&lt;&lt;<span class="hljs-string">&quot;.  Total = &quot;</span>&lt;&lt;money&lt;&lt;<span class="hljs-string">&quot;.&quot;</span>&lt;&lt;endl;<br>			&#125;<span class="hljs-keyword">else</span><br>				<span class="hljs-keyword">if</span>(b==<span class="hljs-number">0</span>)&#123;<br>					money-=t;<br>					cout&lt;&lt;<span class="hljs-string">&quot;Lose &quot;</span>&lt;&lt;t&lt;&lt;<span class="hljs-string">&quot;.  Total = &quot;</span>&lt;&lt;money&lt;&lt;<span class="hljs-string">&quot;.&quot;</span>&lt;&lt;endl;<br>				&#125;<span class="hljs-keyword">else</span>&#123;<br>					money+=t;<br>					cout&lt;&lt;<span class="hljs-string">&quot;Win &quot;</span>&lt;&lt;t&lt;&lt;<span class="hljs-string">&quot;!  Total = &quot;</span>&lt;&lt;money&lt;&lt;<span class="hljs-string">&quot;.&quot;</span>&lt;&lt;endl;<br>				&#125;<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="1072（20-20）：开学寄语："><a href="#1072（20-20）：开学寄语：" class="headerlink" title="1072（20/20）：开学寄语："></a>1072（20/20）：<strong>开学寄语</strong>：</h1><p>链接：<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805260223102976/problems/994805263964422144">题目详情 - 1072 开学寄语 (20 分) (pintia.cn)</a></p>
+<p>1072 开学寄语 (20 分)</p>
+<p>下图是上海某校的新学期开学寄语：天将降大任于斯人也，必先删其微博，卸其 QQ，封其电脑，夺其手机，收其 ipad，断其 wifi，使其百无聊赖，然后，净面、理发、整衣，然后思过、读书、锻炼、明智、开悟、精进。而后必成大器也！</p>
+<p>本题要求你写个程序帮助这所学校的老师检查所有学生的物品，以助其成大器。</p>
+<h3 id="输入格式：-1"><a href="#输入格式：-1" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入第一行给出两个正整数 N（≤ 1000）和 M（≤ 6），分别是学生人数和需要被查缴的物品种类数。第二行给出 M 个需要被查缴的物品编号，其中编号为 4 位数字。随后 N 行，每行给出一位学生的姓名缩写（由 1-4 个大写英文字母组成）、个人物品数量 K（0 ≤ K ≤ 10）、以及 K 个物品的编号。</p>
+<h3 id="输出格式：-1"><a href="#输出格式：-1" class="headerlink" title="输出格式："></a>输出格式：</h3><p>顺次检查每个学生携带的物品，如果有需要被查缴的物品存在，则按以下格式输出该生的信息和其需要被查缴的物品的信息（注意行末不得有多余空格）：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">姓名缩写: 物品编号1 物品编号2 ……</span><br></code></pre></td></tr></table></figure>
+
+<p>最后一行输出存在问题的学生的总人数和被查缴物品的总数。</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs in">4 2<br>2333 6666<br>CYLL 3 1234 2345 3456<br>U 4 9966 6666 8888 6666<br>GG 2 2333 7777<br>JJ 3 0012 6666 2333<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs out">U: 6666 6666<br>GG: 2333<br>JJ: 6666 2333<br>3 5<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h2 id="解析：-1"><a href="#解析：-1" class="headerlink" title="解析："></a>解析：</h2><h2 id="解答：-1"><a href="#解答：-1" class="headerlink" title="解答："></a>解答：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iomanip&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Student</span></span><br><span class="hljs-class">&#123;</span><br>	string name;<br>	<span class="hljs-keyword">int</span> c;<br>&#125;;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-keyword">int</span> N, M,Psum = <span class="hljs-number">0</span>,Ssum = <span class="hljs-number">0</span>;<br>	cin &gt;&gt; N &gt;&gt; M;<br>	vector&lt;string&gt;vst;<br>	<span class="hljs-keyword">while</span> (M--) &#123;<br>		string stuff;<br>		cin &gt;&gt; stuff;<br>		vst.<span class="hljs-built_in">push_back</span>(stuff);<br>	&#125;<br><br>	vector&lt;string&gt;vs,vr;<br>	<span class="hljs-keyword">while</span> (N--) &#123;<br>		Student s;<br>		cin &gt;&gt; s.name &gt;&gt; s.c;<br>		vs.<span class="hljs-built_in">push_back</span>(s.name);<br>		<span class="hljs-keyword">while</span> (s.c--) &#123;<br>			string s;<br>			cin &gt;&gt; s;<br>			vs.<span class="hljs-built_in">push_back</span>(s);<br>		&#125;<br><br>		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; vst.<span class="hljs-built_in">size</span>(); i++)<br>			<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; vs.<span class="hljs-built_in">size</span>(); j++)<br>				<span class="hljs-keyword">if</span> (vst[i] == vs[j])<br>					vr.<span class="hljs-built_in">push_back</span>(vst[i]);<br><br>		<span class="hljs-keyword">if</span> (!vr.<span class="hljs-built_in">empty</span>()) &#123;<br>			Psum++;<br>			Ssum += vr.<span class="hljs-built_in">size</span>();<br>			cout &lt;&lt; *vs.<span class="hljs-built_in">begin</span>() &lt;&lt; <span class="hljs-string">&quot;:&quot;</span>;<br>			<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = vr.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--)<br>				cout &lt;&lt;<span class="hljs-string">&quot; &quot;</span>&lt;&lt; <span class="hljs-built_in">setw</span>(<span class="hljs-number">4</span>)&lt;&lt; vr[i]&lt;&lt;<span class="hljs-built_in">setfill</span>(<span class="hljs-string">&#x27;0&#x27;</span>);<br>			cout &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>;<br>		&#125;<br>		vs.<span class="hljs-built_in">clear</span>();<br>		vr.<span class="hljs-built_in">clear</span>();<br>	&#125;<br>	cout &lt;&lt; Psum &lt;&lt; <span class="hljs-string">&quot; &quot;</span> &lt;&lt; Ssum;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="1073（20-20）多选题常见计分法："><a href="#1073（20-20）多选题常见计分法：" class="headerlink" title="1073（20/20）多选题常见计分法："></a>1073（20/20）<strong>多选题常见计分法</strong>：</h1><p>链接：<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805260223102976/problems/994805263624683520">题目详情 - 1073 多选题常见计分法 (20 分) (pintia.cn)</a></p>
+<p>批改多选题是比较麻烦的事情，有很多不同的计分方法。有一种最常见的计分方法是：如果考生选择了部分正确选项，并且没有选择任何错误选项，则得到 50% 分数；如果考生选择了任何一个错误的选项，则不能得分。本题就请你写个程序帮助老师批改多选题，并且指出哪道题的哪个选项错的人最多。</p>
+<h3 id="输入格式：-2"><a href="#输入格式：-2" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在第一行给出两个正整数 N（≤1000）和 M（≤100），分别是学生人数和多选题的个数。随后 M 行，每行顺次给出一道题的满分值（不超过 5 的正整数）、选项个数（不少于 2 且不超过 5 的正整数）、正确选项个数（不超过选项个数的正整数）、所有正确选项。注意每题的选项从小写英文字母 a 开始顺次排列。各项间以 1 个空格分隔。最后 N 行，每行给出一个学生的答题情况，其每题答案格式为 <code>(选中的选项个数 选项1 ……)</code>，按题目顺序给出。注意：题目保证学生的答题情况是合法的，即不存在选中的选项数超过实际选项数的情况。</p>
+<h3 id="输出格式：-2"><a href="#输出格式：-2" class="headerlink" title="输出格式："></a>输出格式：</h3><p>按照输入的顺序给出每个学生的得分，每个分数占一行，输出小数点后 1 位。最后输出错得最多的题目选项的信息，格式为：<code>错误次数 题目编号（题目按照输入的顺序从1开始编号）-选项号</code>。如果有并列，则每行一个选项，按题目编号递增顺序输出；再并列则按选项号递增顺序输出。行首尾不得有多余空格。如果所有题目都没有人错，则在最后一行输出 <code>Too simple</code>。</p>
+<h3 id="输入样例-1：-1"><a href="#输入样例-1：-1" class="headerlink" title="输入样例 1："></a>输入样例 1：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs in">3 4 <br>3 4 2 a c<br>2 5 1 b<br>5 3 2 b c<br>1 5 4 a b d e<br>(2 a c) (3 b d e) (2 a c) (3 a b e)<br>(2 a c) (1 b) (2 a b) (4 a b d e)<br>(2 b d) (1 e) (1 c) (4 a b c d)<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h3 id="输出样例-1：-1"><a href="#输出样例-1：-1" class="headerlink" title="输出样例 1："></a>输出样例 1：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs out">3.5<br>6.0<br>2.5<br>2 2-e<br>2 3-a<br>2 3-b<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h3 id="输入样例-2：-1"><a href="#输入样例-2：-1" class="headerlink" title="输入样例 2："></a>输入样例 2：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs in">2 2 <br>3 4 2 a c<br>2 5 1 b<br>(2 a c) (1 b)<br>(2 a c) (1 b)<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h3 id="输出样例-2：-1"><a href="#输出样例-2：-1" class="headerlink" title="输出样例 2："></a>输出样例 2：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs out">5.0<br>5.0<br>Too simple<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h2 id="解析：-2"><a href="#解析：-2" class="headerlink" title="解析："></a>解析：</h2><p>这题是在1058那题上的改的，题目给的时间还算充裕，400ms多用点循环啥的基本影响。但是在原来的1058上添加了不同的判断方法，这就是这道题难点所在：</p>
+<ol>
+<li>如果答案是完全正确的，那么直接给分就行。</li>
+<li>如果答案半对，给全部分数的一般分数，但是这个选项错误应该是：正确答案选项没选的也算错误</li>
+<li>答案全错，选了不该选的选项，选项错误应该是：回答的答案选项选多了的算错误，同时正确答案选项没选的也算错误</li>
+</ol>
+<p>这题还要坑点的地方，他给的测试用例完全符合哪道题次数错的多排在前面，而不是他的题目说的选项错的最多排在前面……正确的顺序应该是哪道题中选项错的最多，排在最前面……</p>
+<h2 id="解答：-2"><a href="#解答：-2" class="headerlink" title="解答："></a>解答：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Question</span></span><br><span class="hljs-class">&#123;</span><br>	<span class="hljs-keyword">int</span> num;     <span class="hljs-comment">//题号</span><br>	<span class="hljs-keyword">int</span> score;    <span class="hljs-comment">//分数</span><br>	<span class="hljs-keyword">int</span> choiceNum;  <span class="hljs-comment">//选项个数</span><br>	vector&lt;<span class="hljs-keyword">int</span>&gt;wrongtimes;  <span class="hljs-comment">//存每题的错误次数（索引对应选项）</span><br>	<span class="hljs-keyword">int</span> correctChoiceNum;   <span class="hljs-comment">//正确选项个数</span><br>	string correctChoice;   <span class="hljs-comment">//正确选项字符串，将正确选项组合成一个字符串</span><br>	<span class="hljs-keyword">int</span> maxWrongChoicetimes;  <span class="hljs-comment">//错误选项的最大次数</span><br>	vector&lt;<span class="hljs-keyword">char</span>&gt;vcmistake;   <br>&#125;;<br><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Question&amp; lhs, <span class="hljs-keyword">const</span> Question&amp; rhs)</span> </span>&#123;          <span class="hljs-comment">//排序策略</span><br>	<span class="hljs-keyword">return</span> lhs.maxWrongChoicetimes != rhs.maxWrongChoicetimes ? lhs.maxWrongChoicetimes &gt; rhs.maxWrongChoicetimes:lhs.num &lt; rhs.num;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-keyword">int</span> n, m;<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d %d&quot;</span>, &amp;n, &amp;m);<br>	vector&lt;Question&gt;<span class="hljs-built_in">vq</span>(m);<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>		vq[i].num = i + <span class="hljs-number">1</span>;<br>		cin &gt;&gt; vq[i].score &gt;&gt; vq[i].choiceNum &gt;&gt; vq[i].correctChoiceNum;  <span class="hljs-comment">//输入分数，选项个数，正确选项个数</span><br>	     vector&lt;<span class="hljs-keyword">int</span>&gt;<span class="hljs-built_in">vtemp</span>(<span class="hljs-number">128</span>);   <span class="hljs-comment">//临时数组，用来记录错误次数</span><br>		 vq[i].wrongtimes = vtemp;  <span class="hljs-comment">//将该临时数组赋值给对应的问题中记录错误次数数组</span><br>		<span class="hljs-keyword">int</span> x = vq[i].correctChoiceNum;  <br>		<span class="hljs-keyword">while</span> (x--) &#123;     <br>			<span class="hljs-keyword">char</span> temp;<br>			cin &gt;&gt; temp;<br>			vq[i].correctChoice += temp;   <span class="hljs-comment">//将单个字符追加到字符串中</span><br>		&#125;<br>	&#125;<br><br>	string str;<br>	n += <span class="hljs-number">1</span>;<br>	vector&lt;string&gt;<span class="hljs-built_in">v</span>(n);<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)<br>		<span class="hljs-built_in">getline</span>(cin, v[i]);<br>	v.<span class="hljs-built_in">erase</span>(v.<span class="hljs-built_in">begin</span>());     <span class="hljs-comment">//读入学生的选项</span><br><br>	vector&lt;<span class="hljs-keyword">double</span>&gt;sscore<span class="hljs-comment">//sscore对应每个人的得分</span><br>	vector&lt;<span class="hljs-keyword">int</span>&gt;<span class="hljs-built_in">qwrong</span>(m + <span class="hljs-number">1</span>);    <span class="hljs-comment">//qwrong为每道题错的次数</span><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>; k &lt; v.<span class="hljs-built_in">size</span>(); k++) &#123;  <span class="hljs-comment">//对存放学生回答的容器进行遍历</span><br>		<span class="hljs-keyword">double</span> sum = <span class="hljs-number">0.0</span>;   <br>		<span class="hljs-keyword">int</span> flag = <span class="hljs-number">1</span>;      <span class="hljs-comment">//sum是得分，flag是题号</span><br>		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; v[k].<span class="hljs-built_in">size</span>(); i<span class="hljs-comment">//对每个学生的回答字符串进行遍历</span><br>			<span class="hljs-keyword">if</span> (v[k][i] == <span class="hljs-string">&#x27;(&#x27;</span>) &#123;    <span class="hljs-comment">//当遍历到&#x27;(&#x27;时</span><br>				string temp;  <span class="hljs-comment">//创建临时变量</span><br>				<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i; j &lt; v[k].<span class="hljs-built_in">size</span>(); j++)   <span class="hljs-comment">//从i处向后遍历</span><br>					<span class="hljs-keyword">if</span> (v[k][j] == <span class="hljs-string">&#x27;)&#x27;</span>) &#123;    <span class="hljs-comment">//当另一边遍历到&#x27;)&#x27;</span><br>						temp = v[k].<span class="hljs-built_in">substr</span>(i, j - i);  <span class="hljs-comment">//截取()中的内容，含有(</span><br>						temp.<span class="hljs-built_in">erase</span>(temp.<span class="hljs-built_in">begin</span>(), temp.<span class="hljs-built_in">begin</span>() + <span class="hljs-number">3</span>);<span class="hljs-comment">//直接把该字符前三个删掉</span><br>						temp.<span class="hljs-built_in">erase</span>(<span class="hljs-built_in">remove</span>(temp.<span class="hljs-built_in">begin</span>(), temp.<span class="hljs-built_in">end</span>(), <span class="hljs-string">&#x27; &#x27;</span>), temp.<span class="hljs-built_in">end</span>());   <span class="hljs-comment">//再删除字符串的空格</span><br>						<span class="hljs-keyword">break</span>;<br>					&#125;<br>				<span class="hljs-keyword">if</span> (temp == vq[flag - <span class="hljs-number">1</span>].correctChoice) &#123;    <span class="hljs-comment">//如果这个截取的字符串和对应的答案一样</span><br>					sum += vq[flag - <span class="hljs-number">1</span>].score;     <span class="hljs-comment">//加上该题对应的分数</span><br>					flag++;     <span class="hljs-comment">//将题号加1</span><br>				&#125;<br>				<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(temp.<span class="hljs-built_in">size</span>()&lt; vq[flag - <span class="hljs-number">1</span>].correctChoice.<span class="hljs-built_in">size</span>()) &#123;   <span class="hljs-comment">//如果回答答案的长度没有正确答案长</span><br>					string ttemp = temp,cctemp = vq[flag - <span class="hljs-number">1</span>].correctChoice;   <span class="hljs-comment">//创建两个临时变量</span><br>					<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> cc_it = vq[flag - <span class="hljs-number">1</span>].correctChoice.<span class="hljs-built_in">begin</span>(); cc_it != vq[flag - <span class="hljs-number">1</span>].correctChoice.<span class="hljs-built_in">end</span>(); cc_it++)<br>						temp.<span class="hljs-built_in">erase</span>(<span class="hljs-built_in">remove</span>(temp.<span class="hljs-built_in">begin</span>(), temp.<span class="hljs-built_in">end</span>(), *cc_it), temp.<span class="hljs-built_in">end</span>());  <span class="hljs-comment">//获得漏选的选项</span><br>					<span class="hljs-keyword">if</span> (temp == <span class="hljs-string">&quot;&quot;</span>) &#123;     <span class="hljs-comment">//temp为空，说明漏选了且选的选项是正确的</span><br>						sum += vq[flag - <span class="hljs-number">1</span>].score / <span class="hljs-number">2.0</span>;   <span class="hljs-comment">//分数加一半就行</span><br>						<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> tt_it = ttemp.<span class="hljs-built_in">begin</span>(); tt_it != ttemp.<span class="hljs-built_in">end</span>(); tt_it++)<br>							cctemp.<span class="hljs-built_in">erase</span>(<span class="hljs-built_in">remove</span>(cctemp.<span class="hljs-built_in">begin</span>(), cctemp.<span class="hljs-built_in">end</span>(), *tt_it), cctemp.<span class="hljs-built_in">end</span>());<br>                               <span class="hljs-comment">//获取到漏选的选项</span><br>						<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> cc_it = cctemp.<span class="hljs-built_in">begin</span>(); cc_it != cctemp.<span class="hljs-built_in">end</span>(); cc_it++)<br>							vq[flag - <span class="hljs-number">1</span>].wrongtimes[*cc_it]++;   <span class="hljs-comment">//这些对应的选项次数+1</span><br>					&#125;<br>					<span class="hljs-keyword">else</span> &#123;     <span class="hljs-comment">//不为空，少选了但是还选了错误答案</span><br>						<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> temp_it = temp.<span class="hljs-built_in">begin</span>(); temp_it != temp.<span class="hljs-built_in">end</span>(); temp_it++)<br>							vq[flag - <span class="hljs-number">1</span>].wrongtimes[*temp_it]++;  <span class="hljs-comment">//将剩下的选项在错误选项数组中将对应的+1</span><br>						qwrong[flag]++;   <span class="hljs-comment">//对应的题目错误+1</span><br>					&#125;<br>					flag++;  <span class="hljs-comment">//题号+1</span><br>				&#125;<br>				<span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-comment">//创建两个临时变量，不对temp和vq[flag - 1].correctChoice直接操作，接下来就算完全选错的，分别获取错误选项分别加到对应的题目的错误选项次数数组中就行</span><br>					string cctemp = vq[flag - <span class="hljs-number">1</span>].correctChoice;   <br>					string ttemp = temp;<br>					<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> tt_it = ttemp.<span class="hljs-built_in">begin</span>(); tt_it != ttemp.<span class="hljs-built_in">end</span>(); tt_it++)<br>						cctemp.<span class="hljs-built_in">erase</span>(<span class="hljs-built_in">remove</span>(cctemp.<span class="hljs-built_in">begin</span>(), cctemp.<span class="hljs-built_in">end</span>(), *tt_it), cctemp.<span class="hljs-built_in">end</span>());<br>					<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> z = <span class="hljs-number">0</span>; z &lt; cctemp.<span class="hljs-built_in">size</span>(); z++)<br>						vq[flag - <span class="hljs-number">1</span>].wrongtimes[cctemp[z]]++;<br>					<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> cc_it = vq[flag - <span class="hljs-number">1</span>].correctChoice.<span class="hljs-built_in">begin</span>(); cc_it != vq[flag - <span class="hljs-number">1</span>].correctChoice.<span class="hljs-built_in">end</span>(); cc_it++)<br>						temp.<span class="hljs-built_in">erase</span>(<span class="hljs-built_in">remove</span>(temp.<span class="hljs-built_in">begin</span>(), temp.<span class="hljs-built_in">end</span>(), *cc_it), temp.<span class="hljs-built_in">end</span>());<br>					<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> z = <span class="hljs-number">0</span>;z&lt;temp.<span class="hljs-built_in">size</span>();z++)<br>						vq[flag <span class="hljs-number">-1</span>].wrongtimes[temp[z]]++;<br>					qwrong[flag]++;<br>					flag++;<br>				&#125;<br>			&#125;<br>		sscore.<span class="hljs-built_in">push_back</span>(sum);  <span class="hljs-comment">//将最后的分数放入数组</span><br>	&#125;<br> <br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> temp : sscore) &#123;         <span class="hljs-comment">//格式化输出，输出分数</span><br>		cout.<span class="hljs-built_in">setf</span>(ios_base::fixed);<br>		cout.<span class="hljs-built_in">precision</span>(<span class="hljs-number">1</span>);<br>		cout &lt;&lt; temp &lt;&lt; endl;<br>	&#125;<br>	<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; vq.<span class="hljs-built_in">size</span>(); i++) &#123;   <span class="hljs-comment">//找到错误的最大次数</span><br>		vq[i].maxWrongChoicetimes = *<span class="hljs-built_in">max_element</span>(vq[i].wrongtimes.<span class="hljs-built_in">begin</span>(), vq[i].wrongtimes.<span class="hljs-built_in">end</span>());<br>		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">128</span>; j++)    <span class="hljs-comment">//将最大的错误次数选项存到题目中的数组</span><br>			<span class="hljs-keyword">if</span> (vq[i].wrongtimes[j] == vq[i].maxWrongChoicetimes)<br>				vq[i].vcmistake.<span class="hljs-built_in">push_back</span>(j);<br>	&#125;<br><br><br>	<span class="hljs-built_in">sort</span>(vq.<span class="hljs-built_in">begin</span>(), vq.<span class="hljs-built_in">end</span>(), cmp);      <span class="hljs-comment">//排序</span><br>	vector&lt;Question&gt;maxWrong;     <span class="hljs-comment">//Wrong数组</span><br>	<span class="hljs-keyword">int</span> max = vq.<span class="hljs-built_in">begin</span>()-&gt;maxWrongChoicetimes;   <span class="hljs-comment">//</span><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; vq.<span class="hljs-built_in">size</span>(); i++)<br>		<span class="hljs-keyword">if</span> (vq[i].maxWrongChoicetimes == max)<br>			maxWrong.<span class="hljs-built_in">push_back</span>(vq[i]);<br><br>	<span class="hljs-keyword">int</span> maxnum = *<span class="hljs-built_in">max_element</span>(qwrong.<span class="hljs-built_in">begin</span>(), qwrong.<span class="hljs-built_in">end</span>());<br>	<span class="hljs-keyword">if</span> (maxnum==<span class="hljs-number">0</span>)<br>		cout &lt;&lt; <span class="hljs-string">&quot;Too simple&quot;</span> &lt;&lt; endl;<br>	<span class="hljs-keyword">else</span> &#123;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> q_it = maxWrong.<span class="hljs-built_in">begin</span>(); q_it != maxWrong.<span class="hljs-built_in">end</span>(); q_it++)<br>			<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; q_it-&gt;vcmistake.<span class="hljs-built_in">size</span>(); j++)<br>				cout &lt;&lt; q_it-&gt;maxWrongChoicetimes &lt;&lt; <span class="hljs-string">&quot; &quot;</span> &lt;&lt; q_it-&gt;num &lt;&lt; <span class="hljs-string">&quot;-&quot;</span> &lt;&lt; q_it-&gt;vcmistake[j] &lt;&lt; endl;<br>	&#125;<br><br>	<br>	<span class="hljs-comment">/*int max = *max_element(qwrong.begin(), qwrong.end());</span><br><span class="hljs-comment">	vector&lt;Question&gt;maxWrong;</span><br><span class="hljs-comment">	if (max == 0)</span><br><span class="hljs-comment">		cout &lt;&lt; &quot;Too simple&quot; &lt;&lt; endl;</span><br><span class="hljs-comment">	else &#123;</span><br><span class="hljs-comment">		vector&lt;int&gt;choice;</span><br><span class="hljs-comment">		for (int i = 0; i &lt; qwrong.size(); i++)</span><br><span class="hljs-comment">			if (qwrong[i] == max)</span><br><span class="hljs-comment">				maxWrong.push_back(vq[i - 1]);</span><br><span class="hljs-comment">		for (int i = 0; i &lt; maxWrong.size(); i++) &#123;</span><br><span class="hljs-comment">			int wmax = *max_element(maxWrong[i].wrongtimes.begin(), maxWrong[i].wrongtimes.end());</span><br><span class="hljs-comment">			for (int j = 0; j &lt; 128; j++)</span><br><span class="hljs-comment">				if (maxWrong[i].wrongtimes[j] == wmax)</span><br><span class="hljs-comment">					choice.push_back(j);</span><br><span class="hljs-comment">			for (int j = 0; j &lt; choice.size(); j++)</span><br><span class="hljs-comment">				cout &lt;&lt; max &lt;&lt; &quot; &quot; &lt;&lt; maxWrong[i].num &lt;&lt; &quot;-&quot; &lt;&lt; (char)choice[j] &lt;&lt; endl;</span><br><span class="hljs-comment">			choice.clear();</span><br><span class="hljs-comment">		&#125;</span><br><span class="hljs-comment">	&#125;*/</span><br><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/PAT/">-PAT</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/PAT/">-PAT</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/01/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%841%EF%BC%9A%E9%A1%BA%E5%BA%8F%E8%A1%A8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">数据结构1：顺序表</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/12/20/PAT-Basic-1066-1070/">
+                        <span class="hidden-mobile">PAT-Basic 1066-1070</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

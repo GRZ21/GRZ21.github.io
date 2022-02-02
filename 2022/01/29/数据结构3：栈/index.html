@@ -1,0 +1,517 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="从某种意义上来说，栈是一种特殊的线性表。">
+  <meta name="author" content="Oxygen">
+  <meta name="keywords" content="">
+  
+  <title>数据结构3：栈 - Oxygen</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"grz21.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Oxygen</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="数据结构3：栈">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-29 20:10" pubdate>
+        2022年1月29日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      46
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数据结构3：栈</h1>
+            
+            <div class="markdown-body">
+              <p>从某种意义上来说，栈是一种特殊的线性表。</p>
+<span id="more"></span>
+
+<h1 id="栈："><a href="#栈：" class="headerlink" title="栈："></a>栈：</h1><p>栈是一种特殊的线性表，只允许在一端进行插入与删除，遵循后进先出的顺序（Last in First out，LIFO）。因为是一种特殊的线性表，所以栈分为顺序栈以及链栈两种类型。但是他们的抽象数据类型是相同的：</p>
+<h2 id="栈的抽象数据类型（ADT）："><a href="#栈的抽象数据类型（ADT）：" class="headerlink" title="栈的抽象数据类型（ADT）："></a>栈的抽象数据类型（ADT）：</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">InitStack</span><span class="hljs-params">(&amp;s)</span></span>:初始化一个栈，构造一个空栈，分配内存空间<br><span class="hljs-function"><span class="hljs-title">DestroyStack</span><span class="hljs-params">(&amp;s)</span></span>:销毁一个栈，释放栈占用的空间<br><span class="hljs-function"><span class="hljs-title">Push</span><span class="hljs-params">(&amp;s,x)</span></span>:将数据x插入到栈顶中<br><span class="hljs-function"><span class="hljs-title">Pop</span><span class="hljs-params">(&amp;s,&amp;x)</span></span>:将栈顶数据弹出，并用x返回值<br><span class="hljs-function"><span class="hljs-title">GetTop</span><span class="hljs-params">(s,&amp;x)</span></span>:获取栈顶元素，若栈s非空，用x返回栈顶元素<br><span class="hljs-function"><span class="hljs-title">StackEmpty</span><span class="hljs-params">(s)</span></span>:判断栈是否为一个空栈<br></code></pre></td></tr></table></figure>
+
+<p>栈的两种不同实现：栈一般会定义一个top指针来方便对栈顶元素进行操作，top指针指向栈顶元素。当栈为空时，top指针为-1。</p>
+<h3 id="顺序栈："><a href="#顺序栈：" class="headerlink" title="顺序栈："></a>顺序栈：</h3><p>顺序栈中使用一个定长数组进行实现，包含一个top指针。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MaxSize = <span class="hljs-number">10</span>;<br><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">int</span> ElemType;<br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">SqStack</span>       //顺序栈的结构定义</span><br><span class="hljs-class">&#123;</span><br>	ElemType data[MaxSize];<br>	<span class="hljs-keyword">int</span>  top;<br>&#125;;<br><br><span class="hljs-comment">//初始化一个栈</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">InitSqStack</span><span class="hljs-params">(SqStack&amp; s)</span> </span>&#123;    <br>	s.top = <span class="hljs-number">-1</span>;<br>&#125;<br><br><span class="hljs-comment">//清空一个栈</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ClearSqStack</span><span class="hljs-params">(SqStack&amp; s)</span> </span>&#123;   <br>	s.top = <span class="hljs-number">-1</span>;<br>&#125;<br><br><span class="hljs-comment">//判空操作，当top指针是-1时，返回true;不为空返回false</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">SqStackEmpty</span><span class="hljs-params">(SqStack s)</span> </span>&#123;   <br>	<span class="hljs-keyword">if</span> (s.top == <span class="hljs-number">-1</span>)<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>	<span class="hljs-keyword">else</span><br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>&#125;<br><br><span class="hljs-comment">//将元素插入到栈顶</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Push</span><span class="hljs-params">(SqStack&amp; s, ElemType x)</span> </span>&#123;   <br>	<span class="hljs-keyword">if</span> (s.top == MaxSize - <span class="hljs-number">1</span>)    <span class="hljs-comment">//当top指针指向数组长度-1时（索引达到最大），说明栈已经存满，返回false</span><br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br><br>	s.top++;     <span class="hljs-comment">//先移动栈顶指针</span><br>	s.data[s.top] = x;  <span class="hljs-comment">//插入数据</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-comment">//弹出栈顶数据</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Pop</span><span class="hljs-params">(SqStack&amp; s, ElemType&amp; x)</span> </span>&#123;   <br>	<span class="hljs-keyword">if</span> (s.top == <span class="hljs-number">-1</span>)     <span class="hljs-comment">//当top为-1时，说明是空栈，返回false</span><br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br><br>	x = s.data[s.top];   <span class="hljs-comment">//获取到将要弹出栈顶元素的值</span><br>	s.top--;     <span class="hljs-comment">//移动top指针</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-comment">//获取到栈顶元素的值</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">GetTop</span><span class="hljs-params">(SqStack s, ElemType&amp; x)</span> </span>&#123;   <br>	<span class="hljs-keyword">if</span> (s.top == <span class="hljs-number">-1</span>)     <span class="hljs-comment">//top是-1,说明是空栈，返回false</span><br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br><br>	x = s.data[s.top];   <span class="hljs-comment">//获取到栈顶元素</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-comment">//返回当前栈的长度</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">SqStackLength</span><span class="hljs-params">(SqStack s)</span> </span>&#123;     <br>	<span class="hljs-keyword">return</span> s.top + <span class="hljs-number">1</span>;     <span class="hljs-comment">//就是top指针+1即为长度</span><br>&#125;<br><br><span class="hljs-comment">//测试代码</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	SqStack s;<br>	<span class="hljs-built_in">InitSqStack</span>(s);<br>	<span class="hljs-built_in">Push</span>(s, <span class="hljs-number">1</span>);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>顺序栈最大的问题还是分配多大空间的问题，分配小了不好使，分配大了又浪费，所以为了空间使用率高，在顺序栈基础上，出现了双端顺序栈。</p>
+<p>双端顺序栈即有两个top指针，一个top1指针从-1开始，还有一个top2指针从分配的数组最大长度+1开始。两个指针共用一个数组空间。判断该栈满的操作为：top+1 = top2</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MaxSize = <span class="hljs-number">20</span>;<br><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">int</span> ElemType;<br><br><span class="hljs-comment">//双端顺序栈结构定义</span><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">DoubleSqStack</span>     </span><br><span class="hljs-class">&#123;</span><br>	ElemType data[MaxSize];<br>	<span class="hljs-keyword">int</span> top1;<br>	<span class="hljs-keyword">int</span> top2;<br>&#125;;<br><br> <span class="hljs-comment">//初始化一个双端栈，top1为-1，top2为MaxSize</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">InitDoubleSqStack</span><span class="hljs-params">(DoubleSqStack&amp; s)</span> </span>&#123;  <br>	s.top1 = <span class="hljs-number">-1</span>;<br>	s.top2 = MaxSize;<br>&#125;<br><br><span class="hljs-comment">//清空一个双端栈，top1为-1，top2为MaxSize</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ClearDoubleSqStack</span><span class="hljs-params">(DoubleSqStack&amp; s)</span> </span>&#123;   <br>	s.top1 = <span class="hljs-number">-1</span>;<br>	s.top2 = MaxSize;<br>&#125;<br><br><span class="hljs-comment">//插入操作</span><br><span class="hljs-comment">//首先是判满操作（top+1 = top2），之后根据参数将数据插入到指定的栈中</span><br><span class="hljs-comment">//对于top指针等于-1的栈，先将top指针+1再进行插入</span><br><span class="hljs-comment">//对于top指针等于MaxSize的栈，将top指针-1后在插入</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Push</span><span class="hljs-params">(DoubleSqStack&amp; s, ElemType x, <span class="hljs-keyword">int</span> StackNumber)</span> </span>&#123;  <br>	<span class="hljs-keyword">if</span> (s.top1 + <span class="hljs-number">1</span> == s.top2)<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br><br>	<span class="hljs-keyword">if</span> (StackNumber == <span class="hljs-number">1</span>)<br>		s.data[++s.top1] = x;<br><br>	<span class="hljs-keyword">if</span> (StackNumber == <span class="hljs-number">2</span>)<br>		s.data[--s.top2] = x;<br><br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-comment">//删除操作</span><br><span class="hljs-comment">//首先是判空操作（top1 == -1和top2 == MaxSize），之后根据参数将数据插入到指定的栈中</span><br><span class="hljs-comment">//对于top指针等于-1的栈，先将当前top指针数据获取到，再将top--</span><br><span class="hljs-comment">//对于top指针等于MaxSize的栈，先获取top指针数据，再将top++</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Pop</span><span class="hljs-params">(DoubleSqStack&amp; s, ElemType&amp; x, <span class="hljs-keyword">int</span> StackNumber)</span> </span>&#123;<br>	<span class="hljs-keyword">if</span> (s.top1 == <span class="hljs-number">-1</span> &amp;&amp; s.top2 == MaxSize)<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br><br>	<span class="hljs-keyword">if</span> (StackNumber == <span class="hljs-number">1</span>) &#123;<br>		x = s.data[s.top1];<br>		s.top1--;<br>	&#125;<br><br>	<span class="hljs-keyword">if</span> (StackNumber == <span class="hljs-number">2</span>) &#123;<br>		x = s.data[s.top2];<br>		s.top2++;<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-comment">//获取栈中元素</span><br><span class="hljs-comment">//对栈首先进行判空，空返回false，否则返回数据</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">GetTop</span><span class="hljs-params">(DoubleSqStack&amp; s, ElemType&amp; x, <span class="hljs-keyword">int</span> StackNumber)</span> </span>&#123;<br>	<span class="hljs-keyword">if</span> (StackNumber == <span class="hljs-number">1</span> &amp;&amp; s.top1 != <span class="hljs-number">-1</span>)<br>		x = s.data[s.top1];<br>	<span class="hljs-keyword">else</span><br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br><br>	<span class="hljs-keyword">if</span> (StackNumber == <span class="hljs-number">2</span> &amp;&amp; s.top2 != MaxSize)<br>		x = s.data[s.top2];<br>	<span class="hljs-keyword">else</span><br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br><br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="链栈："><a href="#链栈：" class="headerlink" title="链栈："></a>链栈：</h3><p>通过链表实现，对于栈来说，头节点的用处不是那么大，所以我们可以将头节点直接省略掉。而链表中的头指针正好和top指针意义差不多，所以我们可以将其合并。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">int</span> ElemType;<br><br><span class="hljs-comment">//节点定义</span><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">StackNode</span>     </span><br><span class="hljs-class">&#123;</span><br>	ElemType data;<br>	StackNode* next;<br>&#125;;<br><br><span class="hljs-keyword">typedef</span> StackNode* LinkStack;<br><br><span class="hljs-comment">//当头指针指向空时，为空栈</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">InitLinkStack</span><span class="hljs-params">(LinkStack&amp; s)</span> </span>&#123;<br>	s = <span class="hljs-literal">nullptr</span>;<br>&#125;<br><br><span class="hljs-comment">//判断是否为空栈。就是看top指针是否指向空</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">LinkStackEmpty</span><span class="hljs-params">(LinkStack top)</span> </span>&#123;<br>	<span class="hljs-keyword">if</span> (top-&gt;next==<span class="hljs-literal">nullptr</span>)<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>	<span class="hljs-keyword">else</span><br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>&#125;<br><br><span class="hljs-comment">//链栈插入操作（头插法）</span><br><span class="hljs-comment">//首先分配节点，将该节点的next指针头指针</span><br><span class="hljs-comment">//再将头指针移动为该节点</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Push</span><span class="hljs-params">(LinkStack&amp; s, ElemType x)</span> </span>&#123;     <span class="hljs-comment">//s = top</span><br>	StackNode* newNode = (StackNode*)<span class="hljs-built_in">malloc</span>(<span class="hljs-built_in"><span class="hljs-keyword">sizeof</span></span>(StackNode));<br>	newNode-&gt;data = x;<br>	newNode-&gt;next = s;<br>	s = newNode;<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-comment">//链栈弹出元素操作</span><br><span class="hljs-comment">//和删除链表节点相同操作</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Pop</span><span class="hljs-params">(LinkStack&amp; s, ElemType&amp; x)</span> </span>&#123;    <span class="hljs-comment">//s = top</span><br>	x = s-&gt;data;<br>	StackNode* disorderNode = s;<br>	s = s-&gt;next;<br>	<span class="hljs-built_in">free</span>(disorderNode);<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-comment">//获取栈顶元素操作</span><br><span class="hljs-comment">//首先判断是不是空栈，是空栈就返回false，不是返回数据</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">GetTop</span><span class="hljs-params">(LinkStack s, ElemType&amp; x)</span> </span>&#123;<br>	<span class="hljs-keyword">if</span> (s-&gt;next == <span class="hljs-literal">nullptr</span>)<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	x = s-&gt;next-&gt;data;<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-comment">//测试代码</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	LinkStack temp;<br>	<span class="hljs-built_in">InitLinkStack</span>(temp);<br>	<span class="hljs-built_in">Push</span>(temp, <span class="hljs-number">1</span>);<br>	<span class="hljs-built_in">Push</span>(temp, <span class="hljs-number">2</span>);<br>	<span class="hljs-built_in">Push</span>(temp, <span class="hljs-number">3</span>);<br>	<span class="hljs-built_in">Push</span>(temp, <span class="hljs-number">4</span>);<br><br>	<span class="hljs-keyword">int</span> x;<br>	<span class="hljs-built_in">Pop</span>(temp, x);<br><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="栈的应用："><a href="#栈的应用：" class="headerlink" title="栈的应用："></a>栈的应用：</h2><h3 id="括号匹配算法："><a href="#括号匹配算法：" class="headerlink" title="括号匹配算法："></a>括号匹配算法：</h3><p>用栈进行实现：依次扫描所有字符，遇到左括号入栈，遇到右括号出栈。检查是否匹配。</p>
+<p>匹配失败情况：1.左括号单身 2.右括号单身 3.左右括号不匹配</p>
+<p>代码实现：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MaxSize = <span class="hljs-number">10</span>;<br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">BracketCheck</span><span class="hljs-params">(string&amp; str)</span> </span>&#123;<br>	<span class="hljs-keyword">char</span> data[MaxSize]&#123;&#125;;<br>	<span class="hljs-keyword">int</span> top = <span class="hljs-number">-1</span>;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; str.<span class="hljs-built_in">size</span>(); i++)   <span class="hljs-comment">//对输入的字符串进行循环</span><br>	&#123;<br>		<span class="hljs-keyword">if</span> (str[i] == <span class="hljs-string">&#x27;(&#x27;</span> || str[i] == <span class="hljs-string">&#x27;[&#x27;</span> || str[i] == <span class="hljs-string">&#x27;&#123;&#x27;</span>) &#123;  <span class="hljs-comment">//当扫描到左括号时</span><br>			data[i] = str[i];   <span class="hljs-comment">//进栈</span><br>			top++;    <span class="hljs-comment">//top指针+1</span><br>		&#125;<br>		<span class="hljs-keyword">else</span> &#123;     <span class="hljs-comment">//没有左括号</span><br>			<span class="hljs-keyword">if</span> (top == <span class="hljs-number">-1</span>)  <span class="hljs-comment">//即top指针为-1</span><br>				<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;  <span class="hljs-comment">//返回false</span><br><br>			<span class="hljs-keyword">char</span> topElem;   <br>			topElem = data[top];   <span class="hljs-comment">//获取到栈顶元素</span><br>			top--;  <span class="hljs-comment">//将top指针-1（出栈操作）</span><br>			<span class="hljs-keyword">if</span> (str[i] == <span class="hljs-string">&#x27;)&#x27;</span> &amp;&amp; topElem != <span class="hljs-string">&#x27;(&#x27;</span>)  <span class="hljs-comment">//判断左右括号是否匹配</span><br>				<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>			<span class="hljs-keyword">if</span> (str[i] == <span class="hljs-string">&#x27;]&#x27;</span> &amp;&amp; topElem != <span class="hljs-string">&#x27;[&#x27;</span>)<br>				<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>			<span class="hljs-keyword">if</span> (str[i] == <span class="hljs-string">&#x27;&#123;&#x27;</span> &amp;&amp; topElem != <span class="hljs-string">&#x27;&#125;&#x27;</span>)<br>				<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">if</span> (top == <span class="hljs-number">-1</span>)   <span class="hljs-comment">//栈中没有元素，即全部匹配成功，返回true，否则返回false</span><br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>	<span class="hljs-keyword">else</span><br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>&#125;<br><br><span class="hljs-comment">//测试代码</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	string str = <span class="hljs-string">&quot;&#123;[()]&#125;&quot;</span>;<br>	cout&lt;&lt;<span class="hljs-built_in">BracketCheck</span>(str);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="四则运算："><a href="#四则运算：" class="headerlink" title="四则运算："></a>四则运算：</h3><p>栈的还有一个重要的应用就是将中缀表达式转换为后缀表达式（前缀表达式），再使用栈对后缀表达式进行运算。</p>
+<p>中缀表达式转成后缀表达式在编译原理中学过，手算遵循“左优先原则”：只要左边的运算符能先计算，就优先计算左边的。</p>
+<p>机算：</p>
+<ol>
+<li>从左向右扫描下一个元素，直到处理完所有的元素</li>
+<li>若扫描到操作数压入栈，并返回1，否则执行3</li>
+<li>扫描到运算符，则弹出两个栈顶元素，执行相应运算，运算结果压回栈顶，回到1（注意：先出栈的元素是右操作数）</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stack&gt;</span>      <span class="hljs-comment">//这里使用STL中自带的特化容器来实现</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">Priority</span><span class="hljs-params">(<span class="hljs-keyword">char</span> c)</span> </span>&#123;   <span class="hljs-comment">//区分不同符号的优先级</span><br>	<span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;*&#x27;</span> || c == <span class="hljs-string">&#x27;/&#x27;</span>)<br>		<span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;<br>	<span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;+&#x27;</span> || c == <span class="hljs-string">&#x27;-&#x27;</span>)<br>		<span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;)&#x27;</span> || c == <span class="hljs-string">&#x27;(&#x27;</span>)<br>		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">//中缀表达式转换成后缀表达式的方法</span><br><span class="hljs-function">string <span class="hljs-title">ExpressionTransform</span><span class="hljs-params">(string&amp; str)</span> </span>&#123;   <br>	string temp;<br>	stack&lt;<span class="hljs-keyword">char</span>&gt;sc;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; str.<span class="hljs-built_in">size</span>(); i++) &#123;   <span class="hljs-comment">//循环将需要解析的后缀表达式读入</span><br>		<span class="hljs-keyword">if</span> (str[i] &gt;= <span class="hljs-string">&#x27;0&#x27;</span> &amp;&amp; str[i] &lt;= <span class="hljs-string">&#x27;9&#x27;</span>)    <span class="hljs-comment">//如果是数字，直接进后缀表达式串</span><br>			temp += str[i];  <br>		<span class="hljs-keyword">else</span> &#123;      <span class="hljs-comment">//如果不是数字，即运算符号</span><br>			<span class="hljs-keyword">if</span> (sc.<span class="hljs-built_in">empty</span>())   <span class="hljs-comment">//如果栈是空的，则让该符号进栈就行</span><br>				sc.<span class="hljs-built_in">push</span>(str[i]);<br>			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (str[i] == <span class="hljs-string">&#x27;(&#x27;</span>)   <span class="hljs-comment">//如果是&#x27;(&#x27;，进栈</span><br>				sc.<span class="hljs-built_in">push</span>(str[i]);<br>			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (str[i] == <span class="hljs-string">&#x27;)&#x27;</span>) &#123;   <span class="hljs-comment">//如果是&#x27;)&#x27;，开始对栈中元素从栈顶开始查找，直到查找到&#x27;(&#x27;</span><br>				<span class="hljs-keyword">while</span> (sc.<span class="hljs-built_in">top</span>() != <span class="hljs-string">&#x27;(&#x27;</span>) &#123;<br>					temp += sc.<span class="hljs-built_in">top</span>();  <span class="hljs-comment">//将()中的栈顶元素都加到后缀表达式</span><br>					sc.<span class="hljs-built_in">pop</span>();   <span class="hljs-comment">//每追加一个，就弹出一个</span><br>				&#125;<br>				sc.<span class="hljs-built_in">pop</span>();   <span class="hljs-comment">//最后将&#x27;(&#x27;弹出（这个不入栈）</span><br>			&#125;<br>			<span class="hljs-keyword">else</span>    <span class="hljs-comment">//如果栈不为空</span><br>			&#123;<br>				<span class="hljs-keyword">while</span> (<span class="hljs-built_in">Priority</span>(str[i]) &lt;= <span class="hljs-built_in">Priority</span>(sc.<span class="hljs-built_in">top</span>())) &#123;  <span class="hljs-comment">//那么比较当前运算符优先级和栈顶的优先级</span><br>					temp += sc.<span class="hljs-built_in">top</span>();  <span class="hljs-comment">//后缀表达式追加栈顶运算符</span><br>					sc.<span class="hljs-built_in">pop</span>();   <span class="hljs-comment">//出栈</span><br>					<span class="hljs-keyword">if</span> (sc.<span class="hljs-built_in">empty</span>())   <span class="hljs-comment">//如果是空栈，直接跳出</span><br>						<span class="hljs-keyword">break</span>;<br>				&#125;<br>				sc.<span class="hljs-built_in">push</span>(str[i]);  <span class="hljs-comment">//将新运算符入栈</span><br>			&#125;<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">while</span> (!sc.<span class="hljs-built_in">empty</span>()) &#123;   <span class="hljs-comment">//当栈不为空时（这时候中缀表达式已经结束）</span><br>		temp += sc.<span class="hljs-built_in">top</span>(); <span class="hljs-comment">//将栈顶元素依次加到temo后缀表达式</span><br>		sc.<span class="hljs-built_in">pop</span>();   <span class="hljs-comment">//追加一个，弹出一个</span><br>	&#125;<br>	<span class="hljs-keyword">return</span> temp;  <span class="hljs-comment">//返回后缀表达式</span><br>&#125;<br><br> <span class="hljs-comment">//四则运算方法</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">FourArithmetic</span><span class="hljs-params">(string&amp; str)</span> </span>&#123;    <br>	stack&lt;<span class="hljs-keyword">int</span>&gt;si;       <span class="hljs-comment">//依旧使用STL中特化容器</span><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; str.<span class="hljs-built_in">size</span>(); i++) &#123;   <span class="hljs-comment">//对后缀表达式进行循环</span><br>		<span class="hljs-keyword">if</span> (str[i] != <span class="hljs-string">&#x27;+&#x27;</span> &amp;&amp; str[i] != <span class="hljs-string">&#x27;-&#x27;</span> &amp;&amp; str[i] != <span class="hljs-string">&#x27;*&#x27;</span> &amp;&amp; str[i] != <span class="hljs-string">&#x27;/&#x27;</span>)<br>			si.<span class="hljs-built_in">push</span>(str[i] - <span class="hljs-string">&#x27;0&#x27;</span>);    <span class="hljs-comment">//当不是运算符时，将该字符转换为数字</span><br>		<span class="hljs-keyword">else</span> &#123;<br>			<span class="hljs-keyword">int</span> rtemp = si.<span class="hljs-built_in">top</span>(), sum = <span class="hljs-number">0</span>;    <span class="hljs-comment">//这时候右变量为栈顶元素，和为0</span><br>			si.<span class="hljs-built_in">pop</span>();                         <span class="hljs-comment">//将该元素弹出栈</span><br>			<span class="hljs-keyword">if</span> (str[i] == <span class="hljs-string">&#x27;+&#x27;</span>) &#123;              <span class="hljs-comment">//如果符号是+，将这两个数加起来就行</span><br>				<span class="hljs-keyword">int</span> ltemp = si.<span class="hljs-built_in">top</span>();       <br>				sum = ltemp + rtemp;<br>			&#125;<br>			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (str[i] == <span class="hljs-string">&#x27;-&#x27;</span>) &#123;       <span class="hljs-comment">//减法运算</span><br>				<span class="hljs-keyword">int</span> ltemp = si.<span class="hljs-built_in">top</span>();<br>				sum = ltemp - rtemp;<br>			&#125;<br>			<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (str[i] == <span class="hljs-string">&#x27;*&#x27;</span>) &#123;      <span class="hljs-comment">//乘法运算</span><br>				<span class="hljs-keyword">int</span> ltemp = si.<span class="hljs-built_in">top</span>();<br>				sum = ltemp * rtemp;<br>			&#125;<br>			<span class="hljs-keyword">else</span> &#123;                        <span class="hljs-comment">//除法运算</span><br>				<span class="hljs-keyword">int</span> ltemp = si.<span class="hljs-built_in">top</span>();<br>				sum = ltemp / rtemp;<br>			&#125;<br>			si.<span class="hljs-built_in">pop</span>(); <br>			si.<span class="hljs-built_in">push</span>(sum);   <br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">return</span> si.<span class="hljs-built_in">top</span>();<br>&#125;<br><br><span class="hljs-comment">//c</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-comment">//string str = &quot;931-3*+62/+&quot;;</span><br>	string str = <span class="hljs-string">&quot;9+(3-1)*3+6/2&quot;</span>;<br>	string str1 = <span class="hljs-built_in">ExpressionTransform</span>(str);<br>	cout &lt;&lt; <span class="hljs-built_in">FourArithmetic</span>(str1);<br><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/DataStruct-And-Algorithm/">-DataStruct And Algorithm</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">-数据结构和算法</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/01/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%844%EF%BC%9A%E9%98%9F%E5%88%97/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">数据结构4：队列</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%842%EF%BC%9A%E9%93%BE%E8%A1%A8/">
+                        <span class="hidden-mobile">数据结构2：链表</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
