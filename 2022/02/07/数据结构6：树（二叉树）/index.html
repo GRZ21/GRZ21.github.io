@@ -1,0 +1,530 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="树这章其实很多都是在讲一种特殊的树：二叉树。二叉树的各种性质考的非常多，二叉树也把递归思想使用的淋漓尽致。">
+  <meta name="author" content="Oxygen">
+  <meta name="keywords" content="">
+  
+  <title>数据结构6：树（二叉树） - Oxygen</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"grz21.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Oxygen</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="数据结构6：树（二叉树）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-02-07 22:43" pubdate>
+        2022年2月7日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      53
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数据结构6：树（二叉树）</h1>
+            
+            <div class="markdown-body">
+              <p>树这章其实很多都是在讲一种特殊的树：二叉树。二叉树的各种性质考的非常多，二叉树也把递归思想使用的淋漓尽致。</p>
+<span id="more"></span>
+
+<h1 id="二叉树："><a href="#二叉树：" class="headerlink" title="二叉树："></a>二叉树：</h1><h2 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h2><p>二叉树是n(n&gt;=0)个节点的有限集合</p>
+<ol>
+<li>或者为空二叉树，即：n=0</li>
+<li>或者是由一个根节点和两个互不相交的被称为根的左子树和右子树所组成。左子树或右子树又分别是一棵二叉树。</li>
+</ol>
+<p>特点：每个节点至多有两棵子树、左右子树不能颠倒</p>
+<h2 id="几个特殊的二叉树："><a href="#几个特殊的二叉树：" class="headerlink" title="几个特殊的二叉树："></a>几个特殊的二叉树：</h2><h3 id="1-满二叉树："><a href="#1-满二叉树：" class="headerlink" title="1.满二叉树："></a>1.满二叉树：</h3><p>定义：一颗高度为<code>h</code>，且含有<code>2^h-1</code>个节点的二叉树</p>
+<p>特点：</p>
+<ol>
+<li>只有最后一层有叶子节点</li>
+<li>不存在度为1的节点</li>
+<li>按层序开始编号，节点<code>i</code>的左孩子为<code>2i</code>，右孩子为<code>2i+1</code>,节点<code>i</code>的父节点为<code>i/2向下取整</code>(如果有的情况)</li>
+</ol>
+<h3 id="2-完全二叉树："><a href="#2-完全二叉树：" class="headerlink" title="2.完全二叉树："></a>2.完全二叉树：</h3><p>当且仅当其每个节点与高度为<code>h</code>的满二叉树中编号为<code>1~n</code>的节点一一对应时，称为完全二叉树。（即：去掉了满二叉树中序号较大的节点）</p>
+<p>特点：</p>
+<ol>
+<li>只有最后两层可能有叶子节点</li>
+<li><strong>最多只有一个度为1的节点</strong></li>
+<li>按层序开始编号，节点<code>i</code>的左孩子为<code>2i</code>，右孩子为<code>2i+1</code>,节点<code>i</code>的父节点为<code>i/2向下取整</code>(如果有的情况)</li>
+<li><code>i&lt;=n/2向下取整</code>为分支节点，<code>i&gt;n/2向下取整</code>为叶子节点（<code>n</code>为全部节点的数量）</li>
+<li>对于完全二叉树来说：如果有一个节点<strong>只有一个孩子节点，那么一定是左孩子。</strong></li>
+</ol>
+<h3 id="3-二叉排序树："><a href="#3-二叉排序树：" class="headerlink" title="3.二叉排序树："></a>3.二叉排序树：</h3><ol>
+<li><strong>左子树</strong>上所有节点的<strong>关键字</strong>均<strong>小于根节点</strong>的关键字</li>
+<li><strong>右子树</strong>上所有节点的<strong>关键字</strong>均<strong>大于根节点</strong>的关键字</li>
+<li>左子树和右子树又各是一棵二叉排序树</li>
+</ol>
+<h3 id="4-平衡二叉树："><a href="#4-平衡二叉树：" class="headerlink" title="4.平衡二叉树："></a>4.平衡二叉树：</h3><p>树上任意节点的<strong>左子树</strong>和<strong>右子树</strong>的<strong>深度之差不超过1</strong></p>
+<hr>
+<h2 id="二叉树的性质："><a href="#二叉树的性质：" class="headerlink" title="二叉树的性质："></a>二叉树的性质：</h2><ol>
+<li>设非空二叉树中度为0，1和2的节点个数为<code>n0</code>,<code>n1</code>和<code>n2</code>,那么<code>n0=n2+1</code>。即叶子节点比二分支节点多一个</li>
+<li>二叉树的第<code>i</code>层至多有<code>2^i-1</code>个节点</li>
+<li>高度为<code>h</code>的二叉树至多有<code>2^h-1</code>个节点（满二叉树）</li>
+</ol>
+<h3 id="完全二叉树性质："><a href="#完全二叉树性质：" class="headerlink" title="完全二叉树性质："></a>完全二叉树性质：</h3><ol>
+<li>具有n个（n&gt;0）节点的完全二叉树的高度为<code>h</code>为<code>log2(n+1)向上取整，(2是底数)</code>或<code>log2n向下取整+1</code></li>
+<li>对于完全二叉树，可以由节点数n推出度为0，1或2的节点个数为<code>n0</code>,<code>n1</code>和<code>n2</code>。</li>
+</ol>
+<p>​    完全二叉树最多有一个度为1的节点，即：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs n1```为0或1，那么由```n0"><br>那么，当n为奇数时，```n1=0,n0=k,n2=k-1```<br><br>​           当n为偶数时，```n1=1,n0=k,n2=k-1```<br><br>------<br><br>## 二叉树的存储结构：<br><br>二叉树（树）的抽象数据结构（ADT）如下：<br><br></code></pre></td></tr></table></figure>
+<p>InitTree(&amp;T):构造空树<br>DestroyTree(&amp;T):销毁树<br>CreateTree(&amp;T):创建一个树<br>ClearTree(&amp;T):清空一个树<br>TreeEmpty(T):判断是否为空树<br>TreeDepth(T):输出树的深度<br>Root(T):返回树的根节点<br>Value(T,e):e是树中的一个节点，返回该节点的值<br>Assign(T,e,value):给树的节点e赋值value</p>
+<p>以下是二叉树的遍历：<br>PreOrderTraversal(T):先序遍历<br>InOrderTraversal(T):中序遍历<br>PostOrderTraversal(T):后序遍历<br>LevelOrderTraversal(T):层序遍历</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><br>二叉树的遍历分为四种遍历模式：先序遍历，中序遍历，后序遍历，层序遍历。其中前三种遍历都是使用递归的方法来遍历左子树和右子树，不同的只是在于输出顺序。层序遍历需要用一个辅助队列进行输出。<br><br>我们知道了一个二叉树的**先序+中序遍历/后序+中序遍历/层次+中序遍历**时，我们都可以将这棵二叉树重现出来。<br><br>接下来是代码实现：<br><br>```c++<br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;queue&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">char</span> Elemtype;<br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">LinkBiTreeNode</span>    //二叉树结点结构</span><br><span class="hljs-class">&#123;</span><br>	Elemtype data;    <span class="hljs-comment">//数据域</span><br>	LinkBiTreeNode* lchild, * rchild;   <span class="hljs-comment">//左孩子指针和右孩子指针</span><br>&#125;;<br><br><span class="hljs-keyword">typedef</span> LinkBiTreeNode* LinkBiTree;<br><br><span class="hljs-comment">//初始化一个二叉树</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">InitLinkBiTree</span><span class="hljs-params">(LinkBiTree&amp; t)</span> </span>&#123;    <br>	t = (LinkBiTree)<span class="hljs-built_in">malloc</span>(<span class="hljs-built_in"><span class="hljs-keyword">sizeof</span></span>(LinkBiTreeNode));  <span class="hljs-comment">//分配结点，数据域以及左孩子右孩子都设为空</span><br>	t-&gt;data = <span class="hljs-literal">nullptr</span>;                       <br>	t-&gt;lchild = <span class="hljs-literal">nullptr</span>;<br>	t-&gt;rchild = <span class="hljs-literal">nullptr</span>;<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-comment">//销毁一个二叉树，使用递归的方法</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">DestroyLinkBiTree</span><span class="hljs-params">(LinkBiTree&amp; t)</span> </span>&#123;<br>	<span class="hljs-keyword">if</span> (t != <span class="hljs-literal">NULL</span>) &#123;     <span class="hljs-comment">//当这个二叉树不为空</span><br>		<span class="hljs-keyword">if</span> (t-&gt;lchild)   <span class="hljs-comment">//如果左子树也不为空</span><br>			<span class="hljs-built_in">DestroyLinkBiTree</span>(t-&gt;lchild);  <span class="hljs-comment">//递归释放左子树的孩子结点</span><br>		<span class="hljs-keyword">if</span> (t-&gt;rchild)    <span class="hljs-comment">//如果右子树不为空</span><br>			<span class="hljs-built_in">DestroyLinkBiTree</span>(t-&gt;rchild);  <span class="hljs-comment">//递归释放右子树的孩子结点</span><br>		<span class="hljs-built_in">free</span>(t);    <span class="hljs-comment">//释放结点</span><br>		t = <span class="hljs-literal">nullptr</span>; <span class="hljs-comment">//将该结点重置为空</span><br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-comment">//按前序输入二叉树中结点的值</span><br><span class="hljs-comment">//#表示空树</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">CreateLinkBiTree</span><span class="hljs-params">(LinkBiTree&amp; t)</span> </span>&#123;<br>	<span class="hljs-keyword">char</span> data;<br>	cin &gt;&gt; data;   <span class="hljs-comment">//输入数据</span><br>	<span class="hljs-keyword">if</span> (data == <span class="hljs-string">&#x27;#&#x27;</span>)  <span class="hljs-comment">//当数据为‘#’时，为空</span><br>		t = <span class="hljs-literal">nullptr</span>;  <br>	<span class="hljs-keyword">else</span> &#123;    <span class="hljs-comment">//不为#，就分配新节点，再使用递归的方法继续创建子树</span><br>		LinkBiTree node = (LinkBiTree)<span class="hljs-built_in">malloc</span>(<span class="hljs-built_in"><span class="hljs-keyword">sizeof</span></span>(LinkBiTreeNode));<br>		t = node;<br>		t-&gt;data = data;<br>		<span class="hljs-built_in">CreateLinkBiTree</span>(t-&gt;lchild);<br>		<span class="hljs-built_in">CreateLinkBiTree</span>(t-&gt;rchild);<br>	&#125;<br>&#125;<br><br><span class="hljs-comment">//判断二叉树是否为空的操作</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">LinkBiTreeEmpty</span><span class="hljs-params">(LinkBiTree t)</span> </span>&#123;<br>	<span class="hljs-keyword">if</span> (t != <span class="hljs-literal">NULL</span>)<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	<span class="hljs-keyword">else</span><br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-comment">//返回二叉树的深度，两个变量分别记录左子树的深度和右子树的深度，最后返回最大值</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">LinkBiTreeDepth</span><span class="hljs-params">(LinkBiTree t)</span> </span>&#123;<br>	<span class="hljs-keyword">int</span> i, j;<br>	<span class="hljs-keyword">if</span> (t == <span class="hljs-literal">nullptr</span>)   <span class="hljs-comment">//t是空树，直接返回深度为0</span><br>		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br><br>	<span class="hljs-keyword">if</span> (t-&gt;lchild)  <span class="hljs-comment">//如果左子树存在，递归进行值的记录</span><br>		i = <span class="hljs-built_in">LinkBiTreeDepth</span>(t-&gt;lchild);<br>	<span class="hljs-keyword">else</span>   <span class="hljs-comment">//不存在返回0</span><br>		i = <span class="hljs-number">0</span>;<br><br>	<span class="hljs-keyword">if</span> (t-&gt;rchild)  <span class="hljs-comment">//如果右子树存在，递归进行值的记录</span><br>		j = <span class="hljs-built_in">LinkBiTreeDepth</span>(t-&gt;rchild);<br>	<span class="hljs-keyword">else</span>    <span class="hljs-comment">//不存在返回0</span><br>		j = <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">return</span> i &gt; j ? i + <span class="hljs-number">1</span> : j + <span class="hljs-number">1</span>;  <span class="hljs-comment">//返回值+1</span><br>&#125;<br><br><span class="hljs-comment">//获取根节点的数据</span><br><span class="hljs-function">Elemtype <span class="hljs-title">Root</span><span class="hljs-params">(LinkBiTree t)</span> </span>&#123;<br>	<span class="hljs-keyword">if</span> (<span class="hljs-built_in">LinkBiTreeEmpty</span>(t))<br>		<span class="hljs-built_in">exit</span>(EXIT_FAILURE);<br>	<span class="hljs-keyword">else</span><br>		<span class="hljs-keyword">return</span> t-&gt;data;<br>&#125;<br><br><span class="hljs-comment">//将p结点的值返回</span><br><span class="hljs-function">Elemtype <span class="hljs-title">Value</span><span class="hljs-params">(LinkBiTree p)</span> </span>&#123;<br>	<span class="hljs-keyword">return</span> p-&gt;data;<br>&#125;<br><br><span class="hljs-comment">//将e的值赋值给指定结点</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Assign</span><span class="hljs-params">(LinkBiTree t, Elemtype e)</span> </span>&#123;<br>	t-&gt;data = e;<br>&#125;<br><br><span class="hljs-comment">//前序遍历，遵循&quot;根左右&quot;的顺序原则</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PreOrderTraversal</span><span class="hljs-params">(LinkBiTree t)</span> </span>&#123;<br>	<span class="hljs-keyword">if</span> (t == <span class="hljs-literal">NULL</span>)<br>		<span class="hljs-keyword">return</span>;<br>	cout &lt;&lt; t-&gt;data;   <span class="hljs-comment">//输出根结点数据</span><br>	<span class="hljs-built_in">PreOrderTraversal</span>(t-&gt;lchild); <span class="hljs-comment">//递归调用左子树</span><br>	<span class="hljs-built_in">PreOrderTraversal</span>(t-&gt;rchild); <span class="hljs-comment">//递归调用右子树</span><br>&#125;<br><br><span class="hljs-comment">//中序遍历，遵循&quot;左根右&quot;的顺序原则</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">InOrderTraversal</span><span class="hljs-params">(LinkBiTree t)</span> </span>&#123;<br>	<span class="hljs-keyword">if</span> (t == <span class="hljs-literal">NULL</span>)<br>		<span class="hljs-keyword">return</span>;<br>	<span class="hljs-built_in">InOrderTraversal</span>(t-&gt;lchild);  <span class="hljs-comment">//递归调用左子树</span><br>	cout &lt;&lt; t-&gt;data;    <span class="hljs-comment">//输出根结点数据</span><br>	<span class="hljs-built_in">InOrderTraversal</span>(t-&gt;rchild); <span class="hljs-comment">//递归调用右子树</span><br>&#125;<br><br><span class="hljs-comment">//中序遍历非递归算法：这里需要使用到栈进行实现，</span><br><span class="hljs-comment">//如果熟悉中序遍历的都该知道，总是会遍历到左子树的最左边的结点</span><br><span class="hljs-comment">//我们从根节点开始，一路向左将这些结点放入栈内，当左孩子为空时，出栈并访问，将右孩子同时压入栈</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">InOrderTraverseNoRecursion</span><span class="hljs-params">(BiTreeLink T)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">BiTreeIsEmpty</span>(T))&#123;<br>        std::cout&lt;&lt;<span class="hljs-string">&quot;该表为空！&quot;</span>&lt;&lt;std::endl;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    std::stack&lt;BiTreeLink&gt;s;<br>    <span class="hljs-keyword">auto</span> p = T;<br>    <span class="hljs-keyword">while</span>(p!= <span class="hljs-literal">nullptr</span>||!s.<span class="hljs-built_in">empty</span>())&#123;  <span class="hljs-comment">//如果栈不为空或树不为空，开始循环</span><br>        <span class="hljs-keyword">if</span> (p != <span class="hljs-literal">nullptr</span>) &#123;  <span class="hljs-comment">//当根结点不为空</span><br>            s.<span class="hljs-built_in">push</span>(p);    <span class="hljs-comment">//将结点压入栈</span><br>            p = p-&gt;leftChild;  <span class="hljs-comment">//一直压入左子树部分</span><br>        &#125; <span class="hljs-keyword">else</span> &#123;    <span class="hljs-comment">//当左子树为空</span><br>            <span class="hljs-built_in">visit</span>(s.<span class="hljs-built_in">top</span>());  <span class="hljs-comment">//访问栈中的栈顶结点数值</span><br>            p = s.<span class="hljs-built_in">top</span>();  <span class="hljs-comment">//将p指向这个节点</span><br>            s.<span class="hljs-built_in">pop</span>();    <span class="hljs-comment">//将这个结点出栈</span><br>            p = p-&gt;rightChild;  <span class="hljs-comment">//访问这个出栈结点的y孩子</span><br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">//后序遍历，遵循&quot;左右根&quot;的顺序原则</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PostOrderTraversal</span><span class="hljs-params">(LinkBiTree t)</span> </span>&#123;<br>	<span class="hljs-keyword">if</span> (t == <span class="hljs-literal">NULL</span>)<br>		<span class="hljs-keyword">return</span>;<br>	<span class="hljs-built_in">PostOrderTraversal</span>(t-&gt;lchild);  <span class="hljs-comment">//递归调用左子树</span><br>	<span class="hljs-built_in">PostOrderTraversal</span>(t-&gt;rchild);  <span class="hljs-comment">//递归调用右子树</span><br>	cout &lt;&lt; t-&gt;data;   <span class="hljs-comment">//输出根结点数据</span><br>&#125;<br><br><span class="hljs-comment">//层次遍历，需要一个辅助队列进行操作，这里是直接使用STL提供的适配器queue</span><br><span class="hljs-comment">//首先使根节点入队，若队列非空，则队首结点出队，并访问该节点，再将该结点的左右结点依次入队</span><br><span class="hljs-comment">//重复上面的过程，直到队列空</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">LevelTraversal</span><span class="hljs-params">(LinkBiTree t)</span> </span>&#123;<br>	LinkBiTree temp;<br>	queue&lt;LinkBiTree&gt;q;    <span class="hljs-comment">//创建一个辅助队列</span><br>	q.<span class="hljs-built_in">push</span>(t);    <span class="hljs-comment">//将根节点入队</span><br>	<span class="hljs-keyword">while</span> (!q.<span class="hljs-built_in">empty</span>()) &#123;  <span class="hljs-comment">//当队列不为空</span><br>		temp = q.<span class="hljs-built_in">front</span>();   <span class="hljs-comment">//访问队首结点，并输出</span><br>		cout &lt;&lt; temp-&gt;data;<br>		q.<span class="hljs-built_in">pop</span>();   <span class="hljs-comment">//出队</span><br>		<span class="hljs-keyword">if</span> (temp-&gt;lchild != <span class="hljs-literal">nullptr</span>)  <span class="hljs-comment">//若该结点左孩子不为空，入队</span><br>			q.<span class="hljs-built_in">push</span>(temp-&gt;lchild); <br>		<span class="hljs-keyword">if</span> (temp-&gt;rchild != <span class="hljs-literal">NULL</span>)     <span class="hljs-comment">//若该结点t&#x27;y孩子不为空，入队</span><br>			q.<span class="hljs-built_in">push</span>(temp-&gt;rchild);<br>	&#125;<br>&#125;<br><br><span class="hljs-comment">//测试代码</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	LinkBiTree t;<br>	<span class="hljs-built_in">InitLinkBiTree</span>(t);<br>	<span class="hljs-comment">//str = &quot;ABDH#K###E##CFI###G#J##&quot;;</span><br>	<span class="hljs-built_in">CreateLinkBiTree</span>(t);<br>	cout &lt;&lt; <span class="hljs-string">&quot;当前树的深度：&quot;</span> &lt;&lt; <span class="hljs-built_in">LinkBiTreeDepth</span>(t) &lt;&lt; endl;<br>	cout &lt;&lt; <span class="hljs-string">&quot;先序遍历：&quot;</span>;<br>	<span class="hljs-built_in">PreOrderTraversal</span>(t);<br>	cout &lt;&lt; <span class="hljs-string">&quot;\n中序遍历：&quot;</span>;<br>	<span class="hljs-built_in">InOrderTraversal</span>(t);<br>	cout &lt;&lt; <span class="hljs-string">&quot;\n后序遍历：&quot;</span>;<br>	<span class="hljs-built_in">PostOrderTraversal</span>(t);<br>	cout &lt;&lt; <span class="hljs-string">&quot;\n层次遍历：&quot;</span>;<br>	<span class="hljs-built_in">LevelTraversal</span>(t);<br><br>	<span class="hljs-built_in">DestroyLinkBiTree</span>(t);<br><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="线索二叉树："><a href="#线索二叉树：" class="headerlink" title="线索二叉树："></a>线索二叉树：</h2><p>在二叉树中，我们会发现很多的叶结点的左孩子和右孩子都是空的，这浪费了空间。且我们发现，一颗二叉树在遍历（前、中、后）寻找它的前驱和后继并不是很方便，需要遍历整棵树，于是就出现了线索二叉树。</p>
+<p>线索二叉树的结点构造除了和普通树的构造，还有两个Tag进行标记当前树的左孩子/右孩子指向的究竟是它的孩子结点，还是指向在遍历中的前驱后继。</p>
+<p>上代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br></pre></td><td class="code"><pre><code class="hljs c++"><br><span class="hljs-meta">#<span class="hljs-meta-keyword">ifndef</span> TREE_THREADBITREELINK_H</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> TREE_THREADBITREELINK_H</span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdlib&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;queue&gt;</span></span><br><br><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">char</span> ElemType;<br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">TreeNode</span>&#123;</span><br>    ElemType data;<br>    TreeNode* leftChild,*rightChild;<br>    <span class="hljs-keyword">int</span> leftTag,rightTag;    <span class="hljs-comment">//注意这里的标记位</span><br>&#125;;<br><br><span class="hljs-keyword">typedef</span> TreeNode* ThreadLinkBiTree;<br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">InitThreadBiTreeLink</span><span class="hljs-params">(ThreadLinkBiTree&amp; tree)</span></span>&#123;<br>    ThreadLinkBiTree node = (ThreadLinkBiTree)<span class="hljs-built_in">malloc</span>(<span class="hljs-built_in"><span class="hljs-keyword">sizeof</span></span>(TreeNode));<br>    node-&gt;data = <span class="hljs-literal">NULL</span>;<br>    node-&gt;leftChild = <span class="hljs-literal">nullptr</span>;<br>    node-&gt;rightChild = <span class="hljs-literal">nullptr</span>;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">CreateThreadLinkBiTree</span><span class="hljs-params">(ThreadLinkBiTree&amp; tree)</span></span>&#123;<br>    <span class="hljs-keyword">char</span> data;<br>    std::cin&gt;&gt;data;<br>    <span class="hljs-keyword">if</span>(data==<span class="hljs-string">&#x27;#&#x27;</span>)<br>        tree = <span class="hljs-literal">nullptr</span>;<br>    <span class="hljs-keyword">else</span>&#123;<br>        ThreadLinkBiTree node = (ThreadLinkBiTree)<span class="hljs-built_in">malloc</span>(<span class="hljs-built_in"><span class="hljs-keyword">sizeof</span></span>(TreeNode));<br>        tree = node;<br>        tree-&gt;data = data;<br>        <span class="hljs-built_in">CreateThreadLinkBiTree</span>(tree-&gt;leftChild);<br>        <span class="hljs-keyword">if</span>(tree-&gt;leftChild) tree-&gt;leftTag=<span class="hljs-number">0</span>;    <span class="hljs-comment">//在生成左子树时将这个标记记为0</span><br>        <span class="hljs-built_in">CreateThreadLinkBiTree</span>(tree-&gt;rightChild);<br>        <span class="hljs-keyword">if</span>(tree-&gt;rightTag) tree-&gt;rightTag = <span class="hljs-number">0</span>;   <span class="hljs-comment">//在生成右子树时将这个标记记为0</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">ThreadLinkBiTreeIsEmpty</span><span class="hljs-params">(ThreadLinkBiTree tree)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(tree==<span class="hljs-literal">nullptr</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">ThreadLinkBiTreeDepth</span><span class="hljs-params">(ThreadLinkBiTree tree)</span></span>&#123;<br>    <span class="hljs-keyword">int</span> leftDepth,rightDepth;<br>    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">ThreadLinkBiTreeIsEmpty</span>(tree))&#123;<br>        std::cout&lt;&lt;<span class="hljs-string">&quot;请检查该树是否为空！&quot;</span>&lt;&lt;std::endl;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    &#125;<br>   <span class="hljs-keyword">if</span>(tree-&gt;leftChild!= <span class="hljs-literal">nullptr</span>) leftDepth = <span class="hljs-built_in">ThreadLinkBiTreeDepth</span>(tree-&gt;leftChild);<br>   <span class="hljs-keyword">else</span> leftDepth = <span class="hljs-number">0</span>;<br>   <span class="hljs-keyword">if</span>(tree-&gt;rightChild!= <span class="hljs-literal">nullptr</span>) rightDepth = <span class="hljs-built_in">ThreadLinkBiTreeDepth</span>(tree-&gt;rightChild);<br>   <span class="hljs-keyword">else</span> rightDepth = <span class="hljs-number">0</span>;<br>   <span class="hljs-keyword">return</span> leftDepth&gt;rightDepth?leftDepth+<span class="hljs-number">1</span>:rightDepth+<span class="hljs-number">1</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Visit</span><span class="hljs-params">(ThreadLinkBiTree tree)</span></span>&#123;<br>    std::cout&lt;&lt;tree-&gt;data&lt;&lt;<span class="hljs-string">&quot; &quot;</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PreTraverse</span><span class="hljs-params">(ThreadLinkBiTree tree)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">ThreadLinkBiTreeIsEmpty</span>(tree))&#123;<br>        std::cout&lt;&lt;<span class="hljs-string">&quot;请检查该树是否为空！&quot;</span>&lt;&lt;std::endl;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-built_in">Visit</span>(tree);<br>    <span class="hljs-keyword">if</span>(tree-&gt;leftChild!= <span class="hljs-literal">nullptr</span>) <span class="hljs-built_in">PreTraverse</span>(tree-&gt;leftChild);<br>    <span class="hljs-keyword">if</span>(tree-&gt;rightChild!= <span class="hljs-literal">nullptr</span>) <span class="hljs-built_in">PreTraverse</span>(tree-&gt;rightChild);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">OrderTraverse</span><span class="hljs-params">(ThreadLinkBiTree tree)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">ThreadLinkBiTreeIsEmpty</span>(tree))&#123;<br>        std::cout&lt;&lt;<span class="hljs-string">&quot;请检查该树是否为空！&quot;</span>&lt;&lt;std::endl;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span>(tree-&gt;leftChild!= <span class="hljs-literal">nullptr</span>) <span class="hljs-built_in">OrderTraverse</span>(tree-&gt;leftChild);<br>    <span class="hljs-built_in">Visit</span>(tree);<br>    <span class="hljs-keyword">if</span>(tree-&gt;rightChild!= <span class="hljs-literal">nullptr</span>) <span class="hljs-built_in">OrderTraverse</span>(tree-&gt;rightChild);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PostTraverse</span><span class="hljs-params">(ThreadLinkBiTree tree)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">ThreadLinkBiTreeIsEmpty</span>(tree))&#123;<br>        std::cout&lt;&lt;<span class="hljs-string">&quot;请检查该树是否为空！&quot;</span>&lt;&lt;std::endl;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>   <span class="hljs-keyword">if</span>(tree-&gt;leftChild!= <span class="hljs-literal">nullptr</span>) <span class="hljs-built_in">PostTraverse</span>(tree-&gt;leftChild);<br>   <span class="hljs-keyword">if</span>(tree-&gt;rightChild!= <span class="hljs-literal">nullptr</span>) <span class="hljs-built_in">PostTraverse</span>(tree-&gt;rightChild);<br>   <span class="hljs-built_in">Visit</span>(tree);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">LevelTraverse</span><span class="hljs-params">(ThreadLinkBiTree tree)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">ThreadLinkBiTreeIsEmpty</span>(tree))&#123;<br>        std::cout&lt;&lt;<span class="hljs-string">&quot;请检查该树是否为空！&quot;</span>&lt;&lt;std::endl;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    std::queue&lt;ThreadLinkBiTree&gt; q;<br>    q.<span class="hljs-built_in">push</span>(tree);<br>    ThreadLinkBiTree temp;<br>    <span class="hljs-keyword">while</span>(!q.<span class="hljs-built_in">empty</span>())&#123;<br>        temp = q.<span class="hljs-built_in">front</span>();<br>        <span class="hljs-built_in">Visit</span>(temp);<br>        q.<span class="hljs-built_in">pop</span>();<br>       <span class="hljs-keyword">if</span>(temp-&gt;leftChild!= <span class="hljs-literal">nullptr</span>) q.<span class="hljs-built_in">push</span>(temp-&gt;leftChild);<br>       <span class="hljs-keyword">if</span>(temp-&gt;rightChild!= <span class="hljs-literal">nullptr</span>) q.<span class="hljs-built_in">push</span>(temp-&gt;rightChild);<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">//核心算法，使用Pre指针进行前驱后继的建立</span><br><span class="hljs-comment">//当该结点左孩子为空时，那么就该指向它的前驱了</span><br><span class="hljs-comment">//后继这里有点绕，因为这时候Pre实际为原结点，而p实际为下一个结点（注意算法最后的Pre = p）</span><br><span class="hljs-comment">//所以，这时候如果Pre（该节点）的右孩子为空且Pre本身不为空，那么Pre（该结点）的后继即为p</span><br>ThreadLinkBiTree Pre = <span class="hljs-literal">nullptr</span>;     <span class="hljs-comment">//创建一个全局变量指针Pre</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">CueingBiTree</span><span class="hljs-params">(ThreadLinkBiTree p)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(p!= <span class="hljs-literal">nullptr</span>) &#123;<br>        <span class="hljs-keyword">if</span> (p-&gt;leftChild == <span class="hljs-literal">nullptr</span>) &#123;<br>            p-&gt;leftTag = <span class="hljs-number">1</span>;<br>            p-&gt;leftChild = Pre;<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(Pre!= <span class="hljs-literal">nullptr</span> &amp;&amp; Pre-&gt;rightChild==<span class="hljs-literal">nullptr</span>)&#123;<br>            Pre-&gt;rightTag = <span class="hljs-number">1</span>;<br>            Pre-&gt;rightChild = p;<br>        &#125;<br>        Pre = p;<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">//中序遍历线索化</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">OrderCueingTree</span><span class="hljs-params">(ThreadLinkBiTree tree)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(tree!= <span class="hljs-literal">nullptr</span>)&#123;<br>        <span class="hljs-built_in">OrderCueingTree</span>(tree-&gt;leftChild);<br>        <span class="hljs-built_in">CueingBiTree</span>(tree);<br>        <span class="hljs-built_in">OrderCueingTree</span>(tree-&gt;rightChild);<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">CreateIOrderThread</span><span class="hljs-params">(ThreadLinkBiTree tree)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(tree != <span class="hljs-literal">nullptr</span>)&#123;    <span class="hljs-comment">//非空二叉树才能线索化</span><br>        <span class="hljs-built_in">OrderCueingTree</span>(tree);        <span class="hljs-comment">//中序线索化二叉树</span><br>        <span class="hljs-keyword">if</span>(Pre-&gt;rightChild == <span class="hljs-literal">nullptr</span>)<br>            Pre-&gt;rightTag = <span class="hljs-number">1</span>;    <span class="hljs-comment">//处理遍历的最后一个结点</span><br>    &#125;<br>&#125;<br><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span> <span class="hljs-comment">//TREE_THREADBITREELINK_H</span></span><br></code></pre></td></tr></table></figure>
+
+<p>核心就是那段线索化的代码……。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/DataStruct-And-Algorithm/">-DataStruct And Algorithm</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">-数据结构和算法</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/05/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%846%EF%BC%9A%E6%A0%91%E4%B8%8E%E6%A3%AE%E6%9E%97%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8C%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">数据结构6：树与森林和二叉树，哈夫曼树</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/02/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%846%EF%BC%9A%E6%A0%91%EF%BC%88%E5%BC%95%E8%A8%80%EF%BC%89/">
+                        <span class="hidden-mobile">数据结构6：树（引言）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

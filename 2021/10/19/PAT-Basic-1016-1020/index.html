@@ -1,0 +1,557 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="下面是PAT1016-1020我的解答，其中1017实在没有思路，算0分，总分78/100。">
+  <meta name="author" content="Oxygen">
+  <meta name="keywords" content="">
+  
+  <title>PAT-Basic 1016-1020 - Oxygen</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"grz21.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Oxygen</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="PAT-Basic 1016-1020">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-19 19:42" pubdate>
+        2021年10月19日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      75
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">PAT-Basic 1016-1020</h1>
+            
+            <div class="markdown-body">
+              <p>下面是PAT1016-1020我的解答，其中1017实在没有思路，算0分，总分78/100。</p>
+<span id="more"></span>
+
+<h1 id="1016（15-15）：部分A-B"><a href="#1016（15-15）：部分A-B" class="headerlink" title="1016（15/15）：部分A+B"></a>1016（15/15）：<strong>部分A+B</strong></h1><p>链接：<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805260223102976/problems/994805306310115328">题目详情 (pintia.cn)</a></p>
+<p>正整数 <em>A</em> 的“<em>D**A</em>（为 1 位整数）部分”定义为由 <em>A</em> 中所有 <em>D**A</em> 组成的新整数 <em>P**A</em>。例如：给定 <em>A</em>=3862767，<em>D**A</em>=6，则 <em>A</em> 的“6 部分”<em>P**A</em> 是 66，因为 <em>A</em> 中有 2 个 6。</p>
+<p>现给定 <em>A</em>、<em>D**A</em>、<em>B</em>、<em>D**B</em>，请编写程序计算 <em>P**A</em>+<em>P**B</em>。</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在一行中依次给出 <em>A</em>、<em>D**A</em>、<em>B</em>、<em>D**B</em>，中间以空格分隔，其中 0&lt;<em>A</em>,<em>B</em>&lt;10^9。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>在一行中输出 <em>P**A</em>+<em>P**B</em> 的值。</p>
+<h3 id="输入样例-1："><a href="#输入样例-1：" class="headerlink" title="输入样例 1："></a>输入样例 1：</h3><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">3862767 </span><span class="hljs-number">6</span> <span class="hljs-number">13530293</span> <span class="hljs-number">3</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="输出样例-1："><a href="#输出样例-1：" class="headerlink" title="输出样例 1："></a>输出样例 1：</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">399<br></code></pre></td></tr></table></figure>
+
+<h3 id="输入样例-2："><a href="#输入样例-2：" class="headerlink" title="输入样例 2："></a>输入样例 2：</h3><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">3862767 </span><span class="hljs-number">1</span> <span class="hljs-number">13530293</span> <span class="hljs-number">8</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="输出样例-2："><a href="#输出样例-2：" class="headerlink" title="输出样例 2："></a>输出样例 2：</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">0<br></code></pre></td></tr></table></figure>
+
+<h2 id="解析："><a href="#解析：" class="headerlink" title="解析："></a>解析：</h2><p>这题不算难，15分白给题，主要是想办法判断前面的一串数字中有多少和后面数字相同，再将对应的位置数乘以对应的10的次方就可以了，如果做过前面题目，会很快做出来。还有就是用到了<code>cmath</code>库中的<code>pow()</code>函数。</p>
+<h2 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cmath&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-keyword">int</span> A, DA, B, DB;<br>	cin &gt;&gt; A &gt;&gt; DA &gt;&gt; B &gt;&gt; DB;  <span class="hljs-comment">//输入A，DA，B，DB</span><br>	string SA = <span class="hljs-built_in">to_string</span>(A);  <span class="hljs-comment">//将四个数都转换成字符串string形式</span><br>	string SDA = <span class="hljs-built_in">to_string</span>(DA);<br>	string SB = <span class="hljs-built_in">to_string</span>(B);<br>	string SDB = <span class="hljs-built_in">to_string</span>(DB);<br><br>	vector&lt;<span class="hljs-keyword">int</span>&gt;va, vb;  <span class="hljs-comment">//建立容器</span><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; SA.<span class="hljs-built_in">size</span>(); i++) &#123;<br>		<span class="hljs-keyword">if</span> (SA[i] == SDA[<span class="hljs-number">0</span>])   <span class="hljs-comment">//如果SA字符串中有字符和SDA的字符相等（SDA就一个数字）</span><br>			va.<span class="hljs-built_in">push_back</span>((<span class="hljs-keyword">int</span>)SA[i] - <span class="hljs-number">48</span>); <span class="hljs-comment">//将这个字符转换为数字存入容器中</span><br>	&#125;<br><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; SB.<span class="hljs-built_in">size</span>(); i++) &#123;  <br>		<span class="hljs-keyword">if</span> (SB[i] == SDB[<span class="hljs-number">0</span>])   <span class="hljs-comment">//如果SB字符串中有字符和SDB的字符相等（SDB就一个数字）</span><br>			vb.<span class="hljs-built_in">push_back</span>((<span class="hljs-keyword">int</span>)SB[i] - <span class="hljs-number">48</span>); <span class="hljs-comment">//将这个字符转换为数字存入容器中，这里减&#x27;0&#x27;也可以</span><br>	&#125;<br><br>	<span class="hljs-keyword">int</span> sumA = <span class="hljs-number">0</span>;  <span class="hljs-comment">//创建和来存储容器中的值</span><br>	<span class="hljs-keyword">int</span> sumB = <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">if</span> (va.<span class="hljs-built_in">empty</span>()) &#123;    <span class="hljs-comment">//如果容器为空</span><br>		sumA = <span class="hljs-number">0</span>;    <span class="hljs-comment">//和直接为0</span><br>	&#125;<br>	<span class="hljs-keyword">else</span> &#123;   <span class="hljs-comment">//如果不为0</span><br>		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; va.<span class="hljs-built_in">size</span>(); i++) <span class="hljs-comment">//循环容器中的数</span><br>			sumA += va[i] * <span class="hljs-built_in">pow</span>(<span class="hljs-number">10</span>, i);  <span class="hljs-comment">//使用cmath库中pow()函数来计算各位对应的值，个位其实就是个位数字乘以10的0次方</span><br>	&#125;                                     <span class="hljs-comment">//十位就是十位数字乘以10的1次方，刚好和数组索引对应</span><br>	<br>	<span class="hljs-keyword">if</span> (vb.<span class="hljs-built_in">empty</span>()) &#123;    <span class="hljs-comment">//如果容器为空</span><br>		sumB = <span class="hljs-number">0</span>;     <span class="hljs-comment">//和直接为0</span><br>	&#125;<br>	<span class="hljs-keyword">else</span> &#123;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; vb.<span class="hljs-built_in">size</span>(); i++)  <span class="hljs-comment">//循环容器中的数</span><br>			sumB += vb[i] * <span class="hljs-built_in">pow</span>(<span class="hljs-number">10</span>, i); <span class="hljs-comment">//同上</span><br>	&#125;<br>	cout &lt;&lt; sumA + sumB;  <span class="hljs-comment">//输出两个数的和即可</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="1017（0-20）：-A除以B"><a href="#1017（0-20）：-A除以B" class="headerlink" title="1017（0/20）： A除以B"></a>1017（0/20）： <strong>A除以B</strong></h1><p>链接：<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805260223102976/problems/994805305181847552">题目详情 (pintia.cn)</a></p>
+<p>本题要求计算 <em>A</em>/<em>B</em>，其中 <em>A</em> 是不超过 1000 位的正整数，<em>B</em> 是 1 位正整数。你需要输出商数 <em>Q</em> 和余数 <em>R</em>，使得 <em>A</em>=<em>B</em>×<em>Q</em>+<em>R</em> 成立。</p>
+<h3 id="输入格式：-1"><a href="#输入格式：-1" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在一行中依次给出 <em>A</em> 和 <em>B</em>，中间以 1 空格分隔。</p>
+<h3 id="输出格式：-1"><a href="#输出格式：-1" class="headerlink" title="输出格式："></a>输出格式：</h3><p>在一行中依次输出 <em>Q</em> 和 <em>R</em>，中间以 1 空格分隔。</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs">123456789050987654321 7<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs">17636684150141093474 3<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h2 id="解析：-1"><a href="#解析：-1" class="headerlink" title="解析："></a>解析：</h2><p>首先输入的数不能是整型，要用字符进行计算，比如输入的最高位是1，我要除6，我必须加上他的下一位进行运算，如果他的下一位是5，那我就是（110+5）/6，然后这个值就是我取出结果的第一位，余数要留到下一次计算（110+5）%6.最后计算完，把我的结果输出就可以了。这里要判断结果第一二位的值是不是同时为0，同时为0输出0即可。</p>
+<h2 id="解答：-1"><a href="#解答：-1" class="headerlink" title="解答："></a>解答：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	string s;   <span class="hljs-comment">//创建字符串（数字太长，没基础类型能存的下）</span><br>	<span class="hljs-keyword">int</span> x,div,mod;  <span class="hljs-comment">//除数、商、余数</span><br>	cin &gt;&gt; s &gt;&gt; x;  <span class="hljs-comment">//输入被除数（这里以字符串输入）和除数</span><br>	<span class="hljs-keyword">int</span> len = s.<span class="hljs-built_in">length</span>();  <span class="hljs-comment">//获得字符串的长度</span><br>	div = (s[<span class="hljs-number">0</span>] - <span class="hljs-number">48</span>) / x;  <span class="hljs-comment">//得到第一个商，单个字符减48得到数字</span><br>	mod = (s[<span class="hljs-number">0</span>] - <span class="hljs-number">48</span>) % x;  <span class="hljs-comment">//得到第一个余数</span><br>	<span class="hljs-keyword">if</span> (div != <span class="hljs-number">0</span> || len == <span class="hljs-number">1</span>) &#123;  <span class="hljs-comment">//当商不为0或字符长度为1（被除数就是一个个位数时）</span><br>		cout &lt;&lt; div;   <span class="hljs-comment">//直接输出商</span><br>	&#125;<br><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; len; i++) &#123;  <span class="hljs-comment">//从第二个字符开始输出（注意这里i=1，索引不是0）</span><br>		div = (mod * <span class="hljs-number">10</span> + (s[i] - <span class="hljs-number">48</span>)) / x;  /<br>		cout &lt;&lt; div;<br>		mod = ((mod * <span class="hljs-number">10</span> + s[i] - <span class="hljs-number">48</span>)) % x;<br>	&#125;<br>	cout &lt;&lt; <span class="hljs-string">&#x27; &#x27;</span> &lt;&lt; mod;<br><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="1018（20-20）：锤子剪刀布"><a href="#1018（20-20）：锤子剪刀布" class="headerlink" title="1018（20/20）：锤子剪刀布"></a>1018（20/20）：<strong>锤子剪刀布</strong></h1><p>链接：<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805260223102976/problems/994805304020025344">题目详情 (pintia.cn)</a></p>
+<p>现给出两人的交锋记录，请统计双方的胜、平、负次数，并且给出双方分别出什么手势的胜算最大。</p>
+<h3 id="输入格式：-2"><a href="#输入格式：-2" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入第 1 行给出正整数 <em>N</em>（≤105），即双方交锋的次数。随后 <em>N</em> 行，每行给出一次交锋的信息，即甲、乙双方同时给出的的手势。<code>C</code> 代表“锤子”、<code>J</code> 代表“剪刀”、<code>B</code> 代表“布”，第 1 个字母代表甲方，第 2 个代表乙方，中间有 1 个空格。</p>
+<h3 id="输出格式：-2"><a href="#输出格式：-2" class="headerlink" title="输出格式："></a>输出格式：</h3><p>输出第 1、2 行分别给出甲、乙的胜、平、负次数，数字间以 1 个空格分隔。第 3 行给出两个字母，分别代表甲、乙获胜次数最多的手势，中间有 1 个空格。如果解不唯一，则输出按字母序最小的解。</p>
+<h3 id="输入样例：-1"><a href="#输入样例：-1" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-number">10</span><br>C <span class="hljs-keyword">J</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">J </span><span class="hljs-keyword">B</span><br><span class="hljs-keyword"></span>C <span class="hljs-keyword">B</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">B </span><span class="hljs-keyword">B</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">B </span>C<br>C C<br>C <span class="hljs-keyword">B</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">J </span><span class="hljs-keyword">B</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">B </span>C<br><span class="hljs-keyword">J </span><span class="hljs-keyword">J</span><br><span class="hljs-keyword"></span>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h3 id="输出样例：-1"><a href="#输出样例：-1" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-number">5</span> <span class="hljs-number">3</span> <span class="hljs-number">2</span><br><span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">5</span><br><span class="hljs-keyword">B</span> <span class="hljs-keyword">B</span><br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h2 id="解析：-2"><a href="#解析：-2" class="headerlink" title="解析："></a>解析：</h2><p>这题题目挺长，但是其实就是写个循环并且在里面进行不同的判断。两个人，六种情况，大不了都判断一下就完了。难在最后这个输出条件：但其实想想也能琢磨出来，无论怎样，都是B，C，J这个输出顺序，在循环里对每次获胜的手势进行记录，最后再判断出现手势次数的多少。</p>
+<p>还有就是有一种极限情况，就是x=0，这时候其实默认B，C，J三种手势出现次数的相等的，都是0。所以还是输出B。</p>
+<h2 id="解答：-2"><a href="#解答：-2" class="headerlink" title="解答："></a>解答：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Player</span>&#123;</span>   <span class="hljs-comment">//创建玩家类</span><br>	<span class="hljs-keyword">char</span> c;   <span class="hljs-comment">//代表会出什么（B,C,J)</span><br>&#125;;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	Player A, B;  <span class="hljs-comment">//创建玩家实体A，B</span><br>	<span class="hljs-keyword">int</span> x = <span class="hljs-number">0</span>,va = <span class="hljs-number">0</span>,vb = <span class="hljs-number">0</span>,m = <span class="hljs-number">0</span>,fa = <span class="hljs-number">0</span>,fb = <span class="hljs-number">0</span>; <span class="hljs-comment">//x是进行多少轮，va,vb分别代表A,B两人获胜次数，m是平的次数，</span><br>                                                  <span class="hljs-comment">//fa，fb是失败次数</span><br>	<span class="hljs-keyword">int</span> ac = <span class="hljs-number">0</span>, aj = <span class="hljs-number">0</span>, ab = <span class="hljs-number">0</span>, bc = <span class="hljs-number">0</span>, bj = <span class="hljs-number">0</span>, bb =<span class="hljs-number">0</span>; <span class="hljs-comment">//ac是A出锤子次数，aj是A出剪子次数，ab是A出布的次数，</span><br>                                                        <span class="hljs-comment">//bc，bj，bb同上，即为B</span><br>	cin &gt;&gt; x;   <span class="hljs-comment">//输入进行了多少轮</span><br>	<span class="hljs-keyword">while</span> (x != <span class="hljs-number">0</span>) &#123;  <span class="hljs-comment">//当x不为0时</span><br>		cin &gt;&gt; A.c &gt;&gt; B.c;  <span class="hljs-comment">//循环输入A和B的出的手势</span><br>		<span class="hljs-keyword">if</span> (A.c == B.c)  <span class="hljs-comment">//当A出的和B出的相同时</span><br>			m++;   <span class="hljs-comment">//平的次数加1</span><br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (A.c == <span class="hljs-string">&#x27;C&#x27;</span> &amp;&amp; B.c == <span class="hljs-string">&#x27;J&#x27;</span>) &#123;  <span class="hljs-comment">//如果A出的锤子，B出的剪刀</span><br>			va++;  <span class="hljs-comment">//A的获胜次数+1</span><br>			fb++;  <span class="hljs-comment">//B的失败次数+1</span><br>			ac++;  <span class="hljs-comment">//A出锤子的次数+1</span><br>		&#125;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (A.c == <span class="hljs-string">&#x27;C&#x27;</span> &amp;&amp; B.c == <span class="hljs-string">&#x27;B&#x27;</span>) &#123;  <span class="hljs-comment">//如果A出的锤子，B出的布</span><br>			fa++;   <span class="hljs-comment">//A的失败次数+1</span><br>			vb++;   <span class="hljs-comment">//B的获胜次数+1</span><br>			bb++;   <span class="hljs-comment">//B出布的次数+1</span><br>		&#125;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (A.c == <span class="hljs-string">&#x27;J&#x27;</span> &amp;&amp; B.c == <span class="hljs-string">&#x27;C&#x27;</span>) &#123;   <span class="hljs-comment">//如果A出的剪刀，B出的锤子</span><br>			fa++;  <span class="hljs-comment">//A的失败次数+1</span><br>			vb++;  <span class="hljs-comment">//B的获胜次数+1</span><br>			bc++;  <span class="hljs-comment">//B出锤子的次数+1</span><br>		&#125;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (A.c == <span class="hljs-string">&#x27;J&#x27;</span> &amp;&amp; B.c == <span class="hljs-string">&#x27;B&#x27;</span>) &#123;    <span class="hljs-comment">//如果A出的剪刀，B出的布</span><br>			va++;  <span class="hljs-comment">//A的获胜次数+1</span><br>			fb++;  <span class="hljs-comment">//B的失败次数+1</span><br>			aj++;  <span class="hljs-comment">//A出剪刀的次数+1</span><br>		&#125;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (A.c == <span class="hljs-string">&#x27;B&#x27;</span> &amp;&amp; B.c == <span class="hljs-string">&#x27;J&#x27;</span>) &#123;    <span class="hljs-comment">//如果A出的布，B出的剪刀</span><br>			fa++;   <span class="hljs-comment">//A的失败次数+1</span><br>			vb++;   <span class="hljs-comment">//B的获胜次数+1</span><br>			bj++;   <span class="hljs-comment">//B出剪刀的次数+1</span><br>		&#125;  <br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (A.c == <span class="hljs-string">&#x27;B&#x27;</span> &amp;&amp; B.c == <span class="hljs-string">&#x27;C&#x27;</span>) &#123;   <span class="hljs-comment">//如果A出的剪刀，B出的锤子</span><br>			va++;   <span class="hljs-comment">//A的获胜次数+1</span><br>			fb++;   <span class="hljs-comment">//B的失败次数+1</span><br>			ab++;   <span class="hljs-comment">//A出布的次数+1</span><br>		&#125;<br>		x--;  <span class="hljs-comment">//x控制循环次数，每次自减1</span><br>	&#125;<br><br>	cout &lt;&lt; va &lt;&lt; <span class="hljs-string">&quot; &quot;</span> &lt;&lt; m &lt;&lt; <span class="hljs-string">&quot; &quot;</span> &lt;&lt; fa &lt;&lt; endl;  <span class="hljs-comment">//输出A胜利的次数，平的次数，A失败的次数</span><br>	cout &lt;&lt; vb &lt;&lt; <span class="hljs-string">&quot; &quot;</span> &lt;&lt; m &lt;&lt; <span class="hljs-string">&quot; &quot;</span> &lt;&lt; fb &lt;&lt; endl;  <span class="hljs-comment">//输出B胜利的次数，平的次数，B失败的次数</span><br><br><br>	<span class="hljs-keyword">if</span> (ac &gt;ab &amp;&amp; ac &gt;= aj) <span class="hljs-comment">//如果A出锤子的次数大于出布的次数且大于等于出剪刀的次数（锤子和剪刀相同时，还是输出剪刀次数）</span><br>		cout &lt;&lt; <span class="hljs-string">&#x27;C&#x27;</span>;        <span class="hljs-comment">//因为C的排序大于J</span><br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ab &gt;= ac &amp;&amp; ab &gt;=aj)<span class="hljs-comment">//如果A出布的次数大于等于剪刀次数且大于等于剪刀次数</span><br>		cout &lt;&lt; <span class="hljs-string">&#x27;B&#x27;</span>;  <span class="hljs-comment">//输出布（B在C和J之前，就算三种手势次数相同，还是输出B）</span><br>	<span class="hljs-keyword">else</span>         <span class="hljs-comment">//剪刀和布次数都没锤子次数多</span><br>		cout &lt;&lt; <span class="hljs-string">&#x27;J&#x27;</span>;<br>	<br>	cout &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;<br><br>	<span class="hljs-keyword">if</span> (bc &gt; bb &amp;&amp; bc &gt;= bj)<span class="hljs-comment">//如果B出锤子的次数大于出布的次数且大于等于出剪刀的次数（锤子和剪刀相同时，还是输出剪刀次数）</span><br>		cout &lt;&lt; <span class="hljs-string">&#x27;C&#x27;</span>;   <span class="hljs-comment">//因为C的排序大于J</span><br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (bb &gt;= bc &amp;&amp; bb &gt;= bj) <span class="hljs-comment">//如果A出布的次数大于等于剪刀次数且大于等于剪刀次数</span><br>		cout &lt;&lt; <span class="hljs-string">&#x27;B&#x27;</span>;    <span class="hljs-comment">//输出布（B在C和J之前，就算三种手势次数相同，还是输出B）</span><br>	<span class="hljs-keyword">else</span>      <span class="hljs-comment">//剪刀和布次数都没锤子次数多</span><br>		cout &lt;&lt; <span class="hljs-string">&#x27;J&#x27;</span>;  <span class="hljs-comment">//输出剪刀</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="1019（18-20）：数字黑洞"><a href="#1019（18-20）：数字黑洞" class="headerlink" title="1019（18/20）：数字黑洞"></a>1019（18/20）：<strong>数字黑洞</strong></h1><p>链接：<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805260223102976/problems/994805302786899968">题目详情 (pintia.cn)</a></p>
+<p>给定任一个各位数字不完全相同的 4 位正整数，如果我们先把 4 个数字按非递增排序，再按非递减排序，然后用第 1 个数字减第 2 个数字，将得到一个新的数字。一直重复这样做，我们很快会停在有“数字黑洞”之称的 <code>6174</code>，这个神奇的数字也叫 Kaprekar 常数。</p>
+<p>例如，我们从<code>6767</code>开始，将得到</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-number">7766</span> <span class="hljs-bullet">-</span> <span class="hljs-number">6677</span> <span class="hljs-string">=</span> <span class="hljs-number">1089</span><br><span class="hljs-number">9810</span> <span class="hljs-bullet">-</span> <span class="hljs-number">0189</span> <span class="hljs-string">=</span> <span class="hljs-number">9621</span><br><span class="hljs-number">9621</span> <span class="hljs-bullet">-</span> <span class="hljs-number">1269</span> <span class="hljs-string">=</span> <span class="hljs-number">8352</span><br><span class="hljs-number">8532</span> <span class="hljs-bullet">-</span> <span class="hljs-number">2358</span> <span class="hljs-string">=</span> <span class="hljs-number">6174</span><br><span class="hljs-number">7641</span> <span class="hljs-bullet">-</span> <span class="hljs-number">1467</span> <span class="hljs-string">=</span> <span class="hljs-number">6174</span><br><span class="hljs-string">...</span> <span class="hljs-string">...</span><br></code></pre></td></tr></table></figure>
+
+<p>现给定任意 4 位正整数，请编写程序演示到达黑洞的过程。</p>
+<h3 id="输入格式：-3"><a href="#输入格式：-3" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入给出一个 (0,104) 区间内的正整数 <em>N</em>。</p>
+<h3 id="输出格式：-3"><a href="#输出格式：-3" class="headerlink" title="输出格式："></a>输出格式：</h3><p>如果 <em>N</em> 的 4 位数字全相等，则在一行内输出 <code>N - N = 0000</code>；否则将计算的每一步在一行内输出，直到 <code>6174</code> 作为差出现，输出格式见样例。注意每个数字按 <code>4</code> 位数格式输出。</p>
+<h3 id="输入样例-1：-1"><a href="#输入样例-1：-1" class="headerlink" title="输入样例 1："></a>输入样例 1：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs in">6767<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h3 id="输出样例-1：-1"><a href="#输出样例-1：-1" class="headerlink" title="输出样例 1："></a>输出样例 1：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs out">7766 - 6677 = 1089<br>9810 - 0189 = 9621<br>9621 - 1269 = 8352<br>8532 - 2358 = 6174<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h3 id="输入样例-2：-1"><a href="#输入样例-2：-1" class="headerlink" title="输入样例 2："></a>输入样例 2：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs in">2222<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h3 id="输出样例-2：-1"><a href="#输出样例-2：-1" class="headerlink" title="输出样例 2："></a>输出样例 2：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs out">2222 - 2222 = 0000<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h2 id="解析：-3"><a href="#解析：-3" class="headerlink" title="解析："></a>解析：</h2><p>这题我只拿到了18分，测试点2过不去，因为PAT原因，所以我想不出来到底是哪儿出了问题。这题难在有两种极限情况需要考虑，一方面是当输入的数不满四位时，最后输出需要进行格式化输出，进行补0操作。</p>
+<p>还有一点就是黑洞数6174，一开始我并没有考虑当<code>num</code>为6174该怎么办，只是单纯<code>break</code>。但其实不对，应该进去判断一下再输出，于是再最后我又加了一条判断。这样就拿到了18分。</p>
+<p>我于是又添加了输入的数是0的判断，但是测试点2还是过不去，搞不懂……</p>
+<h2 id="解答：-3"><a href="#解答：-3" class="headerlink" title="解答："></a>解答：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cmath&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iomanip&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-keyword">int</span> num, g, s, b, q,max = <span class="hljs-number">0</span>,min = <span class="hljs-number">0</span>;<br>	vector&lt;<span class="hljs-keyword">int</span>&gt;vi;<br>	cin &gt;&gt; num;<br>	<span class="hljs-keyword">while</span> (cin) &#123;<br>		q = num / <span class="hljs-number">1000</span>;   <span class="hljs-comment">//获取到千位上的数字</span><br>		b = num % <span class="hljs-number">1000</span> / <span class="hljs-number">100</span>;  <span class="hljs-comment">//获取百位上的数字</span><br>		s = num % <span class="hljs-number">100</span> / <span class="hljs-number">10</span>;  <span class="hljs-comment">//获取十位上的数字</span><br>		g = num % <span class="hljs-number">10</span>;  <span class="hljs-comment">//获取个位上的数字</span><br><br>	 vi.<span class="hljs-built_in">push_back</span>(q); vi.<span class="hljs-built_in">push_back</span>(b); vi.<span class="hljs-built_in">push_back</span>(s); vi.<span class="hljs-built_in">push_back</span>(g);  <span class="hljs-comment">//将这四个数存入容器vi中</span><br>	 <span class="hljs-built_in">sort</span>(vi.<span class="hljs-built_in">begin</span>(), vi.<span class="hljs-built_in">end</span>(), [](<span class="hljs-keyword">int</span> lhs, <span class="hljs-keyword">int</span> rhs)-&gt;<span class="hljs-keyword">bool</span> &#123;<span class="hljs-keyword">return</span> lhs &gt; rhs; &#125;);  <span class="hljs-comment">//排序</span><br>	 <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; vi.<span class="hljs-built_in">size</span>(); i++)  <span class="hljs-comment">//循环输出，累加起来使用pow()函数，i即为指数（对应正好为数组下标）</span><br>			min += vi[i] * <span class="hljs-built_in">pow</span>(<span class="hljs-number">10</span>, i);<br>	 <span class="hljs-built_in">sort</span>(vi.<span class="hljs-built_in">begin</span>(), vi.<span class="hljs-built_in">end</span>(), [](<span class="hljs-keyword">int</span> lhs, <span class="hljs-keyword">int</span> rhs)-&gt;<span class="hljs-keyword">bool</span> &#123;<span class="hljs-keyword">return</span> lhs &lt; rhs; &#125;);  <span class="hljs-comment">//排序</span><br>	 <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; vi.<span class="hljs-built_in">size</span>(); i++)   <span class="hljs-comment">//循环输出，累加起来使用pow()函数，i即为指数（对应正好为数组下标）</span><br>			max += vi[i] * <span class="hljs-built_in">pow</span>(<span class="hljs-number">10</span>, i);<br><br>	 num = max - min;  <span class="hljs-comment">//num为最大值减去最小值的差</span><br>	 <span class="hljs-keyword">if</span> (num != <span class="hljs-number">6174</span>) &#123;  <span class="hljs-comment">//当num不为6174时</span><br>		 <span class="hljs-keyword">if</span> (num == <span class="hljs-number">0</span>) &#123;  <span class="hljs-comment">//如果num为0</span><br>			 cout &lt;&lt; <span class="hljs-built_in">setw</span>(<span class="hljs-number">4</span>) &lt;&lt; <span class="hljs-built_in">setfill</span>(<span class="hljs-string">&#x27;0&#x27;</span>) &lt;&lt; max &lt;&lt; <span class="hljs-string">&quot; - &quot;</span> &lt;&lt; <span class="hljs-built_in">setw</span>(<span class="hljs-number">4</span>) &lt;&lt; <span class="hljs-built_in">setfill</span>(<span class="hljs-string">&#x27;0&#x27;</span>) &lt;&lt; min &lt;&lt; <span class="hljs-string">&quot; = &quot;</span> &lt;&lt; <span class="hljs-string">&quot;0000&quot;</span>;<br>			 <span class="hljs-keyword">break</span>;  <span class="hljs-comment">//格式化输出：0000-0000 = 0000，直接退出</span><br>		 &#125;<br>		 <span class="hljs-keyword">else</span> &#123;<br>			 cout &lt;&lt; <span class="hljs-built_in">setw</span>(<span class="hljs-number">4</span>) &lt;&lt; <span class="hljs-built_in">setfill</span>(<span class="hljs-string">&#x27;0&#x27;</span>) &lt;&lt; max &lt;&lt; <span class="hljs-string">&quot; - &quot;</span> &lt;&lt; <span class="hljs-built_in">setw</span>(<span class="hljs-number">4</span>) &lt;&lt; <span class="hljs-built_in">setfill</span>(<span class="hljs-string">&#x27;0&#x27;</span>) &lt;&lt; min &lt;&lt; <span class="hljs-string">&quot; = &quot;</span> &lt;&lt; num &lt;&lt; endl;   <span class="hljs-comment">//否则正常输出</span><br>		 &#125;<br>	 &#125;   <span class="hljs-comment">//如果num为6174，那么还是要对6174进行一次运算</span><br>	 <span class="hljs-keyword">else</span> &#123;<br>		 cout &lt;&lt; <span class="hljs-built_in">setw</span>(<span class="hljs-number">4</span>) &lt;&lt; <span class="hljs-built_in">setfill</span>(<span class="hljs-string">&#x27;0&#x27;</span>) &lt;&lt; max &lt;&lt; <span class="hljs-string">&quot; - &quot;</span> &lt;&lt; <span class="hljs-built_in">setw</span>(<span class="hljs-number">4</span>) &lt;&lt; <span class="hljs-built_in">setfill</span>(<span class="hljs-string">&#x27;0&#x27;</span>) &lt;&lt; min &lt;&lt; <span class="hljs-string">&quot; = &quot;</span> &lt;&lt; num &lt;&lt; endl;<br>		 <span class="hljs-keyword">break</span>;  <span class="hljs-comment">//对6174运算后退出</span><br>	 &#125;<br>	 max = min = <span class="hljs-number">0</span>;  <span class="hljs-comment">//每进行一次循环，将max和min，以及vi归零清空（如果max、min不归0，那么则会在这两个数上进行累加）</span><br>	 vi.<span class="hljs-built_in">clear</span>(); <span class="hljs-comment">//vi不清空，则会直接将新的数字推向末尾</span><br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="1020（25-25）：月饼"><a href="#1020（25-25）：月饼" class="headerlink" title="1020（25/25）：月饼"></a>1020（25/25）：<strong>月饼</strong></h1><p>链接：<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805260223102976/problems/994805301562163200">题目详情 (pintia.cn)</a></p>
+<p>月饼是中国人在中秋佳节时吃的一种传统食品，不同地区有许多不同风味的月饼。现给定所有种类月饼的库存量、总售价、以及市场的最大需求量，请你计算可以获得的最大收益是多少。</p>
+<p>注意：销售时允许取出一部分库存。样例给出的情形是这样的：假如我们有 3 种月饼，其库存量分别为 18、15、10 万吨，总售价分别为 75、72、45 亿元。如果市场的最大需求量只有 20 万吨，那么我们最大收益策略应该是卖出全部 15 万吨第 2 种月饼、以及 5 万吨第 3 种月饼，获得 72 + 45/2 = 94.5（亿元）。</p>
+<h3 id="输入格式：-4"><a href="#输入格式：-4" class="headerlink" title="输入格式："></a>输入格式：</h3><p>每个输入包含一个测试用例。每个测试用例先给出一个不超过 1000 的正整数 <em>N</em> 表示月饼的种类数、以及不超过 500（以万吨为单位）的正整数 <em>D</em> 表示市场最大需求量。随后一行给出 <em>N</em> 个正数表示每种月饼的库存量（以万吨为单位）；最后一行给出 <em>N</em> 个正数表示每种月饼的总售价（以亿元为单位）。数字间以空格分隔。</p>
+<h3 id="输出格式：-4"><a href="#输出格式：-4" class="headerlink" title="输出格式："></a>输出格式：</h3><p>对每组测试用例，在一行中输出最大收益，以亿元为单位并精确到小数点后 2 位。</p>
+<h3 id="输入样例：-2"><a href="#输入样例：-2" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs in">3 20<br>18 15 10<br>75 72 45<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h3 id="输出样例：-2"><a href="#输出样例：-2" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs out">94.50<br>结尾无空行<br></code></pre></td></tr></table></figure>
+
+<h2 id="解析：-4"><a href="#解析：-4" class="headerlink" title="解析："></a>解析：</h2><p>这题首先的输入不好控制，最好是创建一个类来存储总价格，库存，每万吨单价这三个属性。之后创建一个月饼类的动态数组用两次循环进行输入总价格和库存，再计算出每万吨售价。</p>
+<p>之后用<code>sort()</code>对月饼数组进行，需要制定一个执行策略：按每万吨单价进行降序排列。排序完后就可以对售出的总价进行计算。</p>
+<p>计算售出的总价时，当市场需求小于最大售价的月饼的库存时，直接用市场需要的值乘以最大售价的月饼的单价即可。如果大于最大单价的月饼时，那么即为这种月饼的总价。多出来的需求（用原市场需求量减去最大单价的月饼库存）再进入循环进行判断。</p>
+<h2 id="解答：-4"><a href="#解答：-4" class="headerlink" title="解答："></a>解答：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">MoonCake</span>  //创建月饼结构，包含三个数据对象：库存、总价、每万吨单价（都是<span class="hljs-title">double</span>类型，才能得到小数位）</span><br><span class="hljs-class">&#123;</span><br>	<span class="hljs-keyword">double</span> stock;  <span class="hljs-comment">//库存</span><br>	<span class="hljs-keyword">double</span> price;  <span class="hljs-comment">//总价</span><br>	<span class="hljs-keyword">double</span> unitprice;  <span class="hljs-comment">//每万吨单价</span><br>&#125;;<br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(MoonCake a, MoonCake b)</span> </span>&#123;   <span class="hljs-comment">//sort()中的执行策略，降序排列</span><br>	<span class="hljs-keyword">return</span> a.unitprice &gt; b.unitprice;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-keyword">int</span> kind,need;  <span class="hljs-comment">//月饼种类，以及市场需求</span><br>	cin &gt;&gt; kind&gt;&gt;need;<br>	MoonCake* mc = <span class="hljs-keyword">new</span> MoonCake[kind];  <span class="hljs-comment">//创建月饼类的动态数组</span><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; kind; i++) &#123;  <span class="hljs-comment">//循环输入月饼对象的库存</span><br>		cin &gt;&gt; mc[i].stock;<br>	&#125;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; kind; i++) &#123;   <span class="hljs-comment">//循环输入月饼对象的价格</span><br>		cin &gt;&gt; mc[i].price;<br>	&#125;<br><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; kind; i++) &#123;  <span class="hljs-comment">//循环判断月饼对象每万吨单价</span><br>		mc[i].unitprice = mc[i].price / mc[i].stock; <span class="hljs-comment">//每万吨单价 = 月饼总价 / 月饼库存</span><br>	&#125;<br>	<span class="hljs-built_in">sort</span>(mc, mc + kind,cmp);  <span class="hljs-comment">//sort()算法对mc数组排序，执行策略按照月饼的每万吨单价降序排列</span><br><br>	<span class="hljs-keyword">double</span> total = <span class="hljs-number">0</span>;   <span class="hljs-comment">//设置售出的总价</span><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt;= kind; j++) &#123;  <span class="hljs-comment">//循环判断</span><br>		<span class="hljs-keyword">if</span> (need &lt; mc[j].stock) &#123;  <span class="hljs-comment">//当市场需求小于最大单价的月饼的库存时</span><br>			total += need * mc[j].unitprice;  <span class="hljs-comment">//售出的总价为市场需求*最大单价的月饼的单价</span><br>			<span class="hljs-keyword">break</span>;  <span class="hljs-comment">//跳出循环</span><br>		&#125;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (need &gt;= mc[j].stock) &#123;  <span class="hljs-comment">//如果需求大于最大单价的月饼的库存</span><br>			total += mc[j].price;  <span class="hljs-comment">//那么售出的总价为当前月饼的总价</span><br>			need -= mc[j].stock; <span class="hljs-comment">//需求就减去最大单价的月饼的库存（因为需求大于最大的单价月饼的库存，继续下一个最大单价）</span><br>		&#125;<br>	&#125;<br>	cout.<span class="hljs-built_in">setf</span>(ios_base::fixed); <span class="hljs-comment">//格式化输出</span><br>	cout.<span class="hljs-built_in">precision</span>(<span class="hljs-number">2</span>);  <span class="hljs-comment">//保留两位小数</span><br>	cout &lt;&lt; total;  <span class="hljs-comment">//输出总价</span><br>    <span class="hljs-keyword">delete</span>[] mc;  <span class="hljs-comment">//回收掉动态数组</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/PAT/">-PAT</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/PAT/">-PAT</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/20/PAT-Basic-1021-1024/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">PAT-Basic 1021-1024</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/14/PTA-Baisc-1011-1015/">
+                        <span class="hidden-mobile">PTA-Baisc 1011-1015</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
